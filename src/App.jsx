@@ -15,10 +15,10 @@ export default () => {
       <br />
       {/* <Breadcrumb unique="teste" item="Teste1" active="item 2" router="#" /> */}
       {/* <Cadastro></Cadastro> */}
-      {/* <Login></Login> */}
+      <Login></Login>
       {/* <Relatorio></Relatorio> */}
         {/* <Obra></Obra>*/}
-        <Home></Home> 
+        {/* <Home></Home>  */}
     </div>
   );
 };

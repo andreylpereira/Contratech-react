@@ -24,5 +24,5 @@
 
   #efeito {
     opacity: 100%;
-    -webkit-mask-image: linear-gradient(to top, transparent 5%, rgb(255, 255, 255) 30%);
+    -webkit-mask-image: linear-gradient(to top, transparent 5%, rgb(255, 255, 255) 19%);
   }
