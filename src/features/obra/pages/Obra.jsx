@@ -11,7 +11,7 @@ export default () => {
       <div className="container-fluid mt-2 pl-0 w-75">
         <button
           type="submit"
-          class="btn btn-dark mb-2 shadow-sm"
+          className="btn btn-dark mb-2 shadow-sm"
           data-toggle="modal"
           data-target="#modalCriarObra"
         >
@@ -34,7 +34,7 @@ export default () => {
           <tbody>
             <tr className="bg-light text-center">
               <th>
-                <div class="float-left row ml-1">
+                <div className="float-left row ml-1">
                   <div
                     className="pt-2 cursor"
                     data-toggle="modal"
@@ -50,7 +50,7 @@ export default () => {
                 </div>
               </th>
               <td>
-                <div class="float-right">
+                <div className="float-right">
                   <button type="button " className="btn btn-dark m-1 shadow-sm">
                     Editar
                   </button>
@@ -72,7 +72,7 @@ export default () => {
             </tr>
             <tr className="bg-light text-center">
               <th>
-                <div class="float-left row ml-1">
+                <div className="float-left row ml-1">
                   <div
                     className="pt-2 cursor"
                     data-toggle="modal"
@@ -88,7 +88,7 @@ export default () => {
                 </div>
               </th>
               <td>
-                <div class="float-right">
+                <div className="float-right">
                   <button type="button " className="btn btn-dark m-1 shadow-sm">
                     Editar
                   </button>
@@ -110,7 +110,7 @@ export default () => {
             </tr>
             <tr className="bg-light text-center">
               <th>
-                <div class="float-left row ml-1">
+                <div className="float-left row ml-1">
                   <div
                     className="pt-2 cursor"
                     data-toggle="modal"
@@ -126,7 +126,7 @@ export default () => {
                 </div>
               </th>
               <td>
-                <div class="float-right">
+                <div className="float-right">
                   <button type="button " className="btn btn-dark m-1 shadow-sm">
                     Editar
                   </button>
@@ -204,28 +204,28 @@ export default () => {
       </div>
 
       {/* modal para criar obra */}
-      <div class="modal" id="modalCriarObra" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Nova obra</h5>
+      <div className="modal" id="modalCriarObra" tabindex="-1" role="dialog">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Nova obra</h5>
               <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <p>Digite o nome da nova obra</p>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-dark">
+            <div className="modal-footer">
+              <button type="button" className="btn btn-dark">
                 Criar
               </button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">
+              <button type="button" className="btn btn-danger" data-dismiss="modal">
                 Cancelar
               </button>
             </div>
@@ -234,28 +234,28 @@ export default () => {
       </div>
 
       {/* modal para renomear obra */}
-      <div class="modal" id="modalRenomearObra" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Renomear obra</h5>
+      <div className="modal" id="modalRenomearObra" tabindex="-1" role="dialog">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Renomear obra</h5>
               <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <p>Digite o novo nome da obra</p>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-dark">
+            <div className="modal-footer">
+              <button type="button" className="btn btn-dark">
                 Salvar
               </button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">
+              <button type="button" className="btn btn-danger" data-dismiss="modal">
                 Cancelar
               </button>
             </div>
