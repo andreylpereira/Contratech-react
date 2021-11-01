@@ -9,6 +9,7 @@ export default (props) => {
         <div class="card-body">
             <h3 class="card-title font-weight-bold">{props.title}</h3>
         </div>
+        
     </div>
     </div>
   );

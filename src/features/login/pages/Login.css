@@ -1,0 +1,55 @@
+.desktop {
+    display: table-cell;
+}
+
+.mobile {
+    display: none;
+}
+
+@media(max-width: 480px) {
+    .desktop {
+        display: none;
+    }
+    .mobile {
+        display: table-cell;
+    }
+}
+.login {
+    color: #fff;
+  }
+
+  .oi {
+    top: 0;
+  }
+
+  .desktop {
+    display: table-cell;
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  .login-card {
+    width: 377px;
+    padding-bottom: 10px;
+  }
+  .cadastrar {
+      font-size: 0.7rem;
+  }
+  .cadastrar > p > a {
+      color: #0067b8;
+  }
+
+  .oi:empty:before {
+    padding-left: 1.5px;
+  }
+
+  @media (max-width: 480px) {
+    .desktop {
+      display: none;
+    }
+    .mobile {
+      display: table-cell;
+    }
+  }

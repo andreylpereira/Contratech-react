@@ -1,0 +1,20 @@
+.oi {
+    top: 0px;
+}
+
+.desktop {
+    display: table-cell;
+}
+
+.mobile {
+    display: none;
+}
+
+@media(max-width: 480px) {
+    .desktop {
+        display: none;
+    }
+    .mobile {
+        display: table-cell;
+    }
+}

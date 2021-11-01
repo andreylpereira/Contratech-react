@@ -2,11 +2,17 @@
 import React from "react";
 import "./Header.css";
 import Login from "./Login";
+import Logo from "../../assets/img/logo.png";
 
 export default (props) => {
+  let logged = props.active;
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <a class="navbar-brand" href="#">
+          <img src={Logo} width="30" height="30" alt="" />
+        </a>
         <a className="navbar-brand text-warning">Contratech</a>
         <button
           className="navbar-toggler"
@@ -19,31 +25,31 @@ export default (props) => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-
             <li className="nav-item active">
               <a className="nav-link" href="#">
                 Home <span className="sr-only">(current)</span>
               </a>
             </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Cadastre-se
-              </a>
-              
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Minhas Obras
-              </a>
-            </li>
+            {logged !== "true" && (
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Cadastre-se
+                </a>
+              </li>
+            )}
+            {logged === "true" && (
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Minhas Obras
+                </a>
+              </li>
+            )}
           </ul>
-          
-          <Login active="true"/>
-           {/* <div className="form-inline my-2 my-lg-0">
+
+          <Login active="true" />
+          {/* <div className="form-inline my-2 my-lg-0">
             
             <div className="col mr-2 desktop">
               <div className="desktop">
@@ -74,32 +80,6 @@ export default (props) => {
     </div>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {
   /* <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">

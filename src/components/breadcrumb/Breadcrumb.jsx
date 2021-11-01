@@ -10,10 +10,8 @@ export default (props) => {
     <div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-light shadow w-75 mt-5 container-fluid">
-          <li class="breadcrumb-item">
-            <a class="text-dark" href="#">
+          <li class="breadcrumb-item active">       
               {props.unique}
-            </a>
           </li>
         </ol>
       </nav>
