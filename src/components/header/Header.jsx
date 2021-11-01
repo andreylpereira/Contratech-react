@@ -5,7 +5,7 @@ import Login from "./Login";
 import Logo from "../../assets/img/logo.png";
 
 export default (props) => {
-  let logged = props.active;
+  let logged = props.logged;
 
   return (
     <div>
@@ -48,7 +48,7 @@ export default (props) => {
             )}
           </ul>
 
-          <Login active="true" />
+          <Login active="true"></Login>
           {/* <div className="form-inline my-2 my-lg-0">
             
             <div className="col mr-2 desktop">

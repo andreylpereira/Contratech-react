@@ -1,0 +1,47 @@
+body {
+  background: rgba(255, 218, 106, 1);
+  width: 100%;
+  height: 100%;
+}
+
+.edit {
+  color: #c2c2c2ec;
+  cursor: pointer;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+th {
+  padding: 5px;
+}
+
+desktop {
+  display: table-cell;
+}
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: table-cell;
+  }
+}
+
+@media (max-width: 620px) {
+  .table-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 621px) and (max-width: 5000px) {
+  .table-mobile {
+    display: none;
+  }
+}
