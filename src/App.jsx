@@ -17,8 +17,8 @@ export default () => {
       {/* <Cadastro></Cadastro> */}
       {/* <Login></Login> */}
       {/* <Relatorio></Relatorio> */}
-        <Obra></Obra>
-        {/* <Home></Home> */}
+        {/* <Obra></Obra>*/}
+        <Home></Home> 
     </div>
   );
 };
