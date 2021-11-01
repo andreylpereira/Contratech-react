@@ -5,7 +5,9 @@ import "./Relatorio.css";
 export default () => {
   return (
     <>
-      <p className="container-fluid w-75 mb-0 mt-5 font-weight-bold">
+    <div className="body">
+      
+    <p className="container-fluid w-75 mb-0 mt-5 font-weight-bold">
         Contrato nº: 0000001
       </p>
       <p className="container-fluid w-75 mb-5 font-weight-bold">
@@ -66,6 +68,7 @@ export default () => {
       </div>
       <hr style={{ width: 250 }} />
       <p className="text-center font-weight-bold">Assinatura</p>
+    </div>
     </>
   );
 };
