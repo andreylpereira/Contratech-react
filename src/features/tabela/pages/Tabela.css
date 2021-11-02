@@ -67,7 +67,7 @@ input[type="number"] {
 }
 
 .w-auto {
-  width: 100%;
+  width: 100% !important;
 }
 
 .w-120px-mobile {
