@@ -29,20 +29,25 @@ export default () => {
         >
           <div className="card">
             <div className="card-header p-2" id="headingOne">
-              <h4 className="mb-0 p-0">
-                <a
-                  className="btn btn-link btn-block text-left p-0"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  <h3 className="text-dark font-weight-bold p-0 mb-0">
-                    <div className="arrow oi oi-caret-right"></div>Obra do
-                    bernadeu
-                  </h3>
-                </a>
+              <h4 className="row m-0 p-0">
+                <div className="col-1 p-0 d-flex align-items-center justify-content-center">
+                  <div
+                    className="arrow oi oi-caret-right p-0"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  ></div>
+                </div>
+                <div className="col-10 text-dark font-weight-bold h3 p-0 mb-0 d-flex align-items-center">
+                  Obra do bernadeu
+                </div>
+                <div
+                  className="col-1 oi oi-pencil p-0 pt-1 d-flex justify-content-end edit"
+                  data-toggle="modal"
+                  data-target="#modalRenomearEtapa"
+                ></div>
               </h4>
             </div>
 
@@ -71,43 +76,139 @@ export default () => {
                   </thead>
                   <tbody>
                     <tr className="bg-light">
-                      <th scope="row">Colocação de piso</th>
-                      <td className="text-center">R$: 50,00</td>
-                      <td className="text-center">3</td>
-                      <td className="text-center">90%</td>
-                      <td className="text-center">
+                      <th scope="row" className="pr-0">
+                        <input className="w-auto text-center" type="text" />
+                      </th>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-75px text-center"
+                          type="number"
+                          step={0.01}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-45px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-40px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                          max={100}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
                         <span className="oi oi-x"></span>
                       </td>
                     </tr>
                     <tr className="bg-light">
-                      <th scope="row">Colocação de piso</th>
-                      <td className="text-center">R$: 50,00</td>
-                      <td className="text-center">3</td>
-                      <td className="text-center">90%</td>
-                      <td className="text-center">
+                      <th scope="row" className="pr-0">
+                        <input className="w-auto text-center" type="text" />
+                      </th>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-75px text-center"
+                          type="number"
+                          step={0.01}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-45px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-40px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                          max={100}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
                         <span className="oi oi-x"></span>
                       </td>
                     </tr>
                     <tr className="bg-light">
-                      <th scope="row">Colocação de piso</th>
-                      <td className="text-center">R$: 50,00</td>
-                      <td className="text-center">3</td>
-                      <td className="text-center">90%</td>
-                      <td className="text-center">
+                      <th scope="row" className="pr-0">
+                        <input className="w-auto text-center" type="text" />
+                      </th>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-75px text-center"
+                          type="number"
+                          step={0.01}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-45px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-40px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                          max={100}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
                         <span className="oi oi-x"></span>
                       </td>
                     </tr>
                     <tr className="bg-light">
-                      <th scope="row">Colocação de piso</th>
-                      <td className="text-center">R$: 50,00</td>
-                      <td className="text-center">3</td>
-                      <td className="text-center">90%</td>
-                      <td className="text-center">
+                      <th scope="row" className="pr-0">
+                        <input className="w-auto text-center" type="text" />
+                      </th>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-75px text-center"
+                          type="number"
+                          step={0.01}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-45px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-40px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                          max={100}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
                         <span className="oi oi-x"></span>
                       </td>
                     </tr>
                     <tr className="bg-light">
-                    <td className="addServico"> + Adicionar serviço</td>
+                      <td className="addServico"> + Adicionar serviço</td>
                       <td className="p-0"></td>
                       <td className="p-0"></td>
                       <td className="p-0"></td>
@@ -144,20 +245,25 @@ export default () => {
         >
           <div className="card">
             <div className="card-header p-2" id="headingOne">
-              <h4 className="mb-0 p-0">
-                <a
-                  className="btn btn-link btn-block text-left p-0"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  <h3 className="text-dark font-weight-bold p-0 mb-0">
-                    <div className="arrow oi oi-caret-right"></div>Obra do
-                    bernadeu
-                  </h3>
-                </a>
+              <h4 className="row m-0 p-0">
+                <div className="col-1 p-0 d-flex align-items-center justify-content-center">
+                  <div
+                    className="arrow oi oi-caret-right p-0"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  ></div>
+                </div>
+                <div className="col-10 text-dark font-weight-bold h3 p-0 mb-0 d-flex align-items-center">
+                  Obra do bernadeu
+                </div>
+                <div
+                  className="col-1 oi oi-pencil p-0 pt-1 d-flex justify-content-end edit"
+                  data-toggle="modal"
+                  data-target="#modalRenomearEtapa"
+                ></div>
               </h4>
             </div>
 
@@ -186,43 +292,151 @@ export default () => {
                   </thead>
                   <tbody>
                     <tr className="bg-light">
-                      <th scope="row">Colocação de piso</th>
-                      <td className="text-center">R$: 50,00</td>
-                      <td className="text-center">3</td>
-                      <td className="text-center">90%</td>
-                      <td className="text-center">
+                      <th scope="row" className="pr-0 pl-1">
+                        <input
+                          className="w-120px-mobile text-center"
+                          type="text"
+                        />
+                      </th>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-75px text-center"
+                          type="number"
+                          step={0.01}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-45px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-40px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                          max={100}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
                         <span className="oi oi-x"></span>
                       </td>
                     </tr>
                     <tr className="bg-light">
-                      <th scope="row">Colocação de piso</th>
-                      <td className="text-center">R$: 50,00</td>
-                      <td className="text-center">3</td>
-                      <td className="text-center">90%</td>
-                      <td className="text-center">
+                      <th scope="row" className="pr-0 pl-1">
+                        <input
+                          className="w-120px-mobile text-center"
+                          type="text"
+                        />
+                      </th>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-75px text-center"
+                          type="number"
+                          step={0.01}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-45px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-40px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                          max={100}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
                         <span className="oi oi-x"></span>
                       </td>
                     </tr>
                     <tr className="bg-light">
-                      <th scope="row">Colocação de piso</th>
-                      <td className="text-center">R$: 50,00</td>
-                      <td className="text-center">3</td>
-                      <td className="text-center">90%</td>
-                      <td className="text-center">
+                      <th scope="row" className="pr-0 pl-1">
+                        <input
+                          className="w-120px-mobile text-center"
+                          type="text"
+                        />
+                      </th>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-75px text-center"
+                          type="number"
+                          step={0.01}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-45px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-40px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                          max={100}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
                         <span className="oi oi-x"></span>
                       </td>
                     </tr>
                     <tr className="bg-light">
-                      <th scope="row">Colocação de piso</th>
-                      <td className="text-center">R$: 50,00</td>
-                      <td className="text-center">3</td>
-                      <td className="text-center">90%</td>
-                      <td className="text-center">
+                      <th scope="row" className="pr-0 pl-1">
+                        <input
+                          className="w-120px-mobile text-center"
+                          type="text"
+                        />
+                      </th>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-75px text-center"
+                          type="number"
+                          step={0.01}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-45px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
+                        <input
+                          className="w-40px text-center"
+                          type="number"
+                          step={1}
+                          min={0}
+                          max={100}
+                        />
+                      </td>
+                      <td className="text-center pr-0 pl-0">
                         <span className="oi oi-x"></span>
                       </td>
                     </tr>
                     <tr className="bg-light m-2">
-                    <td className="addServico"> + Adicionar serviço</td>
+                      <td className="addServico"> + Adicionar serviço</td>
                       <td className="p-0"></td>
                       <td className="p-0"></td>
                       <td className="p-0"></td>
@@ -253,9 +467,8 @@ export default () => {
       </div>
       <br />
 
-
-            {/* modal para criar etapa */}
-            <div className="modal" id="modalCriarEtapa" tabindex="-1" role="dialog">
+      {/* modal para criar etapa */}
+      <div className="modal" id="modalCriarEtapa" tabindex="-1" role="dialog">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -276,7 +489,50 @@ export default () => {
               <button type="button" className="btn btn-dark">
                 Criar
               </button>
-              <button type="button" className="btn btn-danger" data-dismiss="modal">
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* modal para alterar nome etapa */}
+      <div
+        className="modal"
+        id="modalRenomearEtapa"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Novo nome da Etapa</h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>Digite o novo nome da Etapa</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-dark">
+                Editar
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >
                 Cancelar
               </button>
             </div>
@@ -286,5 +542,3 @@ export default () => {
     </>
   );
 };
-
-

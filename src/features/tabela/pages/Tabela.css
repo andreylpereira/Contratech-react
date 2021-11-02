@@ -17,7 +17,8 @@ a:hover {
 
 .arrow {
   color: #6d6d6d;
-  padding: 10px;
+  cursor: pointer;
+  /* padding: 10px; */
 }
 
 .arrow:hover {
@@ -33,10 +34,57 @@ a:hover {
 }
 
 .oi-x {
-    color: crimson;
+  color: crimson;
 }
 
 .addServico {
   font-size: smaller;
-  color:#b4b4b4
+  color: #b4b4b4;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.w-40px {
+  width: 40px;
+}
+
+.w-45px {
+  max-width: 45px;
+}
+
+.w-75px {
+  max-width: 75px;
+}
+
+.w-auto {
+  width: 100%;
+}
+
+.w-120px-mobile {
+  max-width: 120px;
+}
+
+input {
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 2.5px;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+  outline-color: rgb(190, 190, 190);
+}
+
+.edit {
+  color: #c2c2c2ec;
 }

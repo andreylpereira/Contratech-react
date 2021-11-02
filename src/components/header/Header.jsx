@@ -10,7 +10,7 @@ export default (props) => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-        <a class="navbar-brand" href="#">
+        <a className="navbar-brand" href="#">
           <img id="efeito" src={Logo} width="30" height="30" alt="" />
         </a>
         <a className="navbar-brand text-warning">Contratech</a>
