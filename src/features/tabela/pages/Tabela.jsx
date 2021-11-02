@@ -24,7 +24,7 @@ export default () => {
       {/* web */}
       <div className="web">
         <div
-          className="accordion container-fluid w-75"
+          className="accordion container-fluid w-75 p-0"
           id="accordionExample"
         >
           <div className="card">
