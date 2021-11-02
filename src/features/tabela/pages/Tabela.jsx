@@ -24,12 +24,12 @@ export default () => {
       {/* web */}
       <div className="web">
         <div
-          className="accordion container-fluid w-75 p-0"
+          className="accordion container-fluid w-75"
           id="accordionExample"
         >
           <div className="card">
-            <div className="card-header p-2" id="headingOne">
-              <h4 className="row m-0 p-0">
+            <div className="card-header p-4" id="headingOne">
+              <h4 className="row m-0">
                 <div className="col-1 p-0 d-flex align-items-center justify-content-center">
                   <div
                     className="arrow oi oi-caret-right p-0"
@@ -244,8 +244,8 @@ export default () => {
           id="accordionExample"
         >
           <div className="card">
-            <div className="card-header p-2" id="headingOne">
-              <h4 className="row m-0 p-0">
+            <div className="card-header p-4" id="headingOne">
+              <h4 className="row m-0">
                 <div className="col-1 p-0 d-flex align-items-center justify-content-center">
                   <div
                     className="arrow oi oi-caret-right p-0"
