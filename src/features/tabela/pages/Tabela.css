@@ -1,0 +1,42 @@
+.mobile {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .web {
+    display: none;
+  }
+  .mobile {
+    display: flex;
+  }
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.arrow {
+  color: #6d6d6d;
+  padding: 10px;
+}
+
+.arrow:hover {
+  color: #a5a5a5;
+}
+
+.arrow:active {
+  color: rgb(230, 230, 230);
+}
+
+.accordion-group {
+  min-width: 360px;
+}
+
+.oi-x {
+    color: crimson;
+}
+
+.addServico {
+  font-size: smaller;
+  color:#b4b4b4
+}
