@@ -9,8 +9,8 @@ export default (props) => {
   (
     <div>
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-light shadow w-75 mt-5 container-fluid">
-          <li class="breadcrumb-item active">       
+        <ol className="breadcrumb bg-light shadow w-75 mt-5 container-fluid">
+          <li className="breadcrumb-item active">       
               {props.unique}
           </li>
         </ol>
@@ -21,13 +21,13 @@ export default (props) => {
    (
     <div>
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-light shadow w-75 mt-5 container-fluid">
-          <li class="breadcrumb-item">
-            <a class="text-dark" href={props.router}>
+        <ol className="breadcrumb bg-light shadow w-75 mt-5 container-fluid">
+          <li className="breadcrumb-item">
+            <a className="text-dark" href={props.router}>
               {props.item}
             </a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             {props.active}
           </li>
         </ol>

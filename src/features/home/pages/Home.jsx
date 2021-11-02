@@ -12,7 +12,7 @@ export default () => {
     <div>
       {/* carousel */}
       <div
-        className="bg-secondary container-fluid mt-5 mb-5 sombra w-75"
+        className="bg-secondary container-fluid w-75 mt-5 mb-5 sombra"
         style={{ borderRadius: 5 }}
       >
         <div
