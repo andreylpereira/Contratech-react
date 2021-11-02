@@ -5,6 +5,262 @@ import "./Tabela.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
 
 export default () => {
+
+  let mocks =  [
+    {
+        "id": 1,
+        "nomeObra": "Residencial Itambé",
+        "percentualMedioFinal": 0,
+        "valorTotalFinal": 0.0,
+        "etapas": [
+            {
+                "id": 1,
+                "nomeEtapa": "Etapa 1 da Obra 1",
+                "percentualMedio": 0,
+                "valorTotal": 0.0,
+                "servicos": [
+                    {
+                        "id": 1,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 2,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 3,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 7,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 8,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 9,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "nomeEtapa": "Etapa 2 da Obra 1",
+                "percentualMedio": 0,
+                "valorTotal": 0.0,
+                "servicos": [
+                    {
+                        "id": 4,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 5,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 6,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 10,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 11,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 12,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "nomeObra": "Residencial Itambé 2",
+        "percentualMedioFinal": 0,
+        "valorTotalFinal": 0.0,
+        "etapas": [
+            {
+                "id": 3,
+                "nomeEtapa": "Etapa 1 da Obra 2",
+                "percentualMedio": 0,
+                "valorTotal": 0.0,
+                "servicos": [
+                    {
+                        "id": 13,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 14,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 15,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "nomeEtapa": "Etapa 2 da Obra 2",
+                "percentualMedio": 0,
+                "valorTotal": 0.0,
+                "servicos": [
+                    {
+                        "id": 16,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 17,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    },
+                    {
+                        "id": 18,
+                        "nomeServico": "Serviço",
+                        "preco": 0.0,
+                        "quantidade": 0,
+                        "porcentagem": 0
+                    }
+                ]
+            }
+        ]
+    }
+]
+
+const lista = mocks.map((item) =>
+<tr className="bg-light text-center" data>
+<th>
+  <div className="float-left row ml-1">
+    <div
+      className="pt-2 cursor"
+      data-toggle="modal"
+      data-target={`#modalRenomearObra${item.id}`}
+    >
+      {item.nomeObra}
+    </div>
+    <div
+      className="oi oi-pencil edit ml-1 pt-2"
+      data-toggle="modal"
+      data-target={`#modalRenomearObra${item.id}`}
+    ></div>
+  </div>
+</th>
+<td>
+  <div className="float-right">
+    <button type="button " className="btn btn-dark m-1 shadow-sm">
+      Editar
+    </button>
+    <button
+      type="button "
+      className="btn btn-danger m-1 shadow-sm"
+    >
+      Excluir
+    </button>
+    <button
+      type="button"
+      className="btn btn-light m-1 shadow-sm"
+      style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
+    >
+      Relatório
+    </button>
+  </div>
+</td>
+      {/* modal para renomear obra */}
+      <div className="modal" id={`modalRenomearObra${item.id}`} tabindex="-1" role="dialog">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Renomear Obra {item.nomeObra}</h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>Digite o novo nome da Obra:</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-dark">
+                Salvar
+              </button>
+              <button type="button" className="btn btn-danger" data-dismiss="modal">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+</tr>
+);
+
+
+
+
+
+
+
+
+
   return (
     <>
       <Breadcrumb item="Minhas Obras" active="Etapas" router="#" />
