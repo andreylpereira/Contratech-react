@@ -238,7 +238,7 @@ export default () => {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Renomear obra</h5>
+              <h5 className="modal-title">Renomear Obra</h5>
               <button
                 type="button"
                 className="close"
@@ -249,7 +249,7 @@ export default () => {
               </button>
             </div>
             <div className="modal-body">
-              <p>Digite o novo nome da obra</p>
+              <p>Digite o novo nome da Obra</p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-dark">

@@ -483,7 +483,7 @@ export default () => {
               </button>
             </div>
             <div className="modal-body">
-              <p>Digite o nome da nova etapa</p>
+              <p>Digite o nome da nova Etapa</p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-dark">
@@ -511,7 +511,7 @@ export default () => {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Novo nome da Etapa</h5>
+              <h5 className="modal-title">Renomear Etapa</h5>
               <button
                 type="button"
                 className="close"
