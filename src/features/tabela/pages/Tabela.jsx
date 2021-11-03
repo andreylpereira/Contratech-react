@@ -433,11 +433,10 @@ export default () => {
                 </div>
                 <div className="modal-body">
                   <p>Você deseja excluir a Etapa: {e.nomeEtapa}</p>
-                  <input className="w-auto text-center shadow" type="text" />
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-danger">
-                    Editar
+                    Excluir
                   </button>
                   <button
                     type="button"
