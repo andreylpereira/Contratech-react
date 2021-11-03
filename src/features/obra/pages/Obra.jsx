@@ -291,7 +291,8 @@ const lista = mocks.map((item) =>
 
   return (
     <>
-      <Breadcrumb unique="Minhas obras" />
+  <div className="page">
+  <Breadcrumb unique="Minhas obras" />
       <br />
       <div className="container-fluid mt-2 pl-0 w-75">
         <button
@@ -319,120 +320,6 @@ const lista = mocks.map((item) =>
           </thead>
           <tbody>
             {lista}
-            {/* <tr className="bg-light text-center" data>
-              <th>
-                <div className="float-left row ml-1">
-                  <div
-                    className="pt-2 cursor"
-                    data-toggle="modal"
-                    data-target="#modalRenomearObra"
-                  >
-                    Edificio Outono 5
-                  </div>
-                  <div
-                    className="oi oi-pencil edit ml-1 pt-2"
-                    data-toggle="modal"
-                    data-target="#modalRenomearObra"
-                  ></div>
-                </div>
-              </th>
-              <td>
-                <div className="float-right">
-                  <button type="button " className="btn btn-dark m-1 shadow">
-                    Editar
-                  </button>
-                  <button
-                    type="button "
-                    className="btn btn-danger m-1 shadow"
-                  >
-                    Excluir
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-light m-1 shadow"
-                    style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
-                  >
-                    Relatório
-                  </button>
-                </div>
-              </td>
-            </tr> */}
-            {/* <tr className="bg-light text-center">
-              <th>
-                <div className="float-left row ml-1">
-                  <div
-                    className="pt-2 cursor"
-                    data-toggle="modal"
-                    data-target="#modalRenomearObra"
-                  >
-                    Edificio Outono 5
-                  </div>
-                  <div
-                    className="oi oi-pencil edit ml-1 pt-2"
-                    data-toggle="modal"
-                    data-target="#modalRenomearObra"
-                  ></div>
-                </div>
-              </th>
-              <td>
-                <div className="float-right">
-                  <button type="button " className="btn btn-dark m-1 shadow">
-                    Editar
-                  </button>
-                  <button
-                    type="button "
-                    className="btn btn-danger m-1 shadow"
-                  >
-                    Excluir
-                  </button>
-                  <button
-                    type="button "
-                    className="btn btn-light m-1 shadow"
-                    style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
-                  >
-                    Relatório
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr className="bg-light text-center">
-              <th>
-                <div className="float-left row ml-1">
-                  <div
-                    className="pt-2 cursor"
-                    data-toggle="modal"
-                    data-target="#modalRenomearObra"
-                  >
-                    Edificio Outono 5
-                  </div>
-                  <div
-                    className="oi oi-pencil edit ml-1 pt-2"
-                    data-toggle="modal"
-                    data-target="#modalRenomearObra"
-                  ></div>
-                </div>
-              </th>
-              <td>
-                <div className="float-right">
-                  <button type="button " className="btn btn-dark m-1 shadow">
-                    Editar
-                  </button>
-                  <button
-                    type="button "
-                    className="btn btn-danger m-1 shadow"
-                  >
-                    Excluir
-                  </button>
-                  <button
-                    type="button "
-                    className="btn btn-light m-1 shadow"
-                    style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
-                  >
-                    Relatório
-                  </button>
-                </div>
-              </td>
-            </tr> */}
           </tbody>
         </table>
 
@@ -490,6 +377,7 @@ const lista = mocks.map((item) =>
         </table>
       </div>
 
+  </div>
       {/* modal para criar obra */}
       <div className="modal" id="modalCriarObra" tabindex="-1" role="dialog">
         <div className="modal-dialog" role="document">

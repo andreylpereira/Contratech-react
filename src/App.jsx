@@ -14,14 +14,14 @@ export default () => {
     <>
       <Header logged="true" />
       {/* <Breadcrumb unique="teste" item="Teste1" active="item 2" router="#" />  */}
-         {/* <Cadastro></Cadastro>  
-       <Home></Home>
-       {/* <Login></Login>  
-*/}
-       <Obra></Obra> 
-       <Tabela></Tabela>  
+         {/* <Cadastro></Cadastro> */}
+       {/* <Home></Home> */}
+        {/* <Login></Login>   */}
 
-      {/* <Relatorio></Relatorio> */}
+       {/* <Obra></Obra>   */}
+       <Tabela></Tabela>   
+
+      {/* <Relatorio></Relatorio>  */}
     </>
   );
 };

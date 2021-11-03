@@ -8,10 +8,11 @@ export default () => {
 
   return (
     <>
-      <Breadcrumb unique="Cadastro de usuário" />
-      <br />
-      <div>
-        <div className="card card-border shadow container-fluid w-75 mb-5">
+     <div className="page">
+     <Breadcrumb unique="Cadastro de usuário" />
+    <br />
+      <div className="page">
+        <div className="card card-border shadow container-fluid w-75">
           <div className="card-body">
             <h3 className="card-title font-weight-bold">Cadastrar usuário</h3>
 
@@ -156,6 +157,7 @@ export default () => {
           </div>
         </div>
       </div>
+     </div>
     </>
   );
 };

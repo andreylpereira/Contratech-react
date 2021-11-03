@@ -8,8 +8,9 @@ export default (props) => {
   return unique != null ? 
   (
     <div>
+      <div className="pt-5"></div>
       <nav aria-label="breadcrumb">
-        <ol className="breadcrumb bg-light shadow w-75 mt-5 container-fluid">
+        <ol className="breadcrumb bg-light shadow w-75 container-fluid">
           <li className="breadcrumb-item active">       
               {props.unique}
           </li>
@@ -20,8 +21,9 @@ export default (props) => {
   :
    (
     <div>
+      <div className="pt-5"></div>
       <nav aria-label="breadcrumb">
-        <ol className="breadcrumb bg-light shadow w-75 mt-5 container-fluid">
+        <ol className="breadcrumb bg-light shadow w-75 container-fluid">
           <li className="breadcrumb-item">
             <a className="text-dark" href={props.router}>
               {props.item}
@@ -35,36 +37,3 @@ export default (props) => {
     </div>
   );
 };
-
-// if (unique != null) {
-//   return (
-//     <div>
-//       <nav aria-label="breadcrumb">
-//         <ol class="breadcrumb bg-light shadow w-75 mt-5 container-fluid">
-//           <li class="breadcrumb-item">
-//             <a class="text-dark" href="#">
-//               {props.unique}
-//             </a>
-//           </li>
-//         </ol>
-//       </nav>
-//     </div>
-//   );
-// } else {
-//   return (
-//     <div>
-//       <nav aria-label="breadcrumb">
-//         <ol class="breadcrumb bg-light shadow w-75 mt-5 container-fluid">
-//           <li class="breadcrumb-item">
-//             <a class="text-dark" href={props.router}>
-//               {props.item}
-//             </a>
-//           </li>
-//           <li class="breadcrumb-item active" aria-current="page">
-//             {props.active}
-//           </li>
-//         </ol>
-//       </nav>
-//     </div>
-//   );
-// }

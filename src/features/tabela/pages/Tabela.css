@@ -1,13 +1,6 @@
-.mobile {
-  display: none;
-}
-
 @media (max-width: 480px) {
-  .web {
-    display: none;
-  }
-  .mobile {
-    display: flex;
+  .w-75 {
+    width: 100% !important;
   }
 }
 
@@ -98,9 +91,20 @@ select:focus {
   color: #c2c2c2ec;
 }
 
-.card-border{
+.card-border {
   border-radius: 5px !important;
 }
-.oi-x{
+
+.oi-x,
+.title {
   cursor: pointer;
+}
+
+.page {
+  height: 100vh;
+  background-color: rgba(255, 218, 106, 1);
+}
+.cards-etapa {
+  
+  background-color: rgba(255, 218, 106, 1);
 }
