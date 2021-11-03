@@ -40,6 +40,15 @@ a:hover {
 .addServico {
   font-size: smaller;
   color: #b4b4b4;
+  cursor: pointer;
+}
+
+.addServico:hover {
+  color: #6d6d6d;
+}
+
+.addServico:active {
+  color: #161616;
 }
 
 /* Chrome, Safari, Edge, Opera */

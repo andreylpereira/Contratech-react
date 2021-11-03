@@ -328,7 +328,8 @@ export default () => {
                       {servicos}
 
                       <tr className="bg-light">
-                        <td className="addServico"> + Adicionar serviço</td>
+                        <td className="addServico"                       data-toggle="modal"
+                      data-target={`#modalAdicionarServico${e.id}`}> + Adicionar serviço</td>
                         <td className="p-0"></td>
                         <td className="p-0"></td>
                         <td className="p-0"></td>
@@ -341,6 +342,8 @@ export default () => {
                       type="submit"
                       className="btn btn-dark m-2 ml-1 shadow"
                       style={{ borderColor: "white" }}
+                      data-toggle="modal"
+                      data-target={`#modalEditarEtapa${e.id}`}
                     >
                       Editar Etapa
                     </button>
@@ -359,6 +362,7 @@ export default () => {
             </div>
           </div>
           <br />
+
           {/* modal para alterar nome etapa */}
           <div
             className="modal"
@@ -399,8 +403,8 @@ export default () => {
             </div>
           </div>
 
-                    {/* modal para excluir etapa */}
-                    <div
+          {/* modal para excluir etapa */}
+          <div
             className="modal"
             id={`modalExcluirEtapa${e.id}`}
             tabindex="-1"
@@ -438,6 +442,84 @@ export default () => {
               </div>
             </div>
           </div>
+
+          {/* modal para editar etapa */}
+          <div
+            className="modal"
+            id={`modalEditarEtapa${e.id}`}
+            tabindex="-1"
+            role="dialog"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Editar Etapa: {e.nomeEtapa}</h5>
+                  <button
+                    type="button"
+                    className="close shadow"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                <p>Etapa {e.nomeEtapa} editada com sucesso!</p>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-dark" data-dismiss="modal">
+                    Confirmar
+                  </button>
+                  {/* <button
+                    type="button"
+                    className="btn btn-outline-danger shadow"
+                    data-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>  */}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* modal para adicionar serviço */}
+          <div
+            className="modal"
+            id={`modalAdicionarServico${e.id}`}
+            tabindex="-1"
+            role="dialog"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Adicionar Serviço: {e.nomeEtapa}</h5>
+                  <button
+                    type="button"
+                    className="close shadow"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <p>Foi adicionado um serviço na etapa {e.nomeEtapa}.</p>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-dark" data-dismiss="modal">
+                    Confirmar
+                  </button>
+                  {/* <button
+                    type="button"
+                    className="btn btn-outline-danger shadow"
+                    data-dismiss="modal"
+                  >
+                    Cancelar
+                  </button> */}
+                </div>
+              </div>
+            </div>
+          </div>
         </>
       );
     });
@@ -461,8 +543,8 @@ export default () => {
 
       {lista}
       <br />
-      {/* modal para criar etapa */}
 
+      {/* modal para criar etapa */}
       <div className="modal" id="modalCriarEtapa" tabindex="-1" role="dialog">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
