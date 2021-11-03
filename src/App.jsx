@@ -11,16 +11,17 @@ import Tabela from "./features/tabela/pages/Tabela";
 
 export default () => {
   return (
-    <div>
+    <>
       <Header logged="true" />
-      <br />
       {/* <Breadcrumb unique="teste" item="Teste1" active="item 2" router="#" />  */}
-      {/* <Cadastro></Cadastro>  */}
-      {/* <Login></Login>  */}
-      {/* <Relatorio></Relatorio> */}
-      {/* <Obra></Obra> */}
-      {/* <Home></Home>  */}
-      <Tabela></Tabela>
-    </div>
+         {/* <Cadastro></Cadastro> */}
+       {/* <Home></Home> */}
+        {/* <Login></Login>   */}
+
+       {/* <Obra></Obra>   */}
+       <Tabela></Tabela>   
+
+      {/* <Relatorio></Relatorio>  */}
+    </>
   );
 };

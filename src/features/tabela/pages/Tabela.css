@@ -1,13 +1,6 @@
-.mobile {
-  display: none;
-}
-
 @media (max-width: 480px) {
-  .web {
-    display: none;
-  }
-  .mobile {
-    display: flex;
+  .w-75 {
+    width: 100% !important;
   }
 }
 
@@ -40,6 +33,15 @@ a:hover {
 .addServico {
   font-size: smaller;
   color: #b4b4b4;
+  cursor: pointer;
+}
+
+.addServico:hover {
+  color: #6d6d6d;
+}
+
+.addServico:active {
+  color: #161616;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -87,4 +89,22 @@ select:focus {
 
 .edit {
   color: #c2c2c2ec;
+}
+
+.card-border {
+  border-radius: 5px !important;
+}
+
+.oi-x,
+.title {
+  cursor: pointer;
+}
+
+.page {
+  height: 100vh;
+  background-color: rgba(255, 218, 106, 1);
+}
+.cards-etapa {
+  
+  background-color: rgba(255, 218, 106, 1);
 }

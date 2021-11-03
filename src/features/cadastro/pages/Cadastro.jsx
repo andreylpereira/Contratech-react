@@ -8,10 +8,11 @@ export default () => {
 
   return (
     <>
-      <Breadcrumb unique="Cadastro de usuário" />
-      <br />
-      <div>
-        <div className="card shadow container-fluid w-75 mb-5">
+     <div className="page">
+     <Breadcrumb unique="Cadastro de usuário" />
+    <br />
+      <div className="page">
+        <div className="card card-border shadow container-fluid w-75">
           <div className="card-body">
             <h3 className="card-title font-weight-bold">Cadastrar usuário</h3>
 
@@ -21,7 +22,8 @@ export default () => {
                 <label className="font-weight-bold" for="exampleInputEmail1">
                   Login:
                 </label>
-                <div className="input-group mb-3 shadow-sm">
+                <div className="input-group mb-3 shadow
+                ">
                   <div className="input-group-prepend">
                     <span
                       className="input-group-text oi oi-people pt-2"
@@ -41,7 +43,8 @@ export default () => {
                 <label className="font-weight-bold" for="exampleInputEmail1">
                   Nome:
                 </label>
-                <div className="input-group mb-3 shadow-sm">
+                <div className="input-group mb-3 shadow
+                ">
                   <div className="input-group-prepend">
                     <span
                       className="input-group-text oi oi-person pt-2"
@@ -61,7 +64,8 @@ export default () => {
                 <label className="font-weight-bold" for="exampleInputEmail1">
                   Sobrenome:
                 </label>
-                <div className="input-group mb-3 shadow-sm">
+                <div className="input-group mb-3 shadow
+                ">
                   <div className="input-group-prepend">
                     <span
                       className="input-group-text oi oi-person pt-2"
@@ -81,7 +85,8 @@ export default () => {
                 <label className="font-weight-bold" for="exampleInputEmail1">
                   Email:
                 </label>
-                <div className="input-group mb-3 shadow-sm">
+                <div className="input-group mb-3 shadow
+                ">
                   <div className="input-group-prepend">
                     <span
                       className="input-group-text font-weight-bold text-dark"
@@ -103,7 +108,8 @@ export default () => {
                 <label className="font-weight-bold" for="exampleInputEmail1">
                   Senha:
                 </label>
-                <div className="input-group mb-3 shadow-sm">
+                <div className="input-group mb-3 shadow
+                ">
                   <div className="input-group-prepend">
                     <span
                       className="input-group-text oi oi-key pt-2"
@@ -118,11 +124,12 @@ export default () => {
                   />
                 </div>
               </div>
-              <div className="form-group">
+              <div className="form-group mb-0">
                 <label className="font-weight-bold" for="exampleInputEmail1">
                   Confirme sua senha:
                 </label>
-                <div className="input-group mb-3 shadow-sm">
+                <div className="input-group shadow
+                ">
                   <div className="input-group-prepend">
                     <span
                       className="input-group-text oi oi-key pt-2"
@@ -137,9 +144,11 @@ export default () => {
                   />
                 </div>
               </div>
+              <br />
               <button
                 type="submit"
-                className="btn btn-dark mb-2 shadow-sm"
+                className="btn btn-dark mb-2 shadow
+                "
                 style={{ borderColor: "white" }}
               >
                 Cadastrar
@@ -148,6 +157,7 @@ export default () => {
           </div>
         </div>
       </div>
+     </div>
     </>
   );
 };

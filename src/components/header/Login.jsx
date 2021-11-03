@@ -3,11 +3,9 @@ import "./Login.css";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (props) => {
+  let logged = props.active;
 
-let logged = props.active;
-
-return logged === "false" ?
-   (
+  return logged === "false" ? (
     <div className="form-inline my-2 my-lg-0">
       <button
         type="button"
@@ -17,9 +15,7 @@ return logged === "false" ?
         Login
       </button>
     </div>
-  )
-:
-  (
+  ) : (
     <div className="form-inline my-2 my-lg-0">
       <div className="col mr-2 desktop">
         <div className="desktop">

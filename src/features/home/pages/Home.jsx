@@ -9,10 +9,11 @@ import Relatorio from "../../../assets/img/home/relatorio.jpg";
 
 export default () => {
   return (
-    <div>
+    <div className="page">
+      <div className="pt-5"></div>
       {/* carousel */}
       <div
-        className="bg-secondary container-fluid w-75 mt-5 mb-5 sombra"
+        className="bg-secondary container-fluid w-75 mb-5 sombra"
         style={{ borderRadius: 5 }}
       >
         <div
@@ -110,7 +111,7 @@ export default () => {
       </div>
 
       <div
-        className="row container-fluid justify-content-lg-center justify-content-md-center
+        className="bg-light row container-fluid justify-content-lg-center justify-content-md-center
     justify-content-xl-center
     justify-content-sm-center
     p-0 m-0 mb-5"
