@@ -45,3 +45,11 @@ desktop {
     display: none;
   }
 }
+
+.card-border{
+  border-radius: 5px !important;
+}
+
+.w-auto {
+  width: 100% !important;
+}

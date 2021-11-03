@@ -186,50 +186,98 @@ export default () => {
     const etapas = o.etapas.map((e, indexServico) => {
       const servicos = e.servicos.map((s) => {
         return (
-          <tr className="bg-light" key={indexServico}>
-            <th scope="row" className="pr-0">
-              <input className="w-auto text-center" type="text" />
-            </th>
-            <td className="text-center pr-0 pl-0">
-              {s.id}
-              <input
-                className="w-75px text-center"
-                type="number"
-                step={0.01}
-                min={0}
-              />
-            </td>
-            <td className="text-center pr-0 pl-0">
-              <input
-                className="w-45px text-center"
-                type="number"
-                step={1}
-                min={0}
-              />
-            </td>
-            <td className="text-center pr-0 pl-0">
-              <input
-                className="w-40px text-center"
-                type="number"
-                step={1}
-                min={0}
-                max={100}
-              />
-            </td>
-            <td className="text-center pr-0 pl-0">
-              <span className="oi oi-x"></span>
-            </td>
-          </tr>
+          <>
+            <tr className="bg-light" key={indexServico}>
+              <th scope="row" className="pr-0">
+                <input className="w-auto text-center shadow" type="text" />
+              </th>
+              <td className="text-center pr-0 pl-0">
+                {s.id}
+                <input
+                  className="w-75px text-center shadow"
+                  type="number"
+                  step={0.01}
+                  min={0}
+                />
+              </td>
+              <td className="text-center pr-0 pl-0">
+                <input
+                  className="w-45px text-center shadow"
+                  type="number"
+                  step={1}
+                  min={0}
+                />
+              </td>
+              <td className="text-center pr-0 pl-0">
+                <input
+                  className="w-40px text-center shadow"
+                  type="number"
+                  step={1}
+                  min={0}
+                  max={100}
+                />
+              </td>
+              <td className="text-center pr-0 pl-0">
+                <span
+                  className="oi oi-x shadow"
+                  data-toggle="modal"
+                  data-target={`#modalDeletarServico${s.id}`}
+                ></span>
+              </td>
+            </tr>
+            {/* modal para alterar nome etapa */}
+            <div
+              className="modal"
+              id={`modalDeletarServico${s.id}`}
+              tabindex="-1"
+              role="dialog"
+            >
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">
+                      Deletar serviço: {s.nomeServico}
+                    </h5>
+                    <button
+                      type="button"
+                      className="close shadow"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <p>
+                      Você deseja deletar o serviço {s.nomeServico} ({s.id})
+                    </p>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-danger">
+                      Deletar
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-outline-danger shadow"
+                      data-dismiss="modal"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
         );
       });
       return (
         <>
           <div
-            className="accordion container-fluid w-75 p-0"
+            className="accordion container-fluid w-75 p-0 mb-3"
             id="accordionExample"
             key={indexEtapa}
           >
-            <div className="card">
+            <div className="card card-border shadow">
               <div className="card-header p-4" id={`heading${e.id}`}>
                 <h4 className="row m-0">
                   <div className="col-1 p-0 d-flex align-items-center justify-content-center">
@@ -291,17 +339,19 @@ export default () => {
                   <div className="container-fluid mb-2">
                     <button
                       type="submit"
-                      className="btn btn-dark m-2 ml-1 shadow-sm"
+                      className="btn btn-dark m-2 ml-1 shadow"
                       style={{ borderColor: "white" }}
                     >
-                      Editar
+                      Editar Etapa
                     </button>
                     <button
                       type="button"
-                      className="btn btn-danger shadow-sm ml-1"
+                      className="btn btn-danger shadow ml-1"
                       style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
+                      data-toggle="modal"
+                      data-target={`#modalExcluirEtapa${e.id}`}
                     >
-                      Excluir
+                      Excluir Etapa
                     </button>
                   </div>
                 </div>
@@ -309,57 +359,98 @@ export default () => {
             </div>
           </div>
           <br />
-              {/* modal para alterar nome etapa */}
-    <div
-      className="modal"
-      id={`modalRenomearEtapa${e.id}`}
-      tabindex="-1"
-      role="dialog"
-    >
-      <div className="modal-dialog" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Renomear Etapa {e.nomeEtapa}</h5>
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
+          {/* modal para alterar nome etapa */}
+          <div
+            className="modal"
+            id={`modalRenomearEtapa${e.id}`}
+            tabindex="-1"
+            role="dialog"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Renomear Etapa: {e.nomeEtapa}</h5>
+                  <button
+                    type="button"
+                    className="close shadow"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <p>Digite o novo nome da Etapa:</p>
+                  <input className="w-auto text-center shadow" type="text" />
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-dark">
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger shadow"
+                    data-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="modal-body">
-            <p>Digite o novo nome da Etapa</p>
+
+                    {/* modal para excluir etapa */}
+                    <div
+            className="modal"
+            id={`modalExcluirEtapa${e.id}`}
+            tabindex="-1"
+            role="dialog"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Excluir Etapa: {e.nomeEtapa}</h5>
+                  <button
+                    type="button"
+                    className="close shadow"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <p>Você deseja excluir a Etapa: {e.nomeEtapa}</p>
+                  <input className="w-auto text-center shadow" type="text" />
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-danger">
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger shadow"
+                    data-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-dark">
-              Editar
-            </button>
-            <button
-              type="button"
-              className="btn btn-danger"
-              data-dismiss="modal"
-            >
-              Cancelar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div> 
         </>
       );
     });
-    return <div className="web">{etapas}</div>;
+    return <div className="">{etapas}</div>;
   });
   return (
     <>
       <Breadcrumb item="Minhas Obras" active="Etapas" router="#" />
       <br />
-      <div className="container-fluid p-0 w-75 mb-1">
+      <div className="container-fluid p-0 w-75 mb-3">
         <button
           type="button"
-          className="btn btn-dark shadow-sm"
+          className="btn btn-dark shadow"
           style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
           data-toggle="modal"
           data-target="#modalCriarEtapa"
@@ -367,46 +458,49 @@ export default () => {
           Nova Etapa
         </button>
       </div>
-      <br />
-      {lista}
-          {/* modal para criar etapa */}
 
-    <div className="modal" id="modalCriarEtapa" tabindex="-1" role="dialog">
-      <div className="modal-dialog" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Nova Etapa</h5>
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div className="modal-body">
-            <p>Digite o nome da nova Etapa</p>
-          </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-dark">
-              Criar
-            </button>
-            <button
-              type="button"
-              className="btn btn-danger"
-              data-dismiss="modal"
-            >
-              Cancelar
-            </button>
+      {lista}
+      <br />
+      {/* modal para criar etapa */}
+
+      <div className="modal" id="modalCriarEtapa" tabindex="-1" role="dialog">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Nova Etapa</h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>Digite o nome da nova Etapa:</p>
+              <p>
+                <input className="w-auto text-center shadow" type="text" />
+              </p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-dark">
+                Criar
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-danger"
+                data-dismiss="modal"
+              >
+                Cancelar
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div> 
     </>
   );
 };
-
 
 //     {/* mobile */}
 //     {/* <div className="mobile">
@@ -618,14 +712,14 @@ export default () => {
 //               <div className="container-fluid mb-2">
 //                 <button
 //                   type="submit"
-//                   className="btn btn-dark m-2 ml-1 shadow-sm"
+//                   className="btn btn-dark m-2 ml-1 shadow"
 //                   style={{ borderColor: "white" }}
 //                 >
 //                   Editar
 //                 </button>
 //                 <button
 //                   type="button"
-//                   className="btn btn-danger shadow-sm ml-1"
+//                   className="btn btn-danger shadow ml-1"
 //                   style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
 //                 >
 //                   Excluir
@@ -638,7 +732,6 @@ export default () => {
 //     </div> */}
 
 //     {/* <br /> */}
-
 
 //   </>
 // );

@@ -24,3 +24,6 @@
         display: table-cell;
     }
 }
+.card-border{
+    border-radius: 5px !important;
+  }

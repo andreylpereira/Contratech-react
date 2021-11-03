@@ -88,3 +88,10 @@ select:focus {
 .edit {
   color: #c2c2c2ec;
 }
+
+.card-border{
+  border-radius: 5px !important;
+}
+.oi-x{
+  cursor: pointer;
+}

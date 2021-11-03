@@ -206,18 +206,20 @@ const lista = mocks.map((item) =>
 </th>
 <td>
   <div className="float-right">
-    <button type="button " className="btn btn-dark m-1 shadow-sm">
+    <button type="button " className="btn btn-dark m-1 shadow">
       Editar
     </button>
     <button
-      type="button "
-      className="btn btn-danger m-1 shadow-sm"
+      type="button"
+      className="btn btn-danger m-1 shadow"
+      data-toggle="modal"
+      data-target={`#modalDeletarObra${item.id}`}
     >
       Excluir
     </button>
     <button
       type="button"
-      className="btn btn-light m-1 shadow-sm"
+      className="btn btn-light m-1 shadow"
       style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
     >
       Relatório
@@ -240,13 +242,43 @@ const lista = mocks.map((item) =>
               </button>
             </div>
             <div className="modal-body">
-              <p>Digite o novo nome da Obra:</p>
+              <p className="text-left">Digite o novo nome da Obra:</p>
+              <p><input className="w-auto text-center shadow" type="text" /></p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-dark">
                 Salvar
               </button>
-              <button type="button" className="btn btn-danger" data-dismiss="modal">
+              <button type="button" className="btn btn-outline-danger" data-dismiss="modal">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+            {/* modal para excluir obra */}
+            <div className="modal" id={`modalDeletarObra${item.id}`} tabindex="-1" role="dialog">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Excluir Obra {item.nomeObra}</h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <p className="text-left">Você deseja excluir a obra {item.nomeObra}?</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-danger">
+                Excluir
+              </button>
+              <button type="button" className="btn btn-outline-danger" data-dismiss="modal">
                 Cancelar
               </button>
             </div>
@@ -264,7 +296,7 @@ const lista = mocks.map((item) =>
       <div className="container-fluid mt-2 pl-0 w-75">
         <button
           type="submit"
-          className="btn btn-dark mb-2 shadow-sm"
+          className="btn btn-dark mb-2 shadow"
           data-toggle="modal"
           data-target="#modalCriarObra"
           onClick={name}
@@ -273,7 +305,7 @@ const lista = mocks.map((item) =>
         </button>
       </div>
 
-      <div className="card bg-light shadow container-fluid mt-2 mb-5 w-75">
+      <div className="card card-border bg-light shadow container-fluid mt-2 mb-5 w-75">
         <table className="table table-desktop">
           <thead className="table-light">
             <tr className="bg-light">
@@ -306,18 +338,18 @@ const lista = mocks.map((item) =>
               </th>
               <td>
                 <div className="float-right">
-                  <button type="button " className="btn btn-dark m-1 shadow-sm">
+                  <button type="button " className="btn btn-dark m-1 shadow">
                     Editar
                   </button>
                   <button
                     type="button "
-                    className="btn btn-danger m-1 shadow-sm"
+                    className="btn btn-danger m-1 shadow"
                   >
                     Excluir
                   </button>
                   <button
                     type="button"
-                    className="btn btn-light m-1 shadow-sm"
+                    className="btn btn-light m-1 shadow"
                     style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
                   >
                     Relatório
@@ -344,18 +376,18 @@ const lista = mocks.map((item) =>
               </th>
               <td>
                 <div className="float-right">
-                  <button type="button " className="btn btn-dark m-1 shadow-sm">
+                  <button type="button " className="btn btn-dark m-1 shadow">
                     Editar
                   </button>
                   <button
                     type="button "
-                    className="btn btn-danger m-1 shadow-sm"
+                    className="btn btn-danger m-1 shadow"
                   >
                     Excluir
                   </button>
                   <button
                     type="button "
-                    className="btn btn-light m-1 shadow-sm"
+                    className="btn btn-light m-1 shadow"
                     style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
                   >
                     Relatório
@@ -382,18 +414,18 @@ const lista = mocks.map((item) =>
               </th>
               <td>
                 <div className="float-right">
-                  <button type="button " className="btn btn-dark m-1 shadow-sm">
+                  <button type="button " className="btn btn-dark m-1 shadow">
                     Editar
                   </button>
                   <button
                     type="button "
-                    className="btn btn-danger m-1 shadow-sm"
+                    className="btn btn-danger m-1 shadow"
                   >
                     Excluir
                   </button>
                   <button
                     type="button "
-                    className="btn btn-light m-1 shadow-sm"
+                    className="btn btn-light m-1 shadow"
                     style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
                   >
                     Relatório
@@ -433,19 +465,19 @@ const lista = mocks.map((item) =>
                   <div className="row justify-content-center">
                     <button
                       type="button"
-                      className="btn btn-dark m-1 shadow-sm"
+                      className="btn btn-dark m-1 shadow"
                     >
                       Editar
                     </button>
                     <button
                       type="button"
-                      className="btn btn-danger m-1 shadow-sm"
+                      className="btn btn-danger m-1 shadow"
                     >
                       Excluir
                     </button>
                     <button
                       type="button"
-                      className="btn btn-light m-1 shadow-sm"
+                      className="btn btn-light m-1 shadow"
                       style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
                     >
                       Relatório
@@ -474,13 +506,14 @@ const lista = mocks.map((item) =>
               </button>
             </div>
             <div className="modal-body">
-              <p>Digite o nome da nova obra</p>
+              <p>Digite o nome da nova Obra:</p>
+              <p><input className="w-auto text-center shadow" type="text" /></p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-dark">
                 Criar
               </button>
-              <button type="button" className="btn btn-danger" data-dismiss="modal">
+              <button type="button" className="btn btn-outline-danger" data-dismiss="modal">
                 Cancelar
               </button>
             </div>
