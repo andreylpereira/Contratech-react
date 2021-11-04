@@ -240,7 +240,7 @@ export default () => {
                     </h5>
                     <button
                       type="button"
-                      className="close shadow"
+                      className="close"
                       data-dismiss="modal"
                       aria-label="Close"
                     >
@@ -253,7 +253,7 @@ export default () => {
                     </p>
                   </div>
                   <div className="modal-footer">
-                    <button type="button" className="btn btn-danger">
+                    <button type="button" className="btn btn-danger shadow">
                       Deletar
                     </button>
                     <button
@@ -384,7 +384,7 @@ export default () => {
                   <h5 className="modal-title">Renomear Etapa: {e.nomeEtapa}</h5>
                   <button
                     type="button"
-                    className="close shadow"
+                    className="close"
                     data-dismiss="modal"
                     aria-label="Close"
                   >
@@ -396,7 +396,7 @@ export default () => {
                   <input className="w-auto text-center shadow" type="text" />
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-dark">
+                  <button type="button" className="btn btn-dark shadow">
                     Editar
                   </button>
                   <button
@@ -424,7 +424,7 @@ export default () => {
                   <h5 className="modal-title">Excluir Etapa: {e.nomeEtapa}</h5>
                   <button
                     type="button"
-                    className="close shadow"
+                    className="close"
                     data-dismiss="modal"
                     aria-label="Close"
                   >
@@ -435,7 +435,7 @@ export default () => {
                   <p>Você deseja excluir a Etapa: {e.nomeEtapa}</p>
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-danger">
+                  <button type="button" className="btn btn-danger shadow">
                     Excluir
                   </button>
                   <button
@@ -463,7 +463,7 @@ export default () => {
                   <h5 className="modal-title">Editar Etapa: {e.nomeEtapa}</h5>
                   <button
                     type="button"
-                    className="close shadow"
+                    className="close"
                     data-dismiss="modal"
                     aria-label="Close"
                   >
@@ -476,7 +476,7 @@ export default () => {
                 <div className="modal-footer">
                   <button
                     type="button"
-                    className="btn btn-dark"
+                    className="btn btn-dark shadow"
                     data-dismiss="modal"
                   >
                     Confirmar
@@ -508,7 +508,7 @@ export default () => {
                   </h5>
                   <button
                     type="button"
-                    className="close shadow"
+                    className="close"
                     data-dismiss="modal"
                     aria-label="Close"
                   >
@@ -521,7 +521,7 @@ export default () => {
                 <div className="modal-footer">
                   <button
                     type="button"
-                    className="btn btn-dark"
+                    className="btn btn-dark shadow"
                     data-dismiss="modal"
                   >
                     Confirmar
@@ -582,12 +582,12 @@ export default () => {
               </p>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-dark">
+              <button type="button" className="btn btn-dark shadow">
                 Criar
               </button>
               <button
                 type="button"
-                className="btn btn-outline-danger"
+                className="btn btn-outline-danger shadow"
                 data-dismiss="modal"
               >
                 Cancelar

@@ -18,10 +18,10 @@ export default () => {
        {/* <Home></Home> */}
         {/* <Login></Login>   */}
 
-       {/* <Obra></Obra>   */}
-       <Tabela></Tabela>   
+       <Obra></Obra>  
+       {/* <Tabela></Tabela>    */}
 
-      {/* <Relatorio></Relatorio>  */}
+       {/* <Relatorio></Relatorio> */}
     </>
   );
 };
