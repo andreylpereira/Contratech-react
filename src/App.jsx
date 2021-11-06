@@ -19,10 +19,10 @@ export default () => {
        {/* <Home></Home> */}
 
 
-       {/* <Obra></Obra>   */}
-       <Tabela></Tabela>   
+       <Obra></Obra>  
+       {/* <Tabela></Tabela>    */}
 
-      {/* <Relatorio></Relatorio>  */}
+       {/* <Relatorio></Relatorio> */}
     </>
   );
 };
