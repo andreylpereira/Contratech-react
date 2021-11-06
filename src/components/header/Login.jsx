@@ -20,7 +20,7 @@ export default (props) => {
       <div className="col mr-2 desktop">
         <div className="desktop">
           <div className="row welcome">Seja bem-vindo,</div>
-          <div className="row user">Andrey Luiz Pereira</div>
+          <div className="row user">andreylpereira</div>
         </div>
       </div>
 

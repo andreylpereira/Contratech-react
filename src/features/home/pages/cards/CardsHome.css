@@ -1,0 +1,22 @@
+.card {
+  border: 0;
+}
+
+.card-mobile {
+  width: 20rem;
+}
+
+#img-card {
+  box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.2);
+  opacity: 100%;
+  -webkit-mask-image: linear-gradient(
+    to top,
+    transparent 1.5%,
+    rgb(0, 0, 0) 10%
+  );
+}
+
+.sombra {
+  -webkit-box-shadow: -6px 6px 15px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: -6px 6px 15px 4px rgba(70, 70, 70, 0.5);
+}

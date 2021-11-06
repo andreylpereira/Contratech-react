@@ -23,7 +23,6 @@
   border-radius: 5px !important;
 }
 
-.page {
-  height: 100vh;
+.pageCadastro {
   background-color: rgba(255, 218, 106, 1);
 }
