@@ -2,6 +2,7 @@
 import React from "react";
 import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
+import { useNavigate } from "react-dom";
 
 export default () => {
   let mocks = [
@@ -180,11 +181,12 @@ export default () => {
       ],
     },
   ];
-  function name() {
-    console.log(mocks);
-  }
+  
+   //const navigate = useNavigate();
+  
 
   const lista = mocks.map((item) => (
+    
     <tr className="bg-light text-center" data>
       <th>
         <div className="float-left row ml-1">
@@ -204,7 +206,10 @@ export default () => {
       </th>
       <td>
         <div className="float-right">
-          <button type="button " className="btn btn-dark m-1 shadow">
+          <button
+            type="button "
+            className="btn btn-dark m-1 shadow"
+          >
             Editar
           </button>
           <button
@@ -307,7 +312,7 @@ export default () => {
       </div>
     </tr>
   ));
-
+  
   return (
     <>
       <div className="page">
@@ -319,7 +324,6 @@ export default () => {
             className="btn btn-dark mb-2 shadow"
             data-toggle="modal"
             data-target="#modalCriarObra"
-            onClick={name}
           >
             Nova Obra
           </button>
@@ -340,7 +344,7 @@ export default () => {
             <tbody>{lista}</tbody>
           </table>
 
-          <table className="table table-mobile">
+          {/* <table className="table table-mobile">
             <thead className="table-light">
               <tr className="bg-light">
                 <th>
@@ -388,7 +392,7 @@ export default () => {
                 </th>
               </tr>
             </tbody>
-          </table>
+          </table> */}
         </div>
       </div>
       {/* modal para criar obra */}
@@ -429,4 +433,4 @@ export default () => {
       </div>
     </>
   );
-};
+}
