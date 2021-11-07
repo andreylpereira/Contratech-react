@@ -4,7 +4,7 @@ import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
 import { useNavigate } from "react-dom";
 
-export default () => {
+ const Obra =() => {
   let mocks = [
     {
       id: 1,
@@ -182,7 +182,7 @@ export default () => {
     },
   ];
   
-   //const navigate = useNavigate();
+   
   
 
   const lista = mocks.map((item) => (
@@ -209,6 +209,7 @@ export default () => {
           <button
             type="button "
             className="btn btn-dark m-1 shadow"
+            
           >
             Editar
           </button>
@@ -434,3 +435,5 @@ export default () => {
     </>
   );
 }
+
+export default Obra;

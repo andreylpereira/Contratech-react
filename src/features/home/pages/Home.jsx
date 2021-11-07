@@ -11,8 +11,6 @@ export default () => {
       <div className="pt-5"></div>
       <Carousel></Carousel>
       <CardsHome></CardsHome>
-      <Outlet />
-
     </div>
   );
 };

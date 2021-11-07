@@ -3,55 +3,65 @@ import React from "react";
 import "./Header.css";
 import Login from "./Login";
 import Logo from "../../assets/img/logo.png";
-import { Link } from "react-router-dom";
-export default (props) => {
+import { NavLink } from "react-router-dom";
+import { Fragment } from "react";
+
+const Header = (props) => {
   let logged = props.logged;
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-        <div className="navbar-brand">
-          <img id="efeito" src={Logo} width="30" height="30" alt="" />
-        </div>
-        <div className="navbar-brand text-warning"><Link to="/home" className="text-warning">Contratech</Link></div>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <div className="nav-link active">
-              <a><Link to="/home">Home</Link></a>
-                <span className="sr-only">(current)</span>
-              </div>
-            </li>
-            {logged !== "true" && (
+    <Fragment>
+      <div>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+          <div className="navbar-brand">
+            <img id="efeito" src={Logo} width="30" height="30" alt="" />
+          </div>
+          <div className="navbar-brand text-warning">
+            <NavLink to="/home" className="text-warning">
+              Contratech
+            </NavLink>
+          </div>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <diva className="nav-link">
-                  <Link to="/cadastro">Cadastre-se</Link>{" "}
-                </diva>
-              </li>
-            )}
-            {logged === "true" && (
-              <li className="nav-item">
-                <div className="nav-link">
-                  <Link to="/obras">Minhas Obras</Link>
+                <div className="nav-NavLink">
+                  <NavLink to="/home">Home</NavLink>
+                  <span className="sr-only">(current)</span>
                 </div>
               </li>
-            )}
-          </ul>
+              {logged !== "true" && (
+                <li className="nav-item">
+                  <div className="nav-NavLink ml-3">
+                    <NavLink to="/cadastro">Cadastre-se</NavLink>
+                  </div>
+                </li>
+              )}
+              {logged === "true" && (
+                <li className="nav-item">
+                  <div className="nav-NavLink ml-3">
+                    <NavLink to="/obras">Minhas Obras</NavLink>
+                  </div>
+                </li>
+              )}
+            </ul>
 
-          <Login active="true"></Login>
-        </div>
-      </nav>
-    </div>
+            <Login active="true"></Login>
+          </div>
+        </nav>
+      </div>
+      {props.children}
+    </Fragment>
   );
 };
+export default Header;
