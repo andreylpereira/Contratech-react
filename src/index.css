@@ -10,3 +10,21 @@ body {
 .modal-footer {
   border-top: 0;
 }
+
+a {
+  color: #fafafa;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #adadad;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:active {
+  color: #e2e2e2;
+  text-decoration: none;
+  background-color: transparent;
+}

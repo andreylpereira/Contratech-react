@@ -1,28 +1,27 @@
 /* eslint-disable import/no-anonymous-default-export */
 import "./App.css";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Header from "./components/header/Header";
 import Cadastro from "./features/cadastro/pages/Cadastro";
-import Breadcrumb from "./components/breadcrumb/Breadcrumb";
 import Login from "./features/login/pages/Login";
 import Relatorio from "./features/relatorio/pages/Relatorio";
 import Obra from "./features/obra/pages/Obra";
 import Home from "./features/home/pages/Home";
 import Tabela from "./features/tabela/pages/Tabela";
 
-export default () => {
+const App = () => {
   return (
-    <>
-      <Header logged="true" />
-      {/* <Breadcrumb unique="teste" item="Teste1" active="item 2" router="#" />  */}
-        {/* <Login></Login>   */}
-          {/* <Cadastro></Cadastro> */}
-       {/* <Home></Home> */}
-
-
-       <Obra></Obra>  
-       {/* <Tabela></Tabela>    */}
-
-       {/* <Relatorio></Relatorio> */}
-    </>
+    <Header logged="true">
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/home" />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/obras" element={<Obra />} />
+        <Route path="/obras/:obraId/etapas" element={<Tabela />} />
+        <Route path="/obras/:obraId/relatorio" element={<Relatorio />} />
+      </Routes>
+    </Header>
   );
 };
+export default App;
