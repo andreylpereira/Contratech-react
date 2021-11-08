@@ -2,9 +2,9 @@
 import React from "react";
 import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
-import { useNavigate } from "react-dom";
+import { useNavigate } from "react-router-dom";
 
- const Obra =() => {
+ const Obra = () => {
   let mocks = [
     {
       id: 1,
@@ -181,8 +181,14 @@ import { useNavigate } from "react-dom";
       ],
     },
   ];
-  
-   
+  const navigate = useNavigate();
+  const goToEtapa = () => {
+    navigate('/obras/1/etapas');
+  }; 
+
+  const goToRelatorio = () => {
+    navigate('/obras/1/relatorio');
+  };
   
 
   const lista = mocks.map((item) => (
@@ -209,7 +215,7 @@ import { useNavigate } from "react-dom";
           <button
             type="button "
             className="btn btn-dark m-1 shadow"
-            
+            onClick={goToEtapa}
           >
             Editar
           </button>
@@ -225,6 +231,7 @@ import { useNavigate } from "react-dom";
             type="button"
             className="btn btn-light m-1 shadow"
             style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
+            onClick={goToRelatorio}
           >
             Relatório
           </button>
