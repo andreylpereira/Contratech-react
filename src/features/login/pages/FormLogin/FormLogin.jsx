@@ -1,8 +1,23 @@
 import "./FormLogin.css";
+import React from 'react';
 import { NavLink } from "react-router-dom";
- // eslint-disable-next-line jsx-a11y/anchor-is-valid
-// eslint-disable-next-line import/no-anonymous-default-export
-export default (props) => {
+
+class FormLogin extends React.Component {
+
+
+state = {
+  login: '',
+  senha: ''
+}
+
+
+entrar = () => {
+  console.log('Senha:', this.state.senha)
+  console.log('Login:', this.state.login)
+}
+
+
+  render(){
   return (
     <div>
       <div className="container-fluid p-0 d-flex justify-content-center">
@@ -20,7 +35,7 @@ export default (props) => {
       {/* form */}
       <form>
         <div className="form-group">
-          <label className="font-weight-bold" for="exampleInputEmail1">
+          <label className="font-weight-bold" htmlFor="inputLogin">
             Login:
           </label>
           <div className="input-group mb-3 shadow">
@@ -31,16 +46,18 @@ export default (props) => {
               ></span>
             </div>
             <input
+            value={this.state.login}
+            onChange={e => this.setState({login: e.target.value})}
               type="text"
               className="form-control"
-              id="exampleInputEmail1"
+              id="inputLogin"
               aria-describedby="emailHelp"
               placeholder="Login"
             />
           </div>
         </div>
         <div className="form-group">
-          <label className="font-weight-bold" for="exampleInputEmail1">
+          <label className="font-weight-bold" htmlFor="inputSenha">
             Senha:
           </label>
           <div className="input-group mb-1 shadow">
@@ -51,16 +68,18 @@ export default (props) => {
               ></span>
             </div>
             <input
+            value={this.state.senha}
+            onChange={ e => this.setState({senha: e.target.value})}
               type="password"
               className="form-control"
-              id="exampleInputPassword1"
+              id="inputSenha"
               placeholder="Senha"
             />
           </div>
           <div className="row cadastrar container-fluid d-inline p-0 m-0 mb-4">
             <p>
              
-              Não tem uma conta?<NavLink to="/cadastro">Crie uma</NavLink>!
+              Não tem uma conta?<NavLink to="/cadastro"> Crie uma</NavLink>!
             </p>
           </div>
         </div>
@@ -68,10 +87,13 @@ export default (props) => {
           type="submit"
           className="btn btn-dark mb-2 shadow container-fluid"
           style={{ borderColor: "white" }}
+          onClick={this.entrar}
         >
           Entrar
         </button>
       </form>
     </div>
   );
+}
 };
+export default FormLogin;
