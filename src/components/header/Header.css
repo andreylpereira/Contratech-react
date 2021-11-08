@@ -1,23 +1,10 @@
-@media (max-width: 989px) {
-  .user,
-  .welcome {
-    display: none;
-  }
-  .form-inline {
-      display: block;
+@media (min-width: 992px) {
+  .link-nav {
+    padding-left: 16px;
   }
 }
-
-@media (min-width: 989px) {
-  .desktop {
-    display: block;
-  }
-  .welcome {
-    color: white;
-    font-size: 0.75rem;
-  }
-  .user {
-    color: rgba(255, 255, 255, 0.65);
-    font-size: 0.6rem;
+@media (max-width: 991px) {
+  .link-nav {
+    padding-left: 0px;
   }
 }

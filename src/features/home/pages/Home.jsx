@@ -3,7 +3,6 @@ import React from "react";
 import "./Home.css";
 import CardsHome from "./cards/CardsHome";
 import Carousel from "./carousel/Carousel";
-import { Outlet } from "react-router-dom";
 
 export default () => {
   return (

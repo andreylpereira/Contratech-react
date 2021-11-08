@@ -1,5 +1,6 @@
 import "./FormLogin.css";
-
+import { NavLink } from "react-router-dom";
+ // eslint-disable-next-line jsx-a11y/anchor-is-valid
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (props) => {
   return (
@@ -56,9 +57,10 @@ export default (props) => {
               placeholder="Senha"
             />
           </div>
-          <div className="row cadastrar container-fluid p-0 m-0 mb-4">
+          <div className="row cadastrar container-fluid d-inline p-0 m-0 mb-4">
             <p>
-              Não tem uma conta?<a> Crie uma!</a>
+             
+              Não tem uma conta?<NavLink to="/cadastro">Crie uma</NavLink>!
             </p>
           </div>
         </div>

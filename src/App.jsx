@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import "./App.css";
-import { Routes, Route, Outlet, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/header/Header";
 import Cadastro from "./features/cadastro/pages/Cadastro";
 import Login from "./features/login/pages/Login";
