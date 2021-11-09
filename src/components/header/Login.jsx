@@ -1,6 +1,7 @@
 import React from "react";
 import "./Login.css";
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (props) => {
   let logged = props.active;

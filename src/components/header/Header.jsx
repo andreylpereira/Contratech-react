@@ -34,29 +34,29 @@ const Header = (props) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <div className="nav-NavLink">
+              <li className="nav-item"> 
+                <div className="nav-NavLink link-nav">
                   <NavLink to="/home">Home</NavLink>
                   <span className="sr-only">(current)</span>
                 </div>
               </li>
               {logged !== "true" && (
                 <li className="nav-item">
-                  <div className="nav-NavLink ml-3">
+                  <div className="nav-NavLink link-nav">
                     <NavLink to="/cadastro">Cadastre-se</NavLink>
                   </div>
                 </li>
               )}
               {logged === "true" && (
                 <li className="nav-item">
-                  <div className="nav-NavLink ml-3">
+                  <div className="nav-NavLink link-nav">
                     <NavLink to="/obras">Minhas Obras</NavLink>
                   </div>
                 </li>
               )}
             </ul>
 
-            <Login active="true"></Login>
+            <Login active="false"></Login>
           </div>
         </nav>
       </div>
