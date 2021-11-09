@@ -9,12 +9,15 @@ class FormLogin extends React.Component {
   };
 
   entrar = () => {
-    axios.post("http://localhost:8080/seguranca/login", {
+    axios.post("http://localhost:8080/api/seguranca/login", {
         login: this.state.login,
         senha: this.state.senha,
       })
       .then((response) => {
-        console.log(response)
+        console.log('deu bom');
+        console.log(response.data);
+        console.log(response.data.token)
+        alert('teste')
       })
       .catch((erro) => {
         console.log(erro);
@@ -35,8 +38,6 @@ class FormLogin extends React.Component {
         </div>
 
         <h3 className="card-title font-weight-bold text-center">Login</h3>
-        <h4>{this.state.error}</h4>
-        <h4>{this.state.acerto}</h4>
         {/* form */}
         <form>
           <div className="form-group">
