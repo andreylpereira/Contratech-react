@@ -471,7 +471,7 @@ export default () => {
                   </button>
                 </div>
                 <div className="modal-body">
-                  <p>Etapa {e.nomeEtapa} editada com sucesso!</p>
+                  <p>Têm certeza que deseja editar a Etapa: {e.nomeEtapa}?</p>
                 </div>
                 <div className="modal-footer">
                   <button
@@ -481,13 +481,13 @@ export default () => {
                   >
                     Confirmar
                   </button>
-                  {/* <button
+                  <button
                     type="button"
                     className="btn btn-outline-danger shadow"
                     data-dismiss="modal"
                   >
                     Cancelar
-                  </button>  */}
+                  </button> 
                 </div>
               </div>
             </div>
