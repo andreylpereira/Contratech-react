@@ -219,7 +219,7 @@ export default () => {
               </td>
               <td className="text-center pr-0 pl-0">
                 <span
-                  className="oi oi-x shadow"
+                  className="oi oi-x"
                   data-toggle="modal"
                   data-target={`#modalDeletarServico${s.id}`}
                 ></span>
