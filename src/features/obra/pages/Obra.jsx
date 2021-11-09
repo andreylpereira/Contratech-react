@@ -4,7 +4,7 @@ import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
 import { useNavigate } from "react-router-dom";
 
- const Obra = () => {
+const Obra = () => {
   let mocks = [
     {
       id: 1,
@@ -183,16 +183,14 @@ import { useNavigate } from "react-router-dom";
   ];
   const navigate = useNavigate();
   const goToEtapa = () => {
-    navigate('/obras/1/etapas');
-  }; 
+    navigate("/obras/1/etapas");
+  };
 
   const goToRelatorio = () => {
-    navigate('/obras/1/relatorio');
+    navigate("/obras/1/relatorio");
   };
-  
 
   const lista = mocks.map((item) => (
-    
     <tr className="bg-light text-center" data>
       <th>
         <div className="float-left row ml-1">
@@ -320,7 +318,7 @@ import { useNavigate } from "react-router-dom";
       </div>
     </tr>
   ));
-  
+
   return (
     <>
       <div className="page">
@@ -441,6 +439,6 @@ import { useNavigate } from "react-router-dom";
       </div>
     </>
   );
-}
+};
 
 export default Obra;
