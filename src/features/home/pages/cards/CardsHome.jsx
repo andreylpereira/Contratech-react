@@ -26,7 +26,7 @@ export default () => {
         <div className="card-body">
           <button
             type="button"
-            className="btn btn-dark mb-2 shadow-sm"
+            className="btn btn-dark mb-2 shadow"
             style={{ borderColor: "white" }}
           >
             Cadastre-se
