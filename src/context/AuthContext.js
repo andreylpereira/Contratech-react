@@ -15,6 +15,11 @@ function AuthProvider({ children }) {
         navigate("/home");
       };
 
+      const goToLogin = () => {
+        navigate("/login");
+      };
+
+
     useEffect(() => {
         const token = localStorage.getItem('token');
 
@@ -34,12 +39,10 @@ function AuthProvider({ children }) {
         localStorage.setItem('id', JSON.stringify(id));
         localStorage.setItem('login', JSON.stringify(login))
         setAuthenticated(true);
-        setUser(localStorage.getItem("login").replace(/['"]+/g, ""))
-
-        if (authenticated && token) {
-         
-            goToHome();
-        }
+        let usuario = localStorage.getItem("login").replace(/['"]+/g, "");
+        setUser(usuario);       
+        goToHome();
+        
     }
 
     function handleLogOut() {
@@ -48,7 +51,7 @@ function AuthProvider({ children }) {
         localStorage.removeItem('id');
         localStorage.removeItem('login');
         api.defaults.headers.Authorization = undefined;
-        goToHome();
+        goToLogin();
 
     }
 
