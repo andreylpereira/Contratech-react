@@ -340,7 +340,7 @@ const Obra = () => {
             <thead className="table-light">
               <tr className="bg-light">
                 <th>
-                  <h4 className="card-title font-weight-bold mt-2">
+                  <h4 style={{width: "130px"}} className="card-title font-weight-bold mt-2">
                     Minhas obras
                   </h4>
                 </th>
@@ -349,56 +349,6 @@ const Obra = () => {
             </thead>
             <tbody>{lista}</tbody>
           </table>
-
-          {/* <table className="table table-mobile">
-            <thead className="table-light">
-              <tr className="bg-light">
-                <th>
-                  <h4 className="card-title font-weight-bold mt-2">
-                    Minhas obras
-                  </h4>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="bg-light text-center">
-                <th>
-                  <div
-                    className="font-weight-bold cursor mb-2"
-                    data-toggle="modal"
-                    data-target="#modalRenomearObra"
-                  >
-                    Edificio Outono 5
-                    <div
-                      className="oi oi-pencil edit ml-1"
-                      data-toggle="modal"
-                      data-target="#modalRenomearObra"
-                    />
-                  </div>
-                  <div>
-                    <div className="row justify-content-center">
-                      <button type="button" className="btn btn-dark m-1 shadow">
-                        Editar
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger m-1 shadow"
-                      >
-                        Excluir
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-light m-1 shadow"
-                        style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
-                      >
-                        Relatório
-                      </button>
-                    </div>
-                  </div>
-                </th>
-              </tr>
-            </tbody>
-          </table> */}
         </div>
       </div>
       {/* modal para criar obra */}

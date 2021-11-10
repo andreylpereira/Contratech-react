@@ -11,35 +11,6 @@ th {
   padding: 5px;
 }
 
-desktop {
-  display: table-cell;
-}
-
-.mobile {
-  display: none;
-}
-
-@media (max-width: 480px) {
-  .desktop {
-    display: none;
-  }
-  .mobile {
-    display: table-cell;
-  }
-}
-
-@media (max-width: 620px) {
-  .table-desktop {
-    display: none;
-  }
-}
-
-@media (min-width: 621px) and (max-width: 5000px) {
-  .table-mobile {
-    display: none;
-  }
-}
-
 .card-border{
   border-radius: 5px !important;
 }
