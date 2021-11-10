@@ -12,8 +12,8 @@ import { AuthProvider } from "../context/AuthContext";
 function Rotas() {
   return (
     <>
-      <Header logged="true"></Header>
       <AuthProvider>
+        <Header />
         <Routes>
           <Route path="/" element={<Navigate replace to="/home" />} />
           <Route path="/home" element={<Home />} />

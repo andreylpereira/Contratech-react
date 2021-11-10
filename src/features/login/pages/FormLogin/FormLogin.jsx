@@ -1,30 +1,17 @@
 import "./FormLogin.css";
 import React, { useState, useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Context } from "../../../../context/AuthContext";
 
 const FormLogin = (props) => {
   const { authenticated, handleLogin } = useContext(Context);
   console.log("Login: " + authenticated);
-  const navigate = useNavigate();
-  const goToHome = () => {
-    navigate("/home");
-  };
 
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
   const [msgLogin, setMsgLogin] = useState("");
 
   async function entrar() {
-    if (login || senha === "") {
-      setMsgLogin("* Os campos estão em branco!");
-      setLogin("");
-      setSenha("");
-      setTimeout(function () {
-        setMsgLogin("");
-      }, 3000);
-    }
-
     if (login.length < 6 || login.length > 20) {
       setMsgLogin("* Campo login deve ter entre 6 a 20 caracteres.");
       setLogin("");
@@ -43,10 +30,8 @@ const FormLogin = (props) => {
       }, 3000);
     }
 
-    if (
-      (login.length < 6 || login.length > 20) &&
-      (senha.length < 6 || senha.length > 10)
-    ) {
+    if ((login.length < 6 || login.length > 20) &&
+      (senha.length < 6 || senha.length > 10)) {
       setMsgLogin("* Campos login e senha inválidos!");
       setLogin("");
       setSenha("");
@@ -56,11 +41,10 @@ const FormLogin = (props) => {
     }
     try {
       handleLogin(login, senha);
-      if (authenticated) {
-        goToHome();
-      }
     } catch (error) {
-      console.log(error);
+      setMsgLogin("* Campo login e/ou senha inválido(s)!");
+      setLogin("");
+      setSenha("");
     }
   }
 
