@@ -25,18 +25,6 @@ const FormLogin = (props) => {
       }, 3000);
     }
 
-    if (
-      (login.length < 6 || login.length > 20) &&
-      (senha.length < 6 || senha.length > 10)
-    ) {
-      setMsgLogin("* Campos login e senha inválidos!");
-      setLogin("");
-      setSenha("");
-      setTimeout(function () {
-        setMsgLogin("");
-      }, 3000);
-    }
-
     if (login.length < 6 || login.length > 20) {
       setMsgLogin("* Campo login deve ter entre 6 a 20 caracteres.");
       setLogin("");
@@ -55,9 +43,22 @@ const FormLogin = (props) => {
       }, 3000);
     }
 
+    if (
+      (login.length < 6 || login.length > 20) &&
+      (senha.length < 6 || senha.length > 10)
+    ) {
+      setMsgLogin("* Campos login e senha inválidos!");
+      setLogin("");
+      setSenha("");
+      setTimeout(function () {
+        setMsgLogin("");
+      }, 3000);
+    }
     try {
       handleLogin(login, senha);
-      goToHome();
+      if (authenticated) {
+        goToHome();
+      }
     } catch (error) {
       console.log(error);
     }
