@@ -1,16 +1,18 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
+import React, { useContext } from "react";
 import "./Header.css";
 import Login from "./Login";
 import Logo from "../../assets/img/logo.png";
 import { NavLink } from "react-router-dom";
-import { Fragment } from "react";
+import { Context } from '../../context/AuthContext'
+
 
 const Header = (props) => {
-  let logged = props.logged;
+  const { authenticated } = useContext(Context);
+
 
   return (
-    <Fragment>
+    <>
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
           <div className="navbar-brand">
@@ -40,14 +42,14 @@ const Header = (props) => {
                   <span className="sr-only">(current)</span>
                 </div>
               </li>
-              {logged !== "true" && (
+              {!authenticated && (
                 <li className="nav-item">
                   <div className="nav-NavLink link-nav">
                     <NavLink to="/cadastro">Cadastre-se</NavLink>
                   </div>
                 </li>
               )}
-              {logged === "true" && (
+              {authenticated && (
                 <li className="nav-item">
                   <div className="nav-NavLink link-nav">
                     <NavLink to="/obras">Minhas Obras</NavLink>
@@ -56,12 +58,12 @@ const Header = (props) => {
               )}
             </ul>
 
-            <Login active="false"></Login>
+            <Login></Login>
           </div>
         </nav>
       </div>
       {props.children}
-    </Fragment>
+    </>
   );
 };
 export default Header;

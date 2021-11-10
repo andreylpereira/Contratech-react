@@ -4,7 +4,7 @@ import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
 import { useNavigate } from "react-router-dom";
 
- const Obra = () => {
+const Obra = () => {
   let mocks = [
     {
       id: 1,
@@ -183,17 +183,15 @@ import { useNavigate } from "react-router-dom";
   ];
   const navigate = useNavigate();
   const goToEtapa = () => {
-    navigate('/obras/1/etapas');
-  }; 
+    navigate("/obras/1/etapas");
+  };
 
   const goToRelatorio = () => {
-    navigate('/obras/1/relatorio');
+    navigate("/obras/1/relatorio");
   };
-  
 
   const lista = mocks.map((item) => (
-    
-    <tr className="bg-light text-center" data>
+    <tr className="bg-light text-center" data key={item.id}>
       <th>
         <div className="float-left row ml-1">
           <div
@@ -320,7 +318,7 @@ import { useNavigate } from "react-router-dom";
       </div>
     </tr>
   ));
-  
+
   return (
     <>
       <div className="page">
@@ -342,7 +340,7 @@ import { useNavigate } from "react-router-dom";
             <thead className="table-light">
               <tr className="bg-light">
                 <th>
-                  <h4 className="card-title font-weight-bold mt-2">
+                  <h4 style={{width: "130px"}} className="card-title font-weight-bold mt-2">
                     Minhas obras
                   </h4>
                 </th>
@@ -351,56 +349,6 @@ import { useNavigate } from "react-router-dom";
             </thead>
             <tbody>{lista}</tbody>
           </table>
-
-          {/* <table className="table table-mobile">
-            <thead className="table-light">
-              <tr className="bg-light">
-                <th>
-                  <h4 className="card-title font-weight-bold mt-2">
-                    Minhas obras
-                  </h4>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="bg-light text-center">
-                <th>
-                  <div
-                    className="font-weight-bold cursor mb-2"
-                    data-toggle="modal"
-                    data-target="#modalRenomearObra"
-                  >
-                    Edificio Outono 5
-                    <div
-                      className="oi oi-pencil edit ml-1"
-                      data-toggle="modal"
-                      data-target="#modalRenomearObra"
-                    />
-                  </div>
-                  <div>
-                    <div className="row justify-content-center">
-                      <button type="button" className="btn btn-dark m-1 shadow">
-                        Editar
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger m-1 shadow"
-                      >
-                        Excluir
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-light m-1 shadow"
-                        style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
-                      >
-                        Relatório
-                      </button>
-                    </div>
-                  </div>
-                </th>
-              </tr>
-            </tbody>
-          </table> */}
         </div>
       </div>
       {/* modal para criar obra */}
@@ -441,6 +389,6 @@ import { useNavigate } from "react-router-dom";
       </div>
     </>
   );
-}
+};
 
 export default Obra;
