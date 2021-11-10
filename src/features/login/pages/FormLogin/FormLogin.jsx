@@ -30,8 +30,10 @@ const FormLogin = (props) => {
       }, 3000);
     }
 
-    if ((login.length < 6 || login.length > 20) &&
-      (senha.length < 6 || senha.length > 10)) {
+    if (
+      (login.length < 6 || login.length > 20) &&
+      (senha.length < 6 || senha.length > 10)
+    ) {
       setMsgLogin("* Campos login e senha inválidos!");
       setLogin("");
       setSenha("");
@@ -41,10 +43,13 @@ const FormLogin = (props) => {
     }
     try {
       handleLogin(login, senha);
+      if (!authenticated) {
+        setMsgLogin("* Campo login e/ou senha inválido(s)!");
+        setLogin("");
+        setSenha("");
+      }
     } catch (error) {
-      setMsgLogin("* Campo login e/ou senha inválido(s)!");
-      setLogin("");
-      setSenha("");
+      console.log(error)
     }
   }
 
