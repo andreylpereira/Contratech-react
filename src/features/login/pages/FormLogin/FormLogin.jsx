@@ -5,7 +5,6 @@ import { Context } from "../../../../context/AuthContext";
 
 const FormLogin = (props) => {
   const { authenticated, handleLogin } = useContext(Context);
-  console.log("Login: " + authenticated);
 
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");

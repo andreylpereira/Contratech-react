@@ -26,6 +26,8 @@ function AuthProvider({ children }) {
         if (token) {
             api.defaults.headers.Authorization = `Bearer.${JSON.parse(token)}`;
             setAuthenticated(true);
+            let usuario = localStorage.getItem("login").replace(/['"]+/g, "");
+            setUser(usuario);  
         }
         setLoading(false);
     }, [])
