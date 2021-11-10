@@ -191,7 +191,7 @@ const Obra = () => {
   };
 
   const lista = mocks.map((item) => (
-    <tr className="bg-light text-center" data>
+    <tr className="bg-light text-center" data key={item.id}>
       <th>
         <div className="float-left row ml-1">
           <div
