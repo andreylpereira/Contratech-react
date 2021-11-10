@@ -1,9 +1,11 @@
 import "./FormLogin.css";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Context } from "../../../../context/AuthContext";
 
 const FormLogin = (props) => {
+  const { authenticated, handleLogin } = useContext(Context);
+  console.log("Login: " + authenticated);
   const navigate = useNavigate();
   const goToHome = () => {
     navigate("/home");
@@ -13,25 +15,53 @@ const FormLogin = (props) => {
   const [senha, setSenha] = useState("");
   const [msgLogin, setMsgLogin] = useState("");
 
-  const entrar = () => {
-    axios
-      .post("http://localhost:8080/api/seguranca/login", {
-        login: login,
-        senha: senha,
-      })
-      .then((response) => {
-        console.log(response.data);
-        console.log(response.data.token);
-        goToHome();
-      })
-      .catch((erro) => {
-        console.log(erro);
-        setMsgLogin('* Login e/ou senha invalido(s)!!!')
-        setLogin('');
-        setSenha('');
-        setTimeout(function(){ setMsgLogin('') }, 3000)
-      });
-  };
+  async function entrar() {
+    if (login || senha === "") {
+      setMsgLogin("* Os campos estão em branco!");
+      setLogin("");
+      setSenha("");
+      setTimeout(function () {
+        setMsgLogin("");
+      }, 3000);
+    }
+
+    if (
+      (login.length < 6 || login.length > 20) &&
+      (senha.length < 6 || senha.length > 10)
+    ) {
+      setMsgLogin("* Campos login e senha inválidos!");
+      setLogin("");
+      setSenha("");
+      setTimeout(function () {
+        setMsgLogin("");
+      }, 3000);
+    }
+
+    if (login.length < 6 || login.length > 20) {
+      setMsgLogin("* Campo login deve ter entre 6 a 20 caracteres.");
+      setLogin("");
+      setSenha("");
+      setTimeout(function () {
+        setMsgLogin("");
+      }, 3000);
+    }
+
+    if (senha.length < 6 || senha.length > 10) {
+      setMsgLogin("* Campo senha deve ter entre 6 a 10 caracteres.");
+      setLogin("");
+      setSenha("");
+      setTimeout(function () {
+        setMsgLogin("");
+      }, 3000);
+    }
+
+    try {
+      handleLogin(login, senha);
+      goToHome();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div>
@@ -96,7 +126,10 @@ const FormLogin = (props) => {
             </p>
           </div>
           <div className="row cadastrar container-fluid d-inline p-0 m-0 mb-4">
-            <p style={{height: '16px'}} className="font-italic mb-0 text-danger h">
+            <p
+              style={{ height: "16px" }}
+              className="font-italic mb-0 text-danger h"
+            >
               {msgLogin}
             </p>
           </div>
