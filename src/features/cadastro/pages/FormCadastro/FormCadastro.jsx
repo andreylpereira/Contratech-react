@@ -1,8 +1,12 @@
 import "./FormCadastro.css";
 import React, { useState } from "react";
+import validator from "validator";
 import services from "../../../../services/services";
+import { useNavigate } from "react-router-dom";
+
 
 const FormCadastro = () => {
+  const navigate = useNavigate();
   const [login, setLogin] = useState("");
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
@@ -13,37 +17,76 @@ const FormCadastro = () => {
   const [msgLogin, setMsgLogin] = useState("");
   const [msgNome, setMsgNome] = useState("");
   const [msgSobrenome, setMsgSobrenome] = useState("");
-  const [msgEmail, setMmsgEmail] = useState("");
+  const [msgEmail, setMsgEmail] = useState("");
   const [msgSenha, setMsgSenha] = useState("");
   const [msgSenhaConfirmacao, setMsgSenhaConfirmacao] = useState("");
 
-
   const cadastrar = () => {
-  if (cadastrar) {
-    if (login === "") {
-      setMsgLogin("* Campo login em branco!");
-    } else if((msgLogin.length > 20) || (msgLogin.length < 6)) {
-      setMsgLogin("* Campo login deve estar entre 6 a 20 caracteres!");
-    }
+    if (cadastrar) {
+      if (login === "") {
+        setMsgLogin("* Campo login em branco!");
+      } else if (msgLogin.length > 20 || msgLogin.length < 6) {
+        setMsgLogin("* Campo login deve estar entre 6 a 20 caracteres!");
+      }
 
+      if (nome === "") {
+        setMsgNome("* Campo nome em branco!");
+      } else if (nome.length > 30) {
+        setMsgNome("* Campo nome deve ter no maximo 30 caracteres!");
+      }
 
-    if (nome === "") {
-      setMsgNome("* Campo nome em branco!");
-    } else if(nome.length > 30) {
-      setMsgNome("* Campo nome deve ter no maximo 30 caracteres!");
-    }
+      if (sobrenome === "") {
+        setMsgSobrenome("* Campo sobrenome em branco!");
+      } else if (sobrenome.length > 30) {
+        setMsgSobrenome("* Campo sobrenome deve ter no maximo 30 caracteres!");
+      }
 
-    if (sobrenome === "") {
-      setMsgSobrenome("* Campo sobrenome em branco!");
-    } else if(sobrenome.length > 30) {
-      setMsgSobrenome("* Campo sobrenome deve ter no maximo 30 caracteres!");
+      if (email.length > 0) {
+          if (!validator.isEmail(email)) {
+            setMsgEmail("* Digite um e-mail válido!");
+          }
+      } else {
+        setMsgEmail("* Campo email em branco!");
+      }
+
+      if (senha === "") {
+        setMsgSenha("* Campo senha em branco!");
+      } else if (senha.length > 10 || senha.length < 6) {
+        setMsgSenha("* Campo senha deve estar entre 6 a 10 caracteres!");
+      }
+
+      if (senhaConfirmacao === "") {
+        setMsgSenhaConfirmacao("* Campo senha em branco!");
+      } else if (senhaConfirmacao.length > 10 || senhaConfirmacao.length < 6) {
+        setMsgSenhaConfirmacao("* Campo senha deve estar entre 6 a 10 caracteres!");
+      }
+
+      if (senha !== senhaConfirmacao) {
+        setMsgSenha("* Campo senha e confirme sua senha não são iguais!");
+        setMsgSenhaConfirmacao("* Campo senha e confirme sua senha não são iguais!");
+      }
+
+      try {
+        const data = {
+          login: login,
+          nome: nome,
+          sobrenome: sobrenome,
+          email: email,
+          senha: senha,
+        };
+        services.cadastrar(data);
+        goToHome();
+
+      } catch (error) {
+        console.log(error);
+        
+      }
     }
+  };
 
   
-
-
-
-  }
+  const goToHome = () => {
+    navigate("/home");
   };
 
   return (
