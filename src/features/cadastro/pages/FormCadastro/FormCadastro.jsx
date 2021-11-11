@@ -9,31 +9,51 @@ const FormCadastro = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [senhaConfirmacao, setSenhaConfirmacao] = useState("");
+  //msgs error
+  const [msgLogin, setMsgLogin] = useState("");
+  const [msgNome, setMsgNome] = useState("");
+  const [msgSobrenome, setMsgSobrenome] = useState("");
+  const [msgEmail, setMmsgEmail] = useState("");
+  const [msgSenha, setMsgSenha] = useState("");
+  const [msgSenhaConfirmacao, setMsgSenhaConfirmacao] = useState("");
+
 
   const cadastrar = () => {
-    try {
-      const data = {
-       "login": login,
-        "nome": nome,
-        "sobrenome": sobrenome,
-        "email": email,
-        "senha": senha
-      }
-      services.cadastrar(data);
-
-    } catch (error) {
-      console.log(error);
+  if (cadastrar) {
+    if (login === "") {
+      setMsgLogin("* Campo login em branco!");
+    } else if((msgLogin.length > 20) || (msgLogin.length < 6)) {
+      setMsgLogin("* Campo login deve estar entre 6 a 20 caracteres!");
     }
+
+
+    if (nome === "") {
+      setMsgNome("* Campo nome em branco!");
+    } else if(nome.length > 30) {
+      setMsgNome("* Campo nome deve ter no maximo 30 caracteres!");
+    }
+
+    if (sobrenome === "") {
+      setMsgSobrenome("* Campo sobrenome em branco!");
+    } else if(sobrenome.length > 30) {
+      setMsgSobrenome("* Campo sobrenome deve ter no maximo 30 caracteres!");
+    }
+
+  
+
+
+
   }
+  };
 
   return (
     <div>
       <div>
-        <div className="form-group">
+        <div className="form-group mb-2">
           <label className="font-weight-bold" htmlFor="inputLogin">
             Login:
           </label>
-          <div className="input-group mb-3 shadow">
+          <div className="input-group mb-1 shadow">
             <div className="input-group-prepend">
               <span
                 className="input-group-text oi oi-people pt-2"
@@ -50,13 +70,19 @@ const FormCadastro = () => {
               placeholder="Login"
             />
           </div>
+          <p
+            style={{ height: "8px" }}
+            className="error-msg font-italic mb-0 text-danger h"
+          >
+            {msgLogin}
+          </p>
         </div>
-        <div className="form-group">
+        <div className="form-group mb-2">
           <label className="font-weight-bold" htmlFor="inputNome">
             Nome:
           </label>
           <div
-            className="input-group mb-3 shadow
+            className="input-group mb-1 shadow
       "
           >
             <div className="input-group-prepend">
@@ -75,12 +101,18 @@ const FormCadastro = () => {
               placeholder="Nome"
             />
           </div>
+          <p
+            style={{ height: "8px" }}
+            className="error-msg font-italic mb-0 text-danger h"
+          >
+            {msgNome}
+          </p>
         </div>
-        <div className="form-group">
+        <div className="form-group mb-2">
           <label className="font-weight-bold" htmlFor="inputSobrenome">
             Sobrenome:
           </label>
-          <div className="input-group mb-3 shadow">
+          <div className="input-group mb-1 shadow">
             <div className="input-group-prepend">
               <span
                 className="input-group-text oi oi-person pt-2"
@@ -97,13 +129,20 @@ const FormCadastro = () => {
               placeholder="Sobrenome"
             />
           </div>
+          <p
+            style={{ height: "8px" }}
+            className="error-msg font-italic mb-0 text-danger h"
+          >
+            {msgSobrenome}
+          </p>
         </div>
-        <div className="form-group">
+
+        <div className="form-group mb-2">
           <label className="font-weight-bold" htmlFor="inputEmail">
             Email:
           </label>
           <div
-            className="input-group mb-3 shadow
+            className="input-group mb-1 shadow
       "
           >
             <div className="input-group-prepend">
@@ -124,13 +163,20 @@ const FormCadastro = () => {
               placeholder="Email"
             />
           </div>
+          <p
+            style={{ height: "8px" }}
+            className="error-msg font-italic mb-0 text-danger h"
+          >
+            {msgEmail}
+          </p>
         </div>
-        <div className="form-group">
+
+        <div className="form-group mb-2">
           <label className="font-weight-bold" htmlFor="inputSenha">
             Senha:
           </label>
           <div
-            className="input-group mb-3 shadow
+            className="input-group mb-1 shadow
       "
           >
             <div className="input-group-prepend">
@@ -148,8 +194,15 @@ const FormCadastro = () => {
               placeholder="Senha"
             />
           </div>
+          <p
+            style={{ height: "8px" }}
+            className="error-msg font-italic mb-0 text-danger h"
+          >
+            {msgSenha}
+          </p>
         </div>
-        <div className="form-group mb-0">
+
+        <div className="form-group mb-2">
           <label className="font-weight-bold" htmlFor="inputConfirmaSenha">
             Confirme sua senha:
           </label>
@@ -172,7 +225,14 @@ const FormCadastro = () => {
               placeholder="Confirmar senha"
             />
           </div>
+          <p
+            style={{ height: "8px" }}
+            className="error-msg font-italic mb-0 text-danger h"
+          >
+            {msgSenhaConfirmacao}
+          </p>
         </div>
+
         <br />
         <button
           type="submit"

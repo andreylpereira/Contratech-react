@@ -117,7 +117,7 @@ const FormLogin = (props) => {
           <div className="row cadastrar container-fluid d-inline p-0 m-0 mb-4">
             <p
               style={{ height: "16px" }}
-              className="font-italic mb-0 text-danger h"
+              className="error-msg font-italic mb-0 text-danger"
             >
               {msgLogin}
             </p>
