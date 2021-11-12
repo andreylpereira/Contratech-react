@@ -20,7 +20,16 @@ class Services {
 
     adicionarObra(token, data, id) {
         
-        return api.post(`/usuarios/${id}/obras`, data, {
+        return api.delete(`/usuarios/${id}/obras`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    }
+
+    excluirObra(token, id, idObra) {
+        
+        return api.delete(`/usuarios/${id}/obras/${idObra}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

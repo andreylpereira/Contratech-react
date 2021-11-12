@@ -18,12 +18,6 @@ const Obra = () => {
     return () => console.log("Fim");
   }, []);
 
-  // useEffect(() => {
-  //   addObra();
-  //   carregarObras();
-  //   return () => console.log("Fim");
-    
-  // }, []);
 
   const carregarObras = async () => {
     try {
@@ -44,6 +38,16 @@ const Obra = () => {
       console.log(error);
     }
   };
+
+  const delObra = (obraId) => {
+    const idObra = obraId;
+    try {
+      services.excluirObra(token, id, idObra);
+  carregarObras();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const navigate = useNavigate();
   const goToEtapa = () => {
@@ -176,6 +180,11 @@ const Obra = () => {
                   type="button"
                   className="btn btn-outline-danger shadow"
                   data-dismiss="modal"
+                  onClick={() => {
+                    console.log(o.id);
+                    var id = o.id;
+                    delObra(id);
+                  }}
                 >
                   Cancelar
                 </button>
