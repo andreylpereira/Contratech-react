@@ -110,7 +110,7 @@ const Obra = () => {
               Excluir
             </button>
            
-              <Link style={{ borderColor: "rgba(0, 0, 0, 0.200)" }} className="btn btn-light m-1 shadow" to={`/obras/${o.id}/relatorio`}>Relatório</Link>
+              <Link target="_blank" style={{ borderColor: "rgba(0, 0, 0, 0.200)" }} className="btn btn-light m-1 shadow" to={`/obras/${o.id}/relatorio`}>Relatório</Link>
           
           </div>
         </td>

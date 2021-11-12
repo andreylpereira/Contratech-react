@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Header from "../components/header/Header";
 import Cadastro from "../features/cadastro/pages/Cadastro";
 import Login from "../features/login/pages/Login";
@@ -19,10 +19,11 @@ function RequireAuth({ children , redirectTo}) {
 }
 
 function Rotas() {
+  let location = useLocation();
   return (
     <>
       <AuthProvider>
-        <Header />
+      { <Header />}
 
         <Routes>
           <Route path="/" element={<Navigate replace to="/home" />} />
