@@ -17,6 +17,15 @@ class Services {
             throw erro;
         })
     }
+
+    adicionarObra(token, data, id) {
+        
+        return api.post(`/usuarios/${id}/obras`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    }
 }
 
 export default new Services();
