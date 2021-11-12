@@ -192,7 +192,6 @@ export default () => {
                 <input className="w-auto text-center shadow" type="text" />
               </th>
               <td className="text-center pr-0 pl-0">
-                {s.id}
                 <input
                   className="w-75px text-center shadow"
                   type="number"
