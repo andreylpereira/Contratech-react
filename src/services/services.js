@@ -20,7 +20,7 @@ class Services {
 
     adicionarObra(token, data, id) {
         
-        return api.delete(`/usuarios/${id}/obras`, data, {
+        return api.post(`/usuarios/${id}/obras`, data, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -35,6 +35,17 @@ class Services {
             }
         })
     }
+
+    renomearObra(token, data, id, idObra) {
+        
+        return api.put(`/usuarios/${id}/obras/${idObra}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    }
+
+    
 }
 
 export default new Services();

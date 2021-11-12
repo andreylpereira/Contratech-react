@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+ /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useState, useEffect } from "react";
 import "./Obra.css";
@@ -10,14 +10,13 @@ const Obra = () => {
   const [obras, setObras] = useState([]);
   const token = localStorage.getItem("token").replace(/['"]+/g, "");
   const id = JSON.parse(localStorage.getItem("id"));
-
+  const [renomearObra, setRenomearObra] = useState("");
   const [novaObra, setNovaObra] = useState("");
 
   useEffect(() => {
     carregarObras();
     return () => console.log("Fim");
   }, []);
-
 
   const carregarObras = async () => {
     try {
@@ -29,25 +28,39 @@ const Obra = () => {
     }
   };
 
-  const addObra = () => {
+  const addObra = async () => {
     try {
-      const data = {nomeObra: novaObra,}
-      services.adicionarObra(token, data, id);
-      console.log(data);
+      const data = { nomeObra: novaObra };
+      await services.adicionarObra(token, data, id);
+      setNovaObra('');
+      carregarObras();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const delObra = (obraId) => {
+  const delObra = async (obraId) => {
     const idObra = obraId;
     try {
-      services.excluirObra(token, id, idObra);
-  carregarObras();
+      await services.excluirObra(token, id, idObra);
+      carregarObras();
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  const putObra = async (obraId) => {
+    const idObra = obraId;
+    try {
+      const data = { nomeObra: renomearObra };
+      await services.renomearObra(token, data, id, idObra);
+      setRenomearObra('');
+      carregarObras();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   const navigate = useNavigate();
   const goToEtapa = () => {
@@ -129,11 +142,24 @@ const Obra = () => {
               <div className="modal-body">
                 <p className="text-left">Digite o novo nome da Obra:</p>
                 <p>
-                  <input className="w-auto text-center shadow" type="text" />
+                  <input
+                    className="w-auto text-center shadow"
+                    type="text"
+                    value={renomearObra}
+                    onChange={(e) => setRenomearObra(e.target.value)}
+                  />
                 </p>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-dark shadow">
+                <button
+                  type="button"
+                  className="btn btn-dark shadow"
+                  data-dismiss="modal"
+                  onClick={() => {
+                    var id = o.id;
+                     putObra(id);
+                  }}
+                >
                   Salvar
                 </button>
                 <button
@@ -173,18 +199,19 @@ const Obra = () => {
                 </p>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-danger shadow">
+                <button type="button" className="btn btn-danger shadow"
+                data-dismiss="modal"
+                onClick={() => {
+                  var id = o.id;
+                  delObra(id);
+                }}>
                   Excluir
                 </button>
                 <button
                   type="button"
                   className="btn btn-outline-danger shadow"
                   data-dismiss="modal"
-                  onClick={() => {
-                    console.log(o.id);
-                    var id = o.id;
-                    delObra(id);
-                  }}
+                  
                 >
                   Cancelar
                 </button>
@@ -257,7 +284,12 @@ const Obra = () => {
               </p>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-dark shadow" onClick={addObra}>
+              <button
+                type="button"
+                className="btn btn-dark shadow"
+                data-dismiss="modal"
+                onClick={addObra}
+              >
                 Criar
               </button>
               <button
