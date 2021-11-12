@@ -1,8 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
+import { useParams } from "react-router-dom";
 import "./Relatorio.css";
-
 export default () => {
+  let params = useParams();
+console.log(params);
   let mocks = [
     {
       id: 1,
@@ -176,6 +178,7 @@ export default () => {
         </div>
         <hr style={{ width: 250 }} />
         <p className="text-center font-weight-bold">Assinatura</p>
+        <h5>id: {params.obraId}</h5>
       </div>
     );
   });

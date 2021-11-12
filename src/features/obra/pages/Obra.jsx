@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import services from "../../../services/services";
 
 const Obra = () => {
@@ -109,14 +109,9 @@ const Obra = () => {
             >
               Excluir
             </button>
-            <button
-              type="button"
-              className="btn btn-light m-1 shadow"
-              style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
-              onClick={goToRelatorio}
-            >
-              Relatório
-            </button>
+           
+              <Link style={{ borderColor: "rgba(0, 0, 0, 0.200)" }} className="btn btn-light m-1 shadow" to={`/obras/${o.id}/relatorio`}>Relatório</Link>
+          
           </div>
         </td>
         {/* modal para renomear obra */}
