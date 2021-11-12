@@ -1,210 +1,57 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
 import { useNavigate } from "react-router-dom";
+import services from "../../../services/services";
 
 const Obra = () => {
-  let mocks = [
-    {
-      id: 1,
-      nomeObra: "Residencial Itambé",
-      percentualMedioFinal: 0,
-      valorTotalFinal: 0.0,
-      etapas: [
-        {
-          id: 1,
-          nomeEtapa: "Etapa 1 da Obra 1",
-          percentualMedio: 0,
-          valorTotal: 0.0,
-          servicos: [
-            {
-              id: 1,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 2,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 3,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 7,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 8,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 9,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-          ],
-        },
-        {
-          id: 2,
-          nomeEtapa: "Etapa 2 da Obra 1",
-          percentualMedio: 0,
-          valorTotal: 0.0,
-          servicos: [
-            {
-              id: 4,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 5,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 6,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 10,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 11,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 12,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 2,
-      nomeObra: "Residencial Itambé 2",
-      percentualMedioFinal: 0,
-      valorTotalFinal: 0.0,
-      etapas: [
-        {
-          id: 3,
-          nomeEtapa: "Etapa 1 da Obra 2",
-          percentualMedio: 0,
-          valorTotal: 0.0,
-          servicos: [
-            {
-              id: 13,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 14,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 15,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-          ],
-        },
-        {
-          id: 4,
-          nomeEtapa: "Etapa 2 da Obra 2",
-          percentualMedio: 0,
-          valorTotal: 0.0,
-          servicos: [
-            {
-              id: 16,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 17,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 18,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  const [obras, setObras] = useState([]);
+  const token = localStorage.getItem("token");
+  const id = JSON.parse(localStorage.getItem("id"));
+
+  useEffect(() => {
+    carregarObras();
+    console.log(obras);
+    return () => console.log("Fim");
+  }, []);
+
+  const carregarObras = async () => {
+    try {
+      const obras = await services.buscarObras(token, id);
+      console.log(obras);
+      setObras(obras);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const navigate = useNavigate();
   const goToEtapa = () => {
-    navigate("/obras/1/etapas");
+    console.log(token);
+    navigate(`/obras/${id}/etapas`);
   };
 
   const goToRelatorio = () => {
-    navigate("/obras/1/relatorio");
+    navigate(`/obras/${id}/relatorio`);
   };
 
-  const lista = mocks.map((item) => (
-    <tr className="bg-light text-center" data key={item.id}>
+  const lista = obras && obras.map((o) => (
+    <tr className="bg-light text-center" data key={o.id}>
       <th>
         <div className="float-left row ml-1">
           <div
             className="pt-2 cursor"
             data-toggle="modal"
-            data-target={`#modalRenomearObra${item.id}`}
+            data-target={`#modalRenomearObra${o.id}`}
           >
-            {item.nomeObra}
+            {o.nomeObra}
           </div>
           <div
             className="oi oi-pencil edit ml-1 pt-2"
             data-toggle="modal"
-            data-target={`#modalRenomearObra${item.id}`}
+            data-target={`#modalRenomearObra${o.id}`}
           ></div>
         </div>
       </th>
@@ -221,7 +68,7 @@ const Obra = () => {
             type="button"
             className="btn btn-danger m-1 shadow"
             data-toggle="modal"
-            data-target={`#modalDeletarObra${item.id}`}
+            data-target={`#modalDeletarObra${o.id}`}
           >
             Excluir
           </button>
@@ -238,14 +85,14 @@ const Obra = () => {
       {/* modal para renomear obra */}
       <div
         className="modal"
-        id={`modalRenomearObra${item.id}`}
+        id={`modalRenomearObra${o.id}`}
         tabindex="-1"
         role="dialog"
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Renomear Obra {item.nomeObra}</h5>
+              <h5 className="modal-title">Renomear Obra {o.nomeObra}</h5>
               <button
                 type="button"
                 className="close"
@@ -279,14 +126,14 @@ const Obra = () => {
       {/* modal para excluir obra */}
       <div
         className="modal"
-        id={`modalDeletarObra${item.id}`}
+        id={`modalDeletarObra${o.id}`}
         tabindex="-1"
         role="dialog"
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Excluir Obra {item.nomeObra}</h5>
+              <h5 className="modal-title">Excluir Obra {o.nomeObra}</h5>
               <button
                 type="button"
                 className="close"
@@ -298,7 +145,7 @@ const Obra = () => {
             </div>
             <div className="modal-body">
               <p className="text-left">
-                Você deseja excluir a obra {item.nomeObra}?
+                Você deseja excluir a obra {o.nomeObra}?
               </p>
             </div>
             <div className="modal-footer">
@@ -340,14 +187,17 @@ const Obra = () => {
             <thead className="table-light">
               <tr className="bg-light">
                 <th>
-                  <h4 style={{width: "130px"}} className="card-title font-weight-bold mt-2">
+                  <h4
+                    style={{ width: "130px" }}
+                    className="card-title font-weight-bold mt-2"
+                  >
                     Minhas obras
                   </h4>
                 </th>
                 <th></th>
               </tr>
             </thead>
-            <tbody>{lista}</tbody>
+            {obras && <tbody>{lista}</tbody>}
           </table>
         </div>
       </div>
