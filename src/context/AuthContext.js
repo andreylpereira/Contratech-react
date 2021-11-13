@@ -24,8 +24,11 @@ function AuthProvider({ children }) {
         const token = localStorage.getItem('token');
 
         if (token) {
-            api.defaults.headers.Authorization = `Bearer.${JSON.parse(token)}`;
+            api.defaults.headers.Authorization = `Bearer ${token.replace(/['"]+/g, "")}`;
             setAuthenticated(true);
+            let usuario = localStorage.getItem("login").replace(/['"]+/g, "");
+            setUser(usuario);
+
         }
         setLoading(false);
     }, [])
@@ -40,7 +43,7 @@ function AuthProvider({ children }) {
         localStorage.setItem('login', JSON.stringify(login))
         setAuthenticated(true);
         let usuario = localStorage.getItem("login").replace(/['"]+/g, "");
-        setUser(usuario);       
+        setUser(usuario); 
         goToHome();
         
     }

@@ -9,7 +9,7 @@ import Card from "../../../components/card/Card";
 export default () => {
   return (
     <>
-      <div className="pageCadastro">
+      <div className="pageCadastro pb-5">
         <Breadcrumb unique="Cadastro de usuário" />
         <div className="w-75 p-0 container-fluid">
           <Card className="" titulo="Cadastro de usuário">

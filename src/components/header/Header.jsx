@@ -9,8 +9,7 @@ import { Context } from '../../context/AuthContext'
 
 const Header = (props) => {
   const { authenticated } = useContext(Context);
-
-
+  
   return (
     <>
       <div>

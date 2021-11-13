@@ -1,323 +1,216 @@
+ /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import services from "../../../services/services";
 
 const Obra = () => {
-  let mocks = [
-    {
-      id: 1,
-      nomeObra: "Residencial Itambé",
-      percentualMedioFinal: 0,
-      valorTotalFinal: 0.0,
-      etapas: [
-        {
-          id: 1,
-          nomeEtapa: "Etapa 1 da Obra 1",
-          percentualMedio: 0,
-          valorTotal: 0.0,
-          servicos: [
-            {
-              id: 1,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 2,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 3,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 7,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 8,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 9,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-          ],
-        },
-        {
-          id: 2,
-          nomeEtapa: "Etapa 2 da Obra 1",
-          percentualMedio: 0,
-          valorTotal: 0.0,
-          servicos: [
-            {
-              id: 4,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 5,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 6,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 10,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 11,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 12,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 2,
-      nomeObra: "Residencial Itambé 2",
-      percentualMedioFinal: 0,
-      valorTotalFinal: 0.0,
-      etapas: [
-        {
-          id: 3,
-          nomeEtapa: "Etapa 1 da Obra 2",
-          percentualMedio: 0,
-          valorTotal: 0.0,
-          servicos: [
-            {
-              id: 13,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 14,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 15,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-          ],
-        },
-        {
-          id: 4,
-          nomeEtapa: "Etapa 2 da Obra 2",
-          percentualMedio: 0,
-          valorTotal: 0.0,
-          servicos: [
-            {
-              id: 16,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 17,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-            {
-              id: 18,
-              nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  const [obras, setObras] = useState([]);
+  const token = localStorage.getItem("token").replace(/['"]+/g, "");
+  const id = JSON.parse(localStorage.getItem("id"));
+  const [renomearObra, setRenomearObra] = useState("");
+  const [novaObra, setNovaObra] = useState("");
+
+  useEffect(() => {
+    carregarObras();
+    return () => console.log("Fim");
+  }, []);
+
+  const carregarObras = async () => {
+    try {
+      const obras = await services.buscarObras(token, id);
+      setObras(obras);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addObra = async () => {
+    try {
+      const data = { nomeObra: novaObra };
+      await services.adicionarObra(token, data, id);
+      setNovaObra('');
+      carregarObras();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const delObra = async (obraId) => {
+    const idObra = obraId;
+    try {
+      await services.excluirObra(token, id, idObra);
+      carregarObras();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const putObra = async (obraId) => {
+    const idObra = obraId;
+    try {
+      const data = { nomeObra: renomearObra };
+      await services.renomearObra(token, data, id, idObra);
+      setRenomearObra('');
+      carregarObras();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   const navigate = useNavigate();
   const goToEtapa = () => {
-    navigate("/obras/1/etapas");
+    console.log(token);
+    navigate(`/obras/${id}/etapas`);
   };
 
-  const goToRelatorio = () => {
-    navigate("/obras/1/relatorio");
-  };
-
-  const lista = mocks.map((item) => (
-    <tr className="bg-light text-center" data key={item.id}>
-      <th>
-        <div className="float-left row ml-1">
-          <div
-            className="pt-2 cursor"
-            data-toggle="modal"
-            data-target={`#modalRenomearObra${item.id}`}
-          >
-            {item.nomeObra}
+  const lista =
+    obras &&
+    obras.map((o) => (
+      <tr className="bg-light text-center" data key={o.id}>
+        <th>
+          <div className="float-left row ml-1">
+            <div
+              className="pt-2 cursor"
+              data-toggle="modal"
+              data-target={`#modalRenomearObra${o.id}`}
+            >
+              {o.nomeObra}
+            </div>
+            <div
+              className="oi oi-pencil edit ml-1 pt-2"
+              data-toggle="modal"
+              data-target={`#modalRenomearObra${o.id}`}
+            ></div>
           </div>
-          <div
-            className="oi oi-pencil edit ml-1 pt-2"
-            data-toggle="modal"
-            data-target={`#modalRenomearObra${item.id}`}
-          ></div>
-        </div>
-      </th>
-      <td>
-        <div className="float-right">
-          <button
-            type="button "
-            className="btn btn-dark m-1 shadow"
-            onClick={goToEtapa}
-          >
-            Editar
-          </button>
-          <button
-            type="button"
-            className="btn btn-danger m-1 shadow"
-            data-toggle="modal"
-            data-target={`#modalDeletarObra${item.id}`}
-          >
-            Excluir
-          </button>
-          <button
-            type="button"
-            className="btn btn-light m-1 shadow"
-            style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
-            onClick={goToRelatorio}
-          >
-            Relatório
-          </button>
-        </div>
-      </td>
-      {/* modal para renomear obra */}
-      <div
-        className="modal"
-        id={`modalRenomearObra${item.id}`}
-        tabindex="-1"
-        role="dialog"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Renomear Obra {item.nomeObra}</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <p className="text-left">Digite o novo nome da Obra:</p>
-              <p>
-                <input className="w-auto text-center shadow" type="text" />
-              </p>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-dark shadow">
-                Salvar
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-danger shadow"
-                data-dismiss="modal"
-              >
-                Cancelar
-              </button>
-            </div>
+        </th>
+        <td>
+          <div className="float-right">
+            <button
+              type="button "
+              className="btn btn-dark m-1 shadow"
+              onClick={goToEtapa}
+            >
+              Editar
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger m-1 shadow"
+              data-toggle="modal"
+              data-target={`#modalDeletarObra${o.id}`}
+            >
+              Excluir
+            </button>
+           
+              <Link target="_blank" style={{ borderColor: "rgba(0, 0, 0, 0.200)" }} className="btn btn-light m-1 shadow" to={`/obras/${o.id}/relatorio`}>Relatório</Link>
+          
           </div>
-        </div>
-      </div>
-      {/* modal para excluir obra */}
-      <div
-        className="modal"
-        id={`modalDeletarObra${item.id}`}
-        tabindex="-1"
-        role="dialog"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Excluir Obra {item.nomeObra}</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <p className="text-left">
-                Você deseja excluir a obra {item.nomeObra}?
-              </p>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-danger shadow">
-                Excluir
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-danger shadow"
-                data-dismiss="modal"
-              >
-                Cancelar
-              </button>
+        </td>
+        {/* modal para renomear obra */}
+        <div
+          className="modal"
+          id={`modalRenomearObra${o.id}`}
+          tabindex="-1"
+          role="dialog"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Renomear Obra {o.nomeObra}</h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p className="text-left">Digite o novo nome da Obra:</p>
+                <p>
+                  <input
+                    className="w-auto text-center shadow"
+                    type="text"
+                    value={renomearObra}
+                    onChange={(e) => setRenomearObra(e.target.value)}
+                  />
+                </p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-dark shadow"
+                  data-dismiss="modal"
+                  onClick={() => {
+                    var id = o.id;
+                     putObra(id);
+                  }}
+                >
+                  Salvar
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-danger shadow"
+                  data-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </tr>
-  ));
+        {/* modal para excluir obra */}
+        <div
+          className="modal"
+          id={`modalDeletarObra${o.id}`}
+          tabindex="-1"
+          role="dialog"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Excluir Obra {o.nomeObra}</h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p className="text-left">
+                  Você deseja excluir a obra {o.nomeObra}?
+                </p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-danger shadow"
+                data-dismiss="modal"
+                onClick={() => {
+                  var id = o.id;
+                  delObra(id);
+                }}>
+                  Excluir
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-danger shadow"
+                  data-dismiss="modal"
+                  
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </tr>
+    ));
 
   return (
     <>
@@ -340,14 +233,17 @@ const Obra = () => {
             <thead className="table-light">
               <tr className="bg-light">
                 <th>
-                  <h4 style={{width: "130px"}} className="card-title font-weight-bold mt-2">
+                  <h4
+                    style={{ width: "130px" }}
+                    className="card-title font-weight-bold mt-2"
+                  >
                     Minhas obras
                   </h4>
                 </th>
                 <th></th>
               </tr>
             </thead>
-            <tbody>{lista}</tbody>
+            {obras && <tbody>{lista}</tbody>}
           </table>
         </div>
       </div>
@@ -369,11 +265,21 @@ const Obra = () => {
             <div className="modal-body">
               <p>Digite o nome da nova Obra:</p>
               <p>
-                <input className="w-auto text-center shadow" type="text" />
+                <input
+                  value={novaObra}
+                  onChange={(e) => setNovaObra(e.target.value)}
+                  className="w-auto text-center shadow"
+                  type="text"
+                />
               </p>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-dark shadow">
+              <button
+                type="button"
+                className="btn btn-dark shadow"
+                data-dismiss="modal"
+                onClick={addObra}
+              >
                 Criar
               </button>
               <button
