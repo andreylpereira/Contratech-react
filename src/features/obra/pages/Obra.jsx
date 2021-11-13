@@ -21,7 +21,6 @@ const Obra = () => {
   const carregarObras = async () => {
     try {
       const obras = await services.buscarObras(token, id);
-      console.log(obras);
       setObras(obras);
     } catch (error) {
       console.log(error);
@@ -66,10 +65,6 @@ const Obra = () => {
   const goToEtapa = () => {
     console.log(token);
     navigate(`/obras/${id}/etapas`);
-  };
-
-  const goToRelatorio = () => {
-    navigate(`/obras/${id}/relatorio`);
   };
 
   const lista =

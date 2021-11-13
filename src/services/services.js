@@ -5,6 +5,14 @@ class Services {
         api.post('/cadastro', data)
     }
 
+    // verificarLogin(data) {
+    //     return api.get('/cadastro/verificacao', data)
+    //     .then(response => response.data)
+    //     .catch(erro => {
+    //         throw erro;
+    //     })
+    // }
+
     buscarObras(token, id) {
         
         return api.get(`/usuarios/${id}/obras`, {
@@ -42,6 +50,19 @@ class Services {
             headers: {
                 Authorization: `Bearer ${token}`
             }
+        })
+    }
+
+    relatorioObra(token, id, idObra) {
+        
+        return api.get(`/usuarios/${id}/obras/${idObra}/relatorio`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => response.data)
+        .catch(erro => {
+            throw erro;
         })
     }
 

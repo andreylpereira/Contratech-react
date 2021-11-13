@@ -22,10 +22,11 @@ const FormCadastro = () => {
   const [msgSenhaConfirmacao, setMsgSenhaConfirmacao] = useState("");
 
   const cadastrar = () => {
+    
     if (cadastrar) {
       if (login === "") {
         setMsgLogin("* Campo login em branco!");
-      } else if (msgLogin.length > 20 || msgLogin.length < 6) {
+      } else if (login.length > 20 || login.length < 6) {
         setMsgLogin("* Campo login deve estar entre 6 a 20 caracteres!");
       }
 
@@ -75,15 +76,15 @@ const FormCadastro = () => {
           senha: senha,
         };
         services.cadastrar(data);
-        goToHome();
-
+        //goToHome();
+    
       } catch (error) {
         console.log(error);
         
       }
     }
   };
-
+  
   
   const goToHome = () => {
     navigate("/home");
