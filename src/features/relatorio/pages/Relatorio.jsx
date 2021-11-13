@@ -29,7 +29,7 @@ const Relatorio = () => {
 
 
   const etapas = relatorioObra['etapas']
-  const list = etapas && etapas.map((a) => {
+  const lista = etapas && etapas.map((a) => {
     return (
       <tr className="bg-white">
         <th scope="row">{a.nomeEtapa}</th>
@@ -67,7 +67,7 @@ const Relatorio = () => {
             <td className="p-0"></td>
             <td className="p-0"></td>
           </tr>
-          {list}
+          {lista}
         </tbody>
       </table>
       <br />

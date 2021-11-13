@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Tabela.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
+import { useParams } from "react-router-dom";
+import services from "../../../services/services";
 
-export default () => {
+const Tabela = () => {
   let mocks = [
     {
       id: 1,
@@ -15,22 +17,22 @@ export default () => {
         {
           id: 1,
           nomeEtapa: "Etapa 1 da Obra 1",
-          percentualMedio: 0,
-          valorTotal: 0.0,
+          percentualMedio: 15,
+          valorTotal: 150.0,
           servicos: [
             {
               id: 1,
               nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
+              preco: 5.0,
+              quantidade: 10,
+              porcentagem: 5,
             },
             {
               id: 2,
               nomeServico: "Serviço",
-              preco: 0.0,
-              quantidade: 0,
-              porcentagem: 0,
+              preco: 505.0,
+              quantidade: 5,
+              porcentagem: 5,
             },
             {
               id: 3,
@@ -181,7 +183,29 @@ export default () => {
       ],
     },
   ];
+  const [relatorioObra, setRelatorioObra] = useState({});
+  const token = localStorage.getItem("token").replace(/['"]+/g, "");
+  let params = useParams();
+  const idObra = params.obraId;
+  const id = JSON.parse(localStorage.getItem("id"));
 
+  useEffect(() => {
+    carregarRelatorio();
+    return () => console.log("Fim");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const carregarRelatorio = async () => {
+    try {
+      const relatorio = await services.relatorioObra(token, id, idObra);
+      setRelatorioObra(relatorio);
+      console.log(relatorioObra);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const etapas = relatorioObra["etapas"];
   const lista = mocks.map((o, indexEtapa) => {
     const etapas = o.etapas.map((e, indexServico) => {
       const servicos = e.servicos.map((s) => {
@@ -189,10 +213,17 @@ export default () => {
           <>
             <tr className="bg-light" key={indexServico}>
               <th scope="row" className="pr-0">
-                <input className="w-auto text-center shadow" type="text" />
+                <input
+                  onChange={(s) => setRelatorioObra(s.target.value)}
+                  value={s.nomeServico}
+                  className="w-auto text-center shadow"
+                  type="text"
+                />
               </th>
               <td className="text-center pr-0 pl-0">
                 <input
+                  onChange={(s) => setRelatorioObra(s.target.value)}
+                  value={s.preco}
                   className="w-75px text-center shadow"
                   type="number"
                   step={0.01}
@@ -201,6 +232,8 @@ export default () => {
               </td>
               <td className="text-center pr-0 pl-0">
                 <input
+                  onChange={(s) => setRelatorioObra(s.target.value)}
+                  value={s.quantidade}
                   className="w-45px text-center shadow"
                   type="number"
                   step={1}
@@ -209,6 +242,8 @@ export default () => {
               </td>
               <td className="text-center pr-0 pl-0">
                 <input
+                  onChange={(s) => setRelatorioObra(s.target.value)}
+                  value={s.porcentagem}
                   className="w-40px text-center shadow"
                   type="number"
                   step={1}
@@ -486,7 +521,7 @@ export default () => {
                     data-dismiss="modal"
                   >
                     Cancelar
-                  </button> 
+                  </button>
                 </div>
               </div>
             </div>
@@ -598,3 +633,4 @@ export default () => {
     </>
   );
 };
+export default Tabela;
