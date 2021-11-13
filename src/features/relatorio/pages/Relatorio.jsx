@@ -6,7 +6,6 @@ import "./Relatorio.css";
 
 const Relatorio = () => {
   const [relatorioObra, setRelatorioObra] = useState({});
-  const etapasNull = {}
   let params = useParams();
   const idObra = params.obraId;
   const token = localStorage.getItem("token").replace(/['"]+/g, "");
@@ -30,7 +29,7 @@ const Relatorio = () => {
 
 
   const etapas = relatorioObra['etapas']
-  const list = etapas && etapas.map((a) => {
+  const lista = etapas && etapas.map((a) => {
     return (
       <tr className="bg-white">
         <th scope="row">{a.nomeEtapa}</th>
@@ -68,7 +67,7 @@ const Relatorio = () => {
             <td className="p-0"></td>
             <td className="p-0"></td>
           </tr>
-          {list}
+          {lista}
         </tbody>
       </table>
       <br />
