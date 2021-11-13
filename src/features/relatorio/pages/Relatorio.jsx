@@ -6,7 +6,6 @@ import "./Relatorio.css";
 
 const Relatorio = () => {
   const [relatorioObra, setRelatorioObra] = useState({});
-  const etapasNull = {}
   let params = useParams();
   const idObra = params.obraId;
   const token = localStorage.getItem("token").replace(/['"]+/g, "");

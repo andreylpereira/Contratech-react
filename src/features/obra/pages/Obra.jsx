@@ -1,9 +1,9 @@
- /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useState, useEffect } from "react";
 import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import services from "../../../services/services";
 
 const Obra = () => {
@@ -31,7 +31,7 @@ const Obra = () => {
     try {
       const data = { nomeObra: novaObra };
       await services.adicionarObra(token, data, id);
-      setNovaObra('');
+      setNovaObra("");
       carregarObras();
     } catch (error) {
       console.log(error);
@@ -53,18 +53,11 @@ const Obra = () => {
     try {
       const data = { nomeObra: renomearObra };
       await services.renomearObra(token, data, id, idObra);
-      setRenomearObra('');
+      setRenomearObra("");
       carregarObras();
     } catch (error) {
       console.log(error);
     }
-  };
-
-
-  const navigate = useNavigate();
-  const goToEtapa = () => {
-    console.log(token);
-    navigate(`/obras/${id}/etapas`);
   };
 
   const lista =
@@ -89,13 +82,13 @@ const Obra = () => {
         </th>
         <td>
           <div className="float-right">
-            <button
-              type="button "
+            <Link
               className="btn btn-dark m-1 shadow"
-              onClick={goToEtapa}
+              to={`/obras/${o.id}/etapas`}
             >
               Editar
-            </button>
+            </Link>
+
             <button
               type="button"
               className="btn btn-danger m-1 shadow"
@@ -104,9 +97,15 @@ const Obra = () => {
             >
               Excluir
             </button>
-           
-              <Link target="_blank" style={{ borderColor: "rgba(0, 0, 0, 0.200)" }} className="btn btn-light m-1 shadow" to={`/obras/${o.id}/relatorio`}>Relatório</Link>
-          
+
+            <Link
+              target="_blank"
+              style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
+              className="btn btn-light m-1 shadow"
+              to={`/obras/${o.id}/relatorio`}
+            >
+              Relatório
+            </Link>
           </div>
         </td>
         {/* modal para renomear obra */}
@@ -147,7 +146,7 @@ const Obra = () => {
                   data-dismiss="modal"
                   onClick={() => {
                     var id = o.id;
-                     putObra(id);
+                    putObra(id);
                   }}
                 >
                   Salvar
@@ -189,19 +188,21 @@ const Obra = () => {
                 </p>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-danger shadow"
-                data-dismiss="modal"
-                onClick={() => {
-                  var id = o.id;
-                  delObra(id);
-                }}>
+                <button
+                  type="button"
+                  className="btn btn-danger shadow"
+                  data-dismiss="modal"
+                  onClick={() => {
+                    var id = o.id;
+                    delObra(id);
+                  }}
+                >
                   Excluir
                 </button>
                 <button
                   type="button"
                   className="btn btn-outline-danger shadow"
                   data-dismiss="modal"
-                  
                 >
                   Cancelar
                 </button>
