@@ -1,11 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import services from "../../../../services/services";
 
 const Etapa = (props) => {
-    const etapaId = props.idEtapa;
-    const nomeEtapa = props.nomeEtapa;
-    
-    /*
+  const [etapas, setEtapas] = useState([]);
+  const obraId = props.idObra;
+  const [novoNomeEtapa, setNovoNomeEtapa] = useState("");
+  const token = localStorage.getItem("token").replace(/['"]+/g, "");
+  const id = JSON.parse(localStorage.getItem("id"));
+  const [nomeEtapa, setNomeEtapa] = useState("");
+
+  /*
     const [dadosObra, setDadosObra] = useState({});
     const token = localStorage.getItem("token").replace(/['"]+/g, "");
     const id = JSON.parse(localStorage.getItem("id"));
@@ -28,92 +32,213 @@ const Etapa = (props) => {
     const etapas = dadosObra["etapas"];
     */
 
+  useEffect(() => {
+    getEtapas();
+    return () => console.log("Fim");
+  }, []);
+
+  // const delEtapa = async (etapaId) => {
+  //   const idEtapa = etapaId;
+  //   try {
+  //     await services.excluirEtapa(token, id, obraId, idEtapa);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const putEtapa = async (etapaId) => {
+    const idEtapa = etapaId;
+    const data = { nomeEtapa: novoNomeEtapa };
+
+    try {
+      await services.renomearEtapa(token, data, id, obraId, idEtapa);
+      setNovoNomeEtapa("");
+      getEtapas();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addEtapa = async () => {
+    try {
+      const data = { nomeEtapa: nomeEtapa };
+      await services.adicionarEtapa(token, data, id, obraId);
+      getEtapas();
+      setNomeEtapa("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getEtapas = async () => {
+    try {
+      const listaEtapas = await services.buscarEtapas(token, id, obraId);
+      setEtapas(listaEtapas);
+      console.log(listaEtapas);
+      console.log(etapas);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
-      {" "}
-      <div
-        className="accordion container-fluid w-75 p-0 pb-5"
-        id="accordionExample"
-      >
-        <div className="card card-border shadow">
-          <div className="card-header p-4" id={`heading${etapaId}`}>
-            <h4 className="row m-0">
-              <div className="col-1 p-0 d-flex align-items-center justify-content-center">
-                <div
-                  className="arrow oi oi-caret-right p-0"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target={`#collapse${etapaId}`}
-                  aria-expanded="true"
-                  aria-controls={`collapse${etapaId}`}
-                ></div>
-              </div>
-              <div
-                className="title col-10 text-dark font-weight-bold h3 p-0 mb-0 d-flex align-items-center"
-                data-toggle="modal"
-                data-target={`#modalRenomearEtapa${etapaId}`}
-              >
-                {props.nomeEtapa}
-              </div>
-              <div
-                className="col-1 oi oi-pencil p-0 pt-1 d-flex justify-content-end edit"
-                data-toggle="modal"
-                data-target={`#modalRenomearEtapa${etapaId}`}
-              ></div>
-            </h4>
-          </div>
+      <div className="container-fluid p-0 w-75 pb-4">
+        <button
+          type="button"
+          className="btn btn-dark shadow"
+          style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
+          data-toggle="modal"
+          data-target="#modalCriarEtapa"
+        >
+          Nova Etapa
+        </button>
 
+        {/* modal para criar etapa */}
+        <div className="modal" id="modalCriarEtapa" tabindex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Nova Etapa</h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>Digite o nome da nova Etapa:</p>
+                <p>
+                  <input
+                    className="w-auto text-center shadow"
+                    type="text"
+                    value={nomeEtapa}
+                    onChange={(e) => setNomeEtapa(e.target.value)}
+                  />
+                </p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-dark shadow"
+                  data-dismiss="modal"
+                  onClick={addEtapa}
+                >
+                  Criar
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-danger shadow"
+                  data-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {etapas.map(({ id, nomeEtapa }) => (
+        <div>
           <div
-            id={`collapse${etapaId}`}
-            className="panel-collapse collapse in"
-            role="tabpanel"
-            aria-labelledby={`heading${etapaId}`}
+            className="accordion container-fluid w-75 p-0 pb-5"
+            id="accordionExample"
           >
-            <div className="panel-body">{props.children}</div>
-          </div>
-        </div>
-      </div>
-      {/* modal para alterar nome etapa */}
-      <div
-        className="modal"
-        id={`modalRenomearEtapa${etapaId}`}
-        tabindex="-1"
-        role="dialog"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Renomear Etapa: {props.nomeEtapa}</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
+            <div className="card card-border shadow">
+              <div className="card-header p-4" id={`heading${id}`}>
+                <h4 className="row m-0">
+                  <div className="col-1 p-0 d-flex align-items-center justify-content-center">
+                    <div
+                      className="arrow oi oi-caret-right p-0"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target={`#collapse${id}`}
+                      aria-expanded="true"
+                      aria-controls={`collapse${id}`}
+                    ></div>
+                  </div>
+                  <div
+                    className="title col-10 text-dark font-weight-bold h3 p-0 mb-0 d-flex align-items-center"
+                    data-toggle="modal"
+                    data-target={`#modalRenomearEtapa${id}`}
+                  >
+                    {nomeEtapa}
+                  </div>
+                  <div
+                    className="col-1 oi oi-pencil p-0 pt-1 d-flex justify-content-end edit"
+                    data-toggle="modal"
+                    data-target={`#modalRenomearEtapa${id}`}
+                  ></div>
+                </h4>
+              </div>
+
+              <div
+                id={`collapse${id}`}
+                className="panel-collapse collapse in"
+                role="tabpanel"
+                aria-labelledby={`heading${id}`}
               >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <p>Digite o novo nome da Etapa:</p>
-              <input className="w-auto text-center shadow" type="text" />
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-dark shadow">
-                Editar
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-danger shadow"
-                data-dismiss="modal"
-              >
-                Cancelar
-              </button>
+                <div className="panel-body">{props.children}</div>
+              </div>
             </div>
           </div>
+          {/* modal para alterar nome etapa */}
+          <div
+            className="modal"
+            id={`modalRenomearEtapa${id}`}
+            tabindex="-1"
+            role="dialog"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Renomear Etapa: {nomeEtapa}</h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <p>Digite o novo nome da Etapa:</p>
+                  <input
+                    className="w-auto text-center shadow"
+                    type="text"
+                    value={novoNomeEtapa}
+                    onChange={(e) => setNovoNomeEtapa(e.target.value)}
+                  />
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-dark shadow"
+                    data-dismiss="modal"
+                    onClick={() => {
+                      var etapaId = id;
+                      putEtapa(etapaId);
+                    }}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger shadow"
+                    data-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      
+      ))}
     </>
   );
 };

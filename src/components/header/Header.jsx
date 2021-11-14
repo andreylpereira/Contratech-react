@@ -56,12 +56,10 @@ const Header = (props) => {
                 </li>
               )}
             </ul>
-
             <Login></Login>
           </div>
         </nav>
       </div>
-      {props.children}
     </>
   );
 };

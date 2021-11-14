@@ -14,12 +14,14 @@ const Tabela = () => {
   let params = useParams();
   const idObra = params.obraId;
   const id = JSON.parse(localStorage.getItem("id"));
+  const [nomeEtapa, setNomeEtapa] = useState("");
 
   useEffect(() => {
     carregarRelatorio();
     return () => console.log("Fim");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
 
   const carregarRelatorio = async () => {
     try {
@@ -31,68 +33,30 @@ const Tabela = () => {
     }
   };
 
-  const etapas = relatorioObra["etapas"];
+  const addEtapa = async () => {
+    try {
+      const data = { nomeEtapa: nomeEtapa };
+      await services.adicionarEtapa(token, data, id, idObra);
+      carregarRelatorio();
+      setNomeEtapa("");
+    } catch (error) {
+      console.log(error);
+    }
+    console.log("passou aqui");
+    carregarRelatorio();
+  };
 
   return (
-    <>
-      <div className="page">
+    <div className="h-100" style={{ backgroundColor: 'rgba(255, 218, 106, 1)'}}>
+      <div>
         <Breadcrumb item="Minhas Obras" active="Etapas" router="#" />
         <br />
-        <div className="container-fluid p-0 w-75 pb-4">
-          <button
-            type="button"
-            className="btn btn-dark shadow"
-            style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
-            data-toggle="modal"
-            data-target="#modalCriarEtapa"
-          >
-            Nova Etapa
-          </button>
-        </div>
-        {
-        etapas && etapas.map((e) => (  
-          <Etapa idObra={idObra} idEtapa={`${e.id}`} nomeEtapa={`${e.nomeEtapa}`}>
-            <Servico/>
-          </Etapa>
-        ))}
+        <Etapa idObra={idObra}>
+          <Servico />
+        </Etapa>
       </div>
-      {/* modal para criar etapa */}
-     {/* <div className="modal" id="modalCriarEtapa" tabindex="-1" role="dialog">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Nova Etapa</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <p>Digite o nome da nova Etapa:</p>
-              <p>
-                <input className="w-auto text-center shadow" type="text" />
-              </p>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-dark shadow">
-                Criar
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-danger shadow"
-                data-dismiss="modal"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-        </div> */}
-    </>
+
+    </div>
   );
 };
 export default Tabela;
