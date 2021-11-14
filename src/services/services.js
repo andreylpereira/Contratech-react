@@ -14,20 +14,20 @@ class Services {
     // }
 
     buscarObras(token, id) {
-        
+
         return api.get(`/usuarios/${id}/obras`, {
             headers: {
                 Authorization: `Bearer ${token.replace(/['"]+/g, "")}`
             }
         })
-        .then(response => response.data)
-        .catch(erro => {
-            throw erro;
-        })
+            .then(response => response.data)
+            .catch(erro => {
+                throw erro;
+            })
     }
 
     adicionarObra(token, data, id) {
-        
+
         return api.post(`/usuarios/${id}/obras`, data, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -36,7 +36,7 @@ class Services {
     }
 
     excluirObra(token, id, idObra) {
-        
+
         return api.delete(`/usuarios/${id}/obras/${idObra}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -45,7 +45,7 @@ class Services {
     }
 
     renomearObra(token, data, id, idObra) {
-        
+
         return api.put(`/usuarios/${id}/obras/${idObra}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -54,19 +54,61 @@ class Services {
     }
 
     relatorioObra(token, id, idObra) {
-        
+
         return api.get(`/usuarios/${id}/obras/${idObra}/relatorio`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then(response => response.data)
-        .catch(erro => {
-            throw erro;
+            .then(response => response.data)
+            .catch(erro => {
+                throw erro;
+            })
+    }
+
+
+    buscarEtapas(token, id, idObra) {
+
+        return api.get(`/usuarios/${id}/obras/${idObra}/etapas`, {
+            headers: {
+                Authorization: `Bearer ${token.replace(/['"]+/g, "")}`
+            }
+        })
+            .then(response => response.data)
+            .catch(erro => {
+                throw erro;
+            })
+    }
+
+    adicionarEtapa(token, data, id, idObra) {
+        return api.post(`/usuarios/${id}/obras/${idObra}/etapas`, data, {
+            headers: {
+                Authorization: `Bearer ${token.replace(/['"]+/g, "")}`
+            }
         })
     }
 
-    
+    renomearEtapa(token, data, id, idObra, idEtapa) {
+        return api.put(`/usuarios/${id}/obras/${idObra}/etapas/${idEtapa}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    }
+
+    excluirEtapa(token, id, idObra, idEtapa) {
+        return api.delete(`/usuarios/${id}/obras/${idObra}/etapas/${idEtapa}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(response => response.data)
+            .catch(erro => {
+                throw erro;
+            })
+    }
+
+
 }
 
 export default new Services();

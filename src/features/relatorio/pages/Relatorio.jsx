@@ -40,7 +40,7 @@ const Relatorio = () => {
   })
 
   return (
-    <div className="body">
+    <div className="body pt-1 pb-5">
       <p className="container-fluid w-75 mb-0 mt-5 font-weight-bold">
         Contrato nº: 00000{relatorioObra.id}
       </p>
@@ -84,7 +84,7 @@ const Relatorio = () => {
         </div>
       </div>
       <hr style={{ width: 250 }} />
-      <p className="text-center font-weight-bold">Assinatura</p>
+      <p className="text-center font-weight-bold mb-5">Assinatura</p>
       {/* <h5>id: {params.obraId}</h5> */}
     </div>
   );

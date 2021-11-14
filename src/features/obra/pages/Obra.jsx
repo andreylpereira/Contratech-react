@@ -214,8 +214,8 @@ const Obra = () => {
     ));
 
   return (
-    <>
-      <div className="page">
+    <div className="h-100" style={{ backgroundColor: 'rgba(255, 218, 106, 1)'}}>
+      <div className="pb-5">
         <Breadcrumb unique="Minhas obras" />
         <br />
         <div className="container-fluid mt-2 pl-0 w-75">
@@ -294,7 +294,7 @@ const Obra = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
