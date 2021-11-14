@@ -5,6 +5,8 @@ import "./Tabela.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
 import { useParams } from "react-router-dom";
 import services from "../../../services/services";
+import Etapa from "./etapa/Etapa";
+import Servico from "./servico/Servico";
 
 const Tabela = () => {
   let mocks = [
@@ -592,7 +594,9 @@ const Tabela = () => {
             Nova Etapa
           </button>
         </div>
-        {lista}
+        <Etapa id="1">
+          <Servico></Servico>
+        </Etapa>
       </div>
       {/* modal para criar etapa */}
       <div className="modal" id="modalCriarEtapa" tabindex="-1" role="dialog">
