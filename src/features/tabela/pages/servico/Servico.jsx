@@ -106,46 +106,6 @@ const Servico = () => {
         </button>
       </div>
 
-      {/* modal para alterar nome etapa */}
-      <div
-        className="modal"
-        id={`modalRenomearEtapa${1}`}
-        tabindex="-1"
-        role="dialog"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Renomear Etapa: nomeEtapa</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <p>Digite o novo nome da Etapa:</p>
-              <input className="w-auto text-center shadow" type="text" />
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-dark shadow">
-                Editar
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-danger shadow"
-                data-dismiss="modal"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* modal para excluir etapa */}
       <div
         className="modal"
