@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import services from "../../../../services/services";
+import Servico from "../servico/Servico";
 
 const Etapa = (props) => {
   const [etapas, setEtapas] = useState([]);
@@ -181,7 +182,7 @@ const Etapa = (props) => {
                 role="tabpanel"
                 aria-labelledby={`heading${id}`}
               >
-                <div className="panel-body">{props.children}</div>
+                <div className="panel-body"><Servico idObra={obraId} idEtapa={id}/></div>
               </div>
             </div>
           </div>

@@ -51,11 +51,8 @@ const Tabela = () => {
       <div>
         <Breadcrumb item="Minhas Obras" active="Etapas" router="#" />
         <br />
-        <Etapa idObra={idObra}>
-          <Servico />
-        </Etapa>
+        <Etapa idObra={idObra}/>
       </div>
-
     </div>
   );
 };

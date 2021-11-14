@@ -1,6 +1,9 @@
 import react from "react";
 
-const Servico = () => {
+const Servico = (props) => {
+  const idObra = props.idObra 
+  const idEtapa = props.idEtapa
+
   return (
     <>
       <table className="table w-100">
