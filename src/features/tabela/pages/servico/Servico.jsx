@@ -159,44 +159,7 @@ const Servico = (props) => {
         </button>
       </div>
 
-      {/* modal para excluir etapa */}
-      <div
-        className="modal"
-        id={`modalExcluirEtapa${1}`}
-        tabindex="-1"
-        role="dialog"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Excluir Etapa: nomeEtapa</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <p>Você deseja excluir a Etapa: nomeEtapa</p>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-danger shadow">
-                Excluir
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-danger shadow"
-                data-dismiss="modal"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       {/* modal para editar etapa */}
       <div
