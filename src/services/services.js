@@ -109,6 +109,18 @@ class Services {
     }
 
 
+    buscarServicos(token, id, idObra, idEtapa) {
+        return api.get(`/usuarios/${id}/obras/${idObra}/etapas/${idEtapa}/servicos`, {
+            headers: {
+                Authorization: `Bearer ${token.replace(/['"]+/g, "")}`
+            }
+        })
+            .then(response => response.data)
+            .catch(erro => {
+                throw erro;
+            })
+    }
+
 }
 
 export default new Services();
