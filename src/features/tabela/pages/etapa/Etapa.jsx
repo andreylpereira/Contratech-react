@@ -38,14 +38,15 @@ const Etapa = (props) => {
     return () => console.log("Fim");
   }, []);
 
-  // const delEtapa = async (etapaId) => {
-  //   const idEtapa = etapaId;
-  //   try {
-  //     await services.excluirEtapa(token, id, obraId, idEtapa);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const delEtapa = async (etapaId) => {
+    const idEtapa = etapaId;
+    try {
+      await services.excluirEtapa(token, id, obraId, idEtapa);
+      getEtapas();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const putEtapa = async (etapaId) => {
     const idEtapa = etapaId;
@@ -149,30 +150,40 @@ const Etapa = (props) => {
             id="accordionExample"
           >
             <div className="card card-border shadow">
-              <div className="card-header p-4" id={`heading${id}`}>
-                <h4 className="row m-0">
-                  <div className="col-1 p-0 d-flex align-items-center justify-content-center">
+              <div className="card-header" id={`heading${id}`}>
+                <h4 className="p-0 m-0">
+                  <div className="row">
                     <div
-                      className="arrow oi oi-caret-right p-0"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target={`#collapse${id}`}
-                      aria-expanded="true"
-                      aria-controls={`collapse${id}`}
-                    ></div>
+                      className="row col-10 title text-dark font-weight-bold h3 p-0 mb-1"
+                      data-toggle="modal"
+                    >
+                      {" "}
+                      <div
+                        className="arrow oi oi-caret-right p-0 pl-4 pt-2"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target={`#collapse${id}`}
+                        aria-expanded="true"
+                        aria-controls={`collapse${id}`}
+                      ></div>
+                      <div className="pl-2 pt-1">{nomeEtapa}</div>
+                    </div>
+                    <div
+                      style={{ width: "100px" }}
+                      className="row col-2 p-0 d-flex justify-content-end"
+                    >
+                      <div
+                        className="oi oi-pencil p-0 pt-2 d-flex justify-content-end edit"
+                        data-toggle="modal"
+                        data-target={`#modalRenomearEtapa${id}`}
+                      />
+                      <div
+                        className="oi oi-x  p-0 pt-1 ml-2 d-flex justify-content-end"
+                        data-toggle="modal"
+                        data-target={`#modalExcluirEtapa${id}`}
+                      />
+                    </div>
                   </div>
-                  <div
-                    className="title col-10 text-dark font-weight-bold h3 p-0 mb-0 d-flex align-items-center"
-                    data-toggle="modal"
-                    data-target={`#modalRenomearEtapa${id}`}
-                  >
-                    {nomeEtapa}
-                  </div>
-                  <div
-                    className="col-1 oi oi-pencil p-0 pt-1 d-flex justify-content-end edit"
-                    data-toggle="modal"
-                    data-target={`#modalRenomearEtapa${id}`}
-                  ></div>
                 </h4>
               </div>
 
@@ -182,7 +193,9 @@ const Etapa = (props) => {
                 role="tabpanel"
                 aria-labelledby={`heading${id}`}
               >
-                <div className="panel-body"><Servico idObra={obraId} idEtapa={id}/></div>
+                <div className="panel-body">
+                  <Servico idObra={obraId} idEtapa={id} nomeEtapa={nomeEtapa} />
+                </div>
               </div>
             </div>
           </div>
@@ -226,6 +239,52 @@ const Etapa = (props) => {
                     }}
                   >
                     Editar
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger shadow"
+                    data-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* modal para excluir etapa */}
+          <div
+            className="modal"
+            id={`modalExcluirEtapa${id}`}
+            tabindex="-1"
+            role="dialog"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Excluir Etapa: {nomeEtapa}</h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <p>Você deseja excluir a Etapa: {nomeEtapa}?</p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-danger shadow"
+                    data-dismiss="modal"
+                    onClick={() => {
+                      var etapaId = id;
+                      delEtapa(etapaId);
+                    }}
+                  >
+                    Excluir
                   </button>
                   <button
                     type="button"
