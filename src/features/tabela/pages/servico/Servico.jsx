@@ -1,12 +1,20 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import services from "../../../../services/services";
 
 const Servico = (props) => {
-  const idObra = props.idObra; 
+  const idObra = props.idObra;
   const idEtapa = props.idEtapa;
   const token = localStorage.getItem("token").replace(/['"]+/g, "");
   const id = JSON.parse(localStorage.getItem("id"));
-  const [servicos, setServicos] = useState([]);
+  const [servicos, setServicos] = useState([
+    {
+      id: "",
+      nomeServico: "",
+      preco: "",
+      quantidade: "",
+      porcentagem: "",
+    },
+  ]);
 
   useEffect(() => {
     getServicos();
@@ -16,12 +24,23 @@ const Servico = (props) => {
 
   const getServicos = async () => {
     try {
-      const listaServicos = await services.buscarServicos(token, id, idObra,idEtapa)
-      setServicos(listaServicos)
+      const listaServicos = await services.buscarServicos(
+        token,
+        id,
+        idObra,
+        idEtapa
+      );
+      setServicos(listaServicos);
       console.log(listaServicos);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleChangeInput = (id, event) => {
+    const values = [...servicos];
+    values[id][event.target.name] = event.target.value;
+    setServicos(values);
   };
 
   return (
@@ -44,63 +63,65 @@ const Servico = (props) => {
         </thead>
         <tbody>
           {servicos.map((data, index) => (
-          <tr className="bg-light" key={index}>
-          <th scope="row" className="pr-0">
-            <input
-              onChange={(e) => {
-                data.nomeServico = e.target;
-                setServicos([...servicos])
-              }}
-              value={data.nomeServico}
-              id={`nome${id}`}
-              className="w-auto text-center shadow"
-              type="text"
-            />
-          </th>
-          <td className="text-center pr-0 pl-0">
-            <input
-              //onChange={(s) => setRelatorioObra(s.target.value)}
-              value={data.preco}
-              id={`preco${id}`}
-              className="w-75px text-center shadow"
-              type="number"
-              step={0.01}
-              min={0}
-            />
-          </td>
-          <td className="text-center pr-0 pl-0">
-            <input
-              //onChange={(s) => setRelatorioObra(s.target.value)}
-              value={data.quantidade}
-              id={`quantidade${id}`}
-              className="w-45px text-center shadow"
-              type="number"
-              step={1}
-              min={0}
-            />
-          </td>
-          <td className="text-center pr-0 pl-0">
-            <input
-              //onChange={(s) => setRelatorioObra(s.target.value)}
-              value={data.porcentagem}
-              id={`porcentagem${id}`}
-              className="w-40px text-center shadow"
-              type="number"
-              step={1}
-              min={0}
-              max={100}
-            />
-          </td>
-          <td className="text-center pr-0 pl-0">
-            <span
-              className="oi oi-x"
-              data-toggle="modal"
-              data-target={`#modalDeletarServico${1}`}
-            ></span>
-          </td>
-        </tr>
-          ))
-          }
+           
+              <tr className="bg-light" key={(index)}>
+                <th scope="row" className="pr-0">
+                  <input
+                    name="nomeServico"
+                    onChange={(event) => handleChangeInput(index, event)}
+                    value={data.nomeServico}
+                    id={`nome${id}`}
+                    className="w-auto text-center shadow"
+                    type="text"
+                  />
+                </th>
+                <td className="text-center pr-0 pl-0">
+                  <input
+                    name="preco"
+                    onChange={(event) => handleChangeInput(index, event)}
+                    value={data.preco}
+                    id={`preco${id}`}
+                    className="w-75px text-center shadow"
+                    type="number"
+                    step={0.01}
+                    min={0}
+                  />
+                </td>
+                <td className="text-center pr-0 pl-0">
+                  <input
+                    name="quantidade"
+                    onChange={(event) => handleChangeInput(index, event)}
+                    value={data.quantidade}
+                    id={`quantidade${id}`}
+                    className="w-45px text-center shadow"
+                    type="number"
+                    step={1}
+                    min={0}
+                  />
+                </td>
+                <td className="text-center pr-0 pl-0">
+                  <input
+                    name="porcentagem"
+                    onChange={(event) => handleChangeInput(index, event)}
+                    value={data.porcentagem}
+                    id={`porcentagem${id}`}
+                    className="w-40px text-center shadow"
+                    type="number"
+                    step={1}
+                    min={0}
+                    max={100}
+                  />
+                </td>
+                <td className="text-center pr-0 pl-0">
+                  <span
+                    className="oi oi-x"
+                    data-toggle="modal"
+                    data-target={`#modalDeletarServico${1}`}
+                  ></span>
+                </td>
+              </tr>
+          
+          ))}
           <tr className="bg-light">
             <td
               className="addServico"
