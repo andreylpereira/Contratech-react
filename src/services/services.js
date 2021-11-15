@@ -143,6 +143,14 @@ class Services {
             })
     }
 
+    atualizarServicos(token, data, id, idObra, idEtapa) {
+        return api.put(`/usuarios/${id}/obras/${idObra}/etapas/${idEtapa}/servicos/atualizar`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    }
+
 }
 
 export default new Services();

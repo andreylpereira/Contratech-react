@@ -58,6 +58,16 @@ const Servico = (props) => {
     }
   };
 
+  const putServicos = async () => {
+    try {
+      const data = servicos;
+      await services.atualizarServicos(token, data, id, idObra, idEtapa);
+      getServicos();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleChangeInput = (id, event) => {
     const values = [...servicos];
     values[id][event.target.name] = event.target.value;
@@ -229,14 +239,14 @@ const Servico = (props) => {
       {/* modal para editar etapa */}
       <div
         className="modal"
-        id={`modalEditarEtapa${1}`}
+        id={`modalEditarEtapa${idEtapa}`}
         tabindex="-1"
         role="dialog"
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Editar Etapa: nomeEtapa</h5>
+              <h5 className="modal-title">Editar Etapa: {nomeEtapa}</h5>
               <button
                 type="button"
                 className="close"
@@ -254,6 +264,7 @@ const Servico = (props) => {
                 type="button"
                 className="btn btn-dark shadow"
                 data-dismiss="modal"
+                onClick={putServicos}
               >
                 Confirmar
               </button>
