@@ -4,16 +4,17 @@ import services from "../../../../services/services";
 const Servico = (props) => {
   const idObra = props.idObra;
   const idEtapa = props.idEtapa;
+  const nomeEtapa = props.nomeEtapa;
   const token = localStorage.getItem("token").replace(/['"]+/g, "");
   const id = JSON.parse(localStorage.getItem("id"));
   const [servicos, setServicos] = useState([
-    {
-      id: "",
-      nomeServico: "",
-      preco: "",
-      quantidade: "",
-      porcentagem: "",
-    },
+    // {
+    //   id: "",
+    //   nomeServico: "",
+    //   preco: "",
+    //   quantidade: "",
+    //   porcentagem: "",
+    // },
   ]);
 
   useEffect(() => {
@@ -33,6 +34,26 @@ const Servico = (props) => {
       setServicos(listaServicos);
       console.log(listaServicos);
     } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addServico = async () => {
+    try {
+      await services.adicionarServico(token, id, idObra, idEtapa);
+      getServicos();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const delServico = async (servicoId) => {
+    const idServico = servicoId;
+    try {
+      await services.excluirServico(token, id, idObra, idEtapa, idServico);
+      getServicos();
+    } catch (error) {
+      setServicos([])
       console.log(error);
     }
   };
@@ -63,70 +84,116 @@ const Servico = (props) => {
         </thead>
         <tbody>
           {servicos.map((data, index) => (
-           
-              <tr className="bg-light" key={(index)}>
-                <th scope="row" className="pr-0">
-                  <input
-                    name="nomeServico"
-                    onChange={(event) => handleChangeInput(index, event)}
-                    value={data.nomeServico}
-                    id={`nome${id}`}
-                    className="w-auto text-center shadow"
-                    type="text"
-                  />
-                </th>
-                <td className="text-center pr-0 pl-0">
-                  <input
-                    name="preco"
-                    onChange={(event) => handleChangeInput(index, event)}
-                    value={data.preco}
-                    id={`preco${id}`}
-                    className="w-75px text-center shadow"
-                    type="number"
-                    step={0.01}
-                    min={0}
-                  />
-                </td>
-                <td className="text-center pr-0 pl-0">
-                  <input
-                    name="quantidade"
-                    onChange={(event) => handleChangeInput(index, event)}
-                    value={data.quantidade}
-                    id={`quantidade${id}`}
-                    className="w-45px text-center shadow"
-                    type="number"
-                    step={1}
-                    min={0}
-                  />
-                </td>
-                <td className="text-center pr-0 pl-0">
-                  <input
-                    name="porcentagem"
-                    onChange={(event) => handleChangeInput(index, event)}
-                    value={data.porcentagem}
-                    id={`porcentagem${id}`}
-                    className="w-40px text-center shadow"
-                    type="number"
-                    step={1}
-                    min={0}
-                    max={100}
-                  />
-                </td>
-                <td className="text-center pr-0 pl-0">
-                  <span
-                    className="oi oi-x"
-                    data-toggle="modal"
-                    data-target={`#modalDeletarServico${1}`}
-                  ></span>
-                </td>
-              </tr>
-          
+            <tr className="bg-light" key={index}>
+              <th scope="row" className="pr-0">
+                <input
+                  name="nomeServico"
+                  onChange={(event) => handleChangeInput(index, event)}
+                  value={data.nomeServico}
+                  id={`nome${id}`}
+                  className="w-auto text-center shadow"
+                  type="text"
+                />
+              </th>
+              <td className="text-center pr-0 pl-0">
+                <input
+                  name="preco"
+                  onChange={(event) => handleChangeInput(index, event)}
+                  value={data.preco}
+                  id={`preco${id}`}
+                  className="w-75px text-center shadow"
+                  type="number"
+                  step={0.01}
+                  min={0}
+                />
+              </td>
+              <td className="text-center pr-0 pl-0">
+                <input
+                  name="quantidade"
+                  onChange={(event) => handleChangeInput(index, event)}
+                  value={data.quantidade}
+                  id={`quantidade${id}`}
+                  className="w-45px text-center shadow"
+                  type="number"
+                  step={1}
+                  min={0}
+                />
+              </td>
+              <td className="text-center pr-0 pl-0">
+                <input
+                  name="porcentagem"
+                  onChange={(event) => handleChangeInput(index, event)}
+                  value={data.porcentagem}
+                  id={`porcentagem${id}`}
+                  className="w-40px text-center shadow"
+                  type="number"
+                  step={1}
+                  min={0}
+                  max={100}
+                />
+              </td>
+              <td className="text-center pr-0 pl-0">
+                <span
+                  className="oi oi-x"
+                  data-toggle="modal"
+                  data-target={`#modalDeletarServico${data.id}`}
+                ></span>
+              </td>
+              {/* modal para deletar serviço */}
+              <div
+                className="modal"
+                id={`modalDeletarServico${data.id}`}
+                tabindex="-1"
+                role="dialog"
+              >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title">
+                        Deletar serviço: NomeServico
+                      </h5>
+                      <button
+                        type="button"
+                        className="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      <p>Você deseja deletar o serviço?</p>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-danger shadow"
+                        data-dismiss="modal"
+                        onClick={() => {
+                          var servicoId = data.id;
+                          delServico(servicoId);
+                        }}
+                      >
+                        Deletar
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-outline-danger shadow"
+                        data-dismiss="modal"
+                      >
+                        Cancelar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tr>
           ))}
           <tr className="bg-light">
             <td
               className="addServico"
               data-toggle="modal"
-              data-target={`#modalAdicionarServico${1}`}
+              data-target={`#modalAdicionarServico${idEtapa}`}
             >
               {" "}
               + Adicionar serviço
@@ -144,11 +211,11 @@ const Servico = (props) => {
           className="btn btn-dark m-2 ml-1 shadow"
           style={{ borderColor: "white" }}
           data-toggle="modal"
-          data-target={`#modalEditarEtapa${1}`}
+          data-target={`#modalEditarEtapa${idEtapa}`}
         >
           Editar Etapa
         </button>
-        <button
+        {/* <button
           type="button"
           className="btn btn-danger shadow ml-1"
           style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
@@ -156,10 +223,8 @@ const Servico = (props) => {
           data-target={`#modalExcluirEtapa${1}`}
         >
           Excluir Etapa
-        </button>
+        </button> */}
       </div>
-
-
 
       {/* modal para editar etapa */}
       <div
@@ -207,14 +272,14 @@ const Servico = (props) => {
       {/* modal para adicionar serviço */}
       <div
         className="modal"
-        id={`modalAdicionarServico${1}`}
+        id={`modalAdicionarServico${idEtapa}`}
         tabindex="-1"
         role="dialog"
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Adicionar Serviço: AddServico</h5>
+              <h5 className="modal-title">Adicionar Serviço:</h5>
               <button
                 type="button"
                 className="close"
@@ -225,13 +290,14 @@ const Servico = (props) => {
               </button>
             </div>
             <div className="modal-body">
-              <p>Foi adicionado um serviço na etapa nomeEtapa.</p>
+              <p>Foi adicionado um serviço na etapa {nomeEtapa}.</p>
             </div>
             <div className="modal-footer">
               <button
                 type="button"
                 className="btn btn-dark shadow"
                 data-dismiss="modal"
+                onClick={addServico}
               >
                 Confirmar
               </button>
@@ -242,45 +308,6 @@ const Servico = (props) => {
                   >
                     Cancelar
                   </button> */}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* modal para alterar nome etapa */}
-      <div
-        className="modal"
-        id={`modalDeletarServico${1}`}
-        tabindex="-1"
-        role="dialog"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Deletar serviço: NomeServico</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <p>Você deseja deletar o serviço nomeServico ({1})</p>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-danger shadow">
-                Deletar
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-danger shadow"
-                data-dismiss="modal"
-              >
-                Cancelar
-              </button>
             </div>
           </div>
         </div>

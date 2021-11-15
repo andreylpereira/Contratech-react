@@ -66,7 +66,6 @@ class Services {
             })
     }
 
-
     buscarEtapas(token, id, idObra) {
 
         return api.get(`/usuarios/${id}/obras/${idObra}/etapas`, {
@@ -108,9 +107,32 @@ class Services {
             })
     }
 
-
     buscarServicos(token, id, idObra, idEtapa) {
         return api.get(`/usuarios/${id}/obras/${idObra}/etapas/${idEtapa}/servicos`, {
+            headers: {
+                Authorization: `Bearer ${token.replace(/['"]+/g, "")}`
+            }
+        })
+            .then(response => response.data)
+            .catch(erro => {
+                throw erro;
+            })
+    }
+
+    adicionarServico(token, id, idObra, idEtapa) {
+        return api.post(`/usuarios/${id}/obras/${idObra}/etapas/${idEtapa}/servicos`, {
+            headers: {
+                Authorization: `Bearer ${token.replace(/['"]+/g, "")}`
+            }
+        })
+            .then(response => response.data)
+            .catch(erro => {
+                throw erro;
+            })
+    }
+
+    excluirServico(token, id, idObra, idEtapa, idServico) {
+        return api.delete(`/usuarios/${id}/obras/${idObra}/etapas/${idEtapa}/servicos/${idServico}`, {
             headers: {
                 Authorization: `Bearer ${token.replace(/['"]+/g, "")}`
             }

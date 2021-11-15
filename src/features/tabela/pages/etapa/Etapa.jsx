@@ -194,7 +194,7 @@ const Etapa = (props) => {
                 aria-labelledby={`heading${id}`}
               >
                 <div className="panel-body">
-                  <Servico idObra={obraId} idEtapa={id} />
+                  <Servico idObra={obraId} idEtapa={id} nomeEtapa={nomeEtapa} />
                 </div>
               </div>
             </div>
