@@ -1,12 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./FormCadastro.css";
 import React, { useState } from "react";
 import validator from "validator";
 import services from "../../../../services/services";
-import { useNavigate } from "react-router-dom";
-
 
 const FormCadastro = () => {
-  const navigate = useNavigate();
   const [login, setLogin] = useState("");
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
@@ -75,19 +73,11 @@ const FormCadastro = () => {
           email: email,
           senha: senha,
         };
-        services.cadastrar(data);
-        //goToHome();
-    
+        services.cadastrar(data); 
       } catch (error) {
-        console.log(error);
-        
+        console.log(error);   
       }
     }
-  };
-  
-  
-  const goToHome = () => {
-    navigate("/home");
   };
 
   return (

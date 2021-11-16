@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import services from "../../../../services/services";
 import Servico from "../servico/Servico";
@@ -10,32 +11,8 @@ const Etapa = (props) => {
   const id = JSON.parse(localStorage.getItem("id"));
   const [nomeEtapa, setNomeEtapa] = useState("");
 
-  /*
-    const [dadosObra, setDadosObra] = useState({});
-    const token = localStorage.getItem("token").replace(/['"]+/g, "");
-    const id = JSON.parse(localStorage.getItem("id"));
-
-    useEffect(() => {
-      carregarDadosObra();
-      return () => console.log("Fim");
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-  
-    const carregarDadosObra = async () => {
-      try {
-        const dado = await services.relatorioObra(token, id, etapaId);
-        setDadosObra(dado);
-        console.log(dadosObra);
-      } catch (error) {
-        console.log(error);
-      }
-    }; 
-    const etapas = dadosObra["etapas"];
-    */
-
   useEffect(() => {
     getEtapas();
-    return () => console.log("Fim");
   }, []);
 
   const delEtapa = async (etapaId) => {
@@ -51,22 +28,29 @@ const Etapa = (props) => {
   const putEtapa = async (etapaId) => {
     const idEtapa = etapaId;
     const data = { nomeEtapa: novoNomeEtapa };
-
     try {
-      await services.renomearEtapa(token, data, id, obraId, idEtapa);
-      setNovoNomeEtapa("");
-      getEtapas();
+      if (data.nomeEtapa.length <= 35 && data.nomeEtapa.length >= 5) {
+        await services.renomearEtapa(token, data, id, obraId, idEtapa);
+        setNovoNomeEtapa("");
+        getEtapas();
+      } else {
+        alert("* O nome da etapa deve ter entre 5 e 35 caracteres!");
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
   const addEtapa = async () => {
+    const data = { nomeEtapa: nomeEtapa };
     try {
-      const data = { nomeEtapa: nomeEtapa };
-      await services.adicionarEtapa(token, data, id, obraId);
-      getEtapas();
-      setNomeEtapa("");
+      if (data.nomeEtapa.length <= 35 && data.nomeEtapa.length >= 5) {
+        await services.adicionarEtapa(token, data, id, obraId);
+        getEtapas();
+        setNomeEtapa("");
+      } else {
+        alert("* O nome da etapa deve ter entre 5 e 35 caracteres!");
+      }
     } catch (error) {
       console.log(error);
     }
