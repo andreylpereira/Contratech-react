@@ -24,9 +24,9 @@ const Servico = (props) => {
         idObra,
         idEtapa
       );
-      setServicos(listaServicos.sort(
-        (a, b) => a.nomeServico > b.nomeServico && 1 || -1
-      ));
+      setServicos(
+        listaServicos.sort((a, b) => (a.nomeServico > b.nomeServico && 1) || -1)
+      );
     } catch (error) {
       console.log(error);
     }
@@ -55,21 +55,46 @@ const Servico = (props) => {
   const putServicos = async () => {
     const data = servicos;
 
-    // const validacao = data.filter(function (v) {
-    //   return (
-    //     v.nomeServico.length >= 5 &&
-    //     v.nomeServico.length <= 35 &&
-    //     v.preco.value <= 0 &&
-    //     v.quantidade.value >= 0 &&
-    //     v.quantidade.value <= 99 &&
-    //     v.porcentagem.value >= 0 &&
-    //     v.quantidade.value <= 100
-    //   );
-    // });
+    const validacaoNome = data.filter(
+      (x) => x.nomeServico.length >= 5 && x.nomeServico.length <= 35
+    );
+
+    const validacaoPreco = data.filter((x) => x.preco >= 0);
+
+    const validacaoPorcentagem = data.filter(
+      (x) => typeof x.porcentagem !== "string"
+    );
+
+    const validacaoQuantidade = data.filter(
+      (x) => x.quantidade >= 0 && x.quantidade <= 99
+    );
 
     try {
-      await services.atualizarServicos(token, data, id, idObra, idEtapa);
-      getServicos();
+      if (
+        validacaoNome.length === data.length &&
+        validacaoPreco.length === data.length &&
+        validacaoPorcentagem.length === data.length &&
+        validacaoQuantidade.length === data.length
+      ) {
+        await services.atualizarServicos(token, data, id, idObra, idEtapa);
+        getServicos();
+      } else {
+        if (validacaoNome.length !== data.length) {
+          alert("* O nome do serviço deve ter entre 5 e 35 caracteres!");
+        }
+
+        if (validacaoPreco.length !== data.length) {
+          alert("* O preço do serviço deve ser maior que ZERO!");
+        }
+
+        if (validacaoPorcentagem.length !== data.length) {
+          alert("* A porcentagem deve ser um numero inteiro entre 0 e 100!");
+        }
+
+        if (validacaoQuantidade.length !== data.length) {
+          alert("* A quantidade deve ser entre 0 e 99!");
+        }
+      }
     } catch (error) {
       console.log(error);
     }
