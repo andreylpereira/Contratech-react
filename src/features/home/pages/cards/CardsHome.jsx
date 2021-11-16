@@ -2,7 +2,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 // eslint-disable-next-line import/no-anonymous-default-export
 import Tabela from "../../../../assets/img/home/tabelaObra.jpg";
-import Cadastrar from "../../../../assets/img/home/cadastro.jpg";
+import Cadastrar from "../../../../assets/img/home/cadastrar.jpg";
 import "./CardsHome.css";
 import { Link } from "react-router-dom";
 
