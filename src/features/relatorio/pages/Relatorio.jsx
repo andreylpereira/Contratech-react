@@ -33,7 +33,7 @@ const Relatorio = () => {
     return (
       <tr className="bg-white">
         <th scope="row">{a.nomeEtapa}</th>
-        <td className="text-center">R$: {a.valorTotal}</td>
+        <td className="text-center">R$: {parseFloat(a.valorTotal).toLocaleString('pt-BR')}</td>
         <td className="text-center">{a.percentualMedio}%</td>
       </tr>
     );
@@ -75,7 +75,7 @@ const Relatorio = () => {
         <div className="container" style={{ marginBottom: 75 }}>
           <p className="m-1 font-weight-bold">
             Valor total:{" "}
-            <b className="text-danger"> R$: {relatorioObra.valorTotalFinal}</b>
+            <b className="text-danger"> R$: {parseFloat(relatorioObra.valorTotalFinal).toLocaleString('pt-BR')}</b>
           </p>
           <b className="m-1 font-weight-bold">
             Concluído:{" "}
