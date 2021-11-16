@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-mixed-operators */
 import React, { useEffect, useState } from "react";
 import services from "../../../../services/services";
 
@@ -7,20 +9,11 @@ const Servico = (props) => {
   const nomeEtapa = props.nomeEtapa;
   const token = localStorage.getItem("token").replace(/['"]+/g, "");
   const id = JSON.parse(localStorage.getItem("id"));
-  const [servicos, setServicos] = useState([
-    // {
-    //   id: "",
-    //   nomeServico: "",
-    //   preco: "",
-    //   quantidade: "",
-    //   porcentagem: "",
-    // },
-  ]);
+  const [servicos, setServicos] = useState([]);
 
   useEffect(() => {
     getServicos();
     console.log(servicos);
-    return () => console.log("Fim");
   }, []);
 
   const getServicos = async () => {
@@ -31,8 +24,9 @@ const Servico = (props) => {
         idObra,
         idEtapa
       );
-      setServicos(listaServicos);
-      console.log(listaServicos);
+      setServicos(listaServicos.sort(
+        (a, b) => a.nomeServico > b.nomeServico && 1 || -1
+      ));
     } catch (error) {
       console.log(error);
     }
@@ -53,20 +47,33 @@ const Servico = (props) => {
       await services.excluirServico(token, id, idObra, idEtapa, idServico);
       getServicos();
     } catch (error) {
-      setServicos([])
+      setServicos([]);
       console.log(error);
     }
   };
 
   const putServicos = async () => {
+    const data = servicos;
+
+    // const validacao = data.filter(function (v) {
+    //   return (
+    //     v.nomeServico.length >= 5 &&
+    //     v.nomeServico.length <= 35 &&
+    //     v.preco.value <= 0 &&
+    //     v.quantidade.value >= 0 &&
+    //     v.quantidade.value <= 99 &&
+    //     v.porcentagem.value >= 0 &&
+    //     v.quantidade.value <= 100
+    //   );
+    // });
+
     try {
-      const data = servicos;
       await services.atualizarServicos(token, data, id, idObra, idEtapa);
       getServicos();
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const handleChangeInput = (id, event) => {
     const values = [...servicos];

@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
+/* eslint-disable no-mixed-operators */
 import React, { useState, useEffect } from "react";
 import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
@@ -15,13 +16,12 @@ const Obra = () => {
 
   useEffect(() => {
     carregarObras();
-    return () => console.log("Fim");
   }, []);
 
   const carregarObras = async () => {
     try {
       const obras = await services.buscarObras(token, id);
-      setObras(obras);
+      setObras(obras.sort((a,b) => a.nomeObra > b.nomeObra && 1 || -1));
     } catch (error) {
       console.log(error);
     }
@@ -30,9 +30,13 @@ const Obra = () => {
   const addObra = async () => {
     try {
       const data = { nomeObra: novaObra };
-      await services.adicionarObra(token, data, id);
-      setNovaObra("");
-      carregarObras();
+      if ((data.nomeObra.length <= 35) && (data.nomeObra.length >= 5)) {
+        await services.adicionarObra(token, data, id);
+        setNovaObra("");
+        carregarObras();
+      } else {
+        alert("* O nome da obra deve ter entre 5 e 35 caracteres!");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -50,11 +54,15 @@ const Obra = () => {
 
   const putObra = async (obraId) => {
     const idObra = obraId;
+    const data = { nomeObra: renomearObra };
     try {
-      const data = { nomeObra: renomearObra };
+      if ((data.nomeObra.length <= 35) && (data.nomeObra.length >= 5)) {
       await services.renomearObra(token, data, id, idObra);
       setRenomearObra("");
       carregarObras();
+    } else {
+      alert("* O nome da obra deve ter entre 5 e 35 caracteres!");
+    }
     } catch (error) {
       console.log(error);
     }
