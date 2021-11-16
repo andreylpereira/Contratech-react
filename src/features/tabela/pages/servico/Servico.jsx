@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-mixed-operators */
 import React, { useEffect, useState } from "react";
 import services from "../../../../services/services";
 
@@ -23,7 +24,9 @@ const Servico = (props) => {
         idObra,
         idEtapa
       );
-      setServicos(listaServicos);
+      setServicos(listaServicos.sort(
+        (a, b) => a.nomeServico > b.nomeServico && 1 || -1
+      ));
     } catch (error) {
       console.log(error);
     }
@@ -52,17 +55,17 @@ const Servico = (props) => {
   const putServicos = async () => {
     const data = servicos;
 
-    const validacao = data.filter(function (v) {
-      return (
-        v.nomeServico.length >= 5 &&
-        v.nomeServico.length <= 35 &&
-        v.preco.value <= 0 &&
-        v.quantidade.value >= 0 &&
-        v.quantidade.value <= 99 &&
-        v.porcentagem.value >= 0 &&
-        v.quantidade.value <= 100
-      );
-    });
+    // const validacao = data.filter(function (v) {
+    //   return (
+    //     v.nomeServico.length >= 5 &&
+    //     v.nomeServico.length <= 35 &&
+    //     v.preco.value <= 0 &&
+    //     v.quantidade.value >= 0 &&
+    //     v.quantidade.value <= 99 &&
+    //     v.porcentagem.value >= 0 &&
+    //     v.quantidade.value <= 100
+    //   );
+    // });
 
     try {
       await services.atualizarServicos(token, data, id, idObra, idEtapa);

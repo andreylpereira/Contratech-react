@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -27,9 +28,8 @@ const Relatorio = () => {
     }
   };
 
-
   const etapas = relatorioObra['etapas']
-  const lista = etapas && etapas.map((a) => {
+  const lista = etapas && etapas.sort((a,b) => a.nomeEtapa > b.nomeEtapa && 1 || -1).map((a) => {
     return (
       <tr className="bg-white">
         <th scope="row">{a.nomeEtapa}</th>
@@ -85,7 +85,6 @@ const Relatorio = () => {
       </div>
       <hr style={{ width: 250 }} />
       <p className="text-center font-weight-bold mb-5">Assinatura</p>
-      {/* <h5>id: {params.obraId}</h5> */}
     </div>
   );
 };

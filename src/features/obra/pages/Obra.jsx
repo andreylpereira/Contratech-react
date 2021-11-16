@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-anonymous-default-export */
+/* eslint-disable no-mixed-operators */
 import React, { useState, useEffect } from "react";
 import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
@@ -20,7 +21,7 @@ const Obra = () => {
   const carregarObras = async () => {
     try {
       const obras = await services.buscarObras(token, id);
-      setObras(obras);
+      setObras(obras.sort((a,b) => a.nomeObra > b.nomeObra && 1 || -1));
     } catch (error) {
       console.log(error);
     }

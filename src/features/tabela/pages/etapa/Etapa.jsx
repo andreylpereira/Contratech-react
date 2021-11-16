@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-mixed-operators */
 import React, { useState, useEffect } from "react";
 import services from "../../../../services/services";
 import Servico from "../servico/Servico";
@@ -57,9 +58,9 @@ const Etapa = (props) => {
   };
 
   const getEtapas = async () => {
-    try {
+    try { 
       const listaEtapas = await services.buscarEtapas(token, id, obraId);
-      setEtapas(listaEtapas);
+      setEtapas(listaEtapas.sort((a,b) => a.nomeEtapa > b.nomeEtapa && 1 || -1))
       console.log(listaEtapas);
       console.log(etapas);
     } catch (error) {
