@@ -1,7 +1,7 @@
 # Contratech 
 
 ### Sobre o projeto:
-- Gerenciador de obras de construção civil e de arquiteturra;
+- Gerenciador de obras de construção civil e de arquitetura;
 - Pode se criar obras e etapas especificas de cada obra;
 - Pode se determinar serviços para cada uma das etapas, como o quanto vai custar, quantidade e percentual executado;
 - Pode se gerar relatório das obras, onde será demonstrado o quanto custou e quanto foi executado em cada etapa e na obra como um todo;
