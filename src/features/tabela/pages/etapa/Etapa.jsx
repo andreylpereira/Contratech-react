@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import services from "../../../../services/services";
 import Servico from "../servico/Servico";
 import $ from "jquery";
-import Card from '../../../../components/card/Card'
+import Card from "../../../../components/card/Card";
 
 const Etapa = (props) => {
   const [etapas, setEtapas] = useState([]);
@@ -32,6 +32,7 @@ const Etapa = (props) => {
   const putEtapa = async (etapaId) => {
     const idEtapa = etapaId;
     const data = { nomeEtapa: novoNomeEtapa };
+    setMsgErrorNome("");
     try {
       if (data.nomeEtapa.length <= 35 && data.nomeEtapa.length >= 5) {
         const url = `#modalRenomearEtapa${idEtapa}`;
@@ -144,8 +145,15 @@ const Etapa = (props) => {
           </div>
         </div>
       </div>
-      {etapas.length === 0 && <div className="w-75 container-fluid p-0">
-        <Card ><p className=" pt-0 text-center font-italic font-weight-light text-muted">Nenhuma etapa cadastrada.</p></Card></div>}
+      {etapas.length === 0 && (
+        <div className="w-75 container-fluid p-0">
+          <Card>
+            <p className=" pt-0 text-center font-italic font-weight-light text-muted">
+              Nenhuma etapa cadastrada.
+            </p>
+          </Card>
+        </div>
+      )}
       {etapas.map(({ id, nomeEtapa }) => (
         <div>
           <div
@@ -156,10 +164,7 @@ const Etapa = (props) => {
               <div className="card-header" id={`heading${id}`}>
                 <h4 className="p-0 m-0">
                   <div className="row">
-                    <div
-                      className="row col-10 title text-dark font-weight-bold h3 p-0 mb-1"
-                      data-toggle="modal"
-                    >
+                    <div className="row col-10 title text-dark font-weight-bold h3 p-0 mb-1">
                       {" "}
                       <div
                         className="arrow oi oi-caret-right p-0 pl-4 pt-2"
@@ -169,7 +174,16 @@ const Etapa = (props) => {
                         aria-expanded="true"
                         aria-controls={`collapse${id}`}
                       ></div>
-                      <div className="pl-2 pt-1">{nomeEtapa}</div>
+                      <div
+                        className="pl-2 pt-1"
+                        data-toggle="modal"
+                        data-target={`#modalRenomearEtapa${id}`}
+                        onClick={() => {
+                          setMsgErrorNome("");
+                        }}
+                      >
+                        {nomeEtapa}
+                      </div>
                     </div>
                     <div
                       style={{ width: "100px" }}
@@ -235,7 +249,7 @@ const Etapa = (props) => {
                   />
                   <p
                     style={{ height: "8px" }}
-                    className="error-msg font-italic mb-0 text-danger h"
+                    className="error-msg mt-3 font-italic mb-0 text-danger h"
                   >
                     {msgErrorNome}
                   </p>
