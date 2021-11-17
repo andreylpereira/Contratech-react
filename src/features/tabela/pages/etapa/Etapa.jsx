@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import services from "../../../../services/services";
 import Servico from "../servico/Servico";
+import $ from "jquery";
 
 const Etapa = (props) => {
   const [etapas, setEtapas] = useState([]);
@@ -11,6 +12,7 @@ const Etapa = (props) => {
   const token = localStorage.getItem("token").replace(/['"]+/g, "");
   const id = JSON.parse(localStorage.getItem("id"));
   const [nomeEtapa, setNomeEtapa] = useState("");
+  const [msgErrorNome, setMsgErrorNome] = useState("");
 
   useEffect(() => {
     getEtapas();
@@ -31,11 +33,13 @@ const Etapa = (props) => {
     const data = { nomeEtapa: novoNomeEtapa };
     try {
       if (data.nomeEtapa.length <= 35 && data.nomeEtapa.length >= 5) {
+        const url = `#modalRenomearEtapa${idEtapa}`;
+        $(url).hide().click();
         await services.renomearEtapa(token, data, id, obraId, idEtapa);
         setNovoNomeEtapa("");
         getEtapas();
       } else {
-        alert("* O nome da etapa deve ter entre 5 e 35 caracteres!");
+        setMsgErrorNome("* O nome da etapa deve ter entre 5 e 35 caracteres!");
       }
     } catch (error) {
       console.log(error);
@@ -44,13 +48,16 @@ const Etapa = (props) => {
 
   const addEtapa = async () => {
     const data = { nomeEtapa: nomeEtapa };
+    setMsgErrorNome("");
     try {
       if (data.nomeEtapa.length <= 35 && data.nomeEtapa.length >= 5) {
         await services.adicionarEtapa(token, data, id, obraId);
         getEtapas();
         setNomeEtapa("");
+        const url = "#modalCriarEtapa .close";
+        $(url).click();
       } else {
-        alert("* O nome da etapa deve ter entre 5 e 35 caracteres!");
+        setMsgErrorNome("* O nome da etapa deve ter entre 5 e 35 caracteres!");
       }
     } catch (error) {
       console.log(error);
@@ -58,11 +65,11 @@ const Etapa = (props) => {
   };
 
   const getEtapas = async () => {
-    try { 
+    try {
       const listaEtapas = await services.buscarEtapas(token, id, obraId);
-      setEtapas(listaEtapas.sort((a,b) => a.nomeEtapa > b.nomeEtapa && 1 || -1))
-      console.log(listaEtapas);
-      console.log(etapas);
+      setEtapas(
+        listaEtapas.sort((a, b) => (a.nomeEtapa > b.nomeEtapa && 1) || -1)
+      );
     } catch (error) {
       console.log(error);
     }
@@ -77,6 +84,9 @@ const Etapa = (props) => {
           style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
           data-toggle="modal"
           data-target="#modalCriarEtapa"
+          onClick={() => {
+            setMsgErrorNome("");
+          }}
         >
           Nova Etapa
         </button>
@@ -106,12 +116,17 @@ const Etapa = (props) => {
                     onChange={(e) => setNomeEtapa(e.target.value)}
                   />
                 </p>
+                <p
+                  style={{ height: "8px" }}
+                  className="error-msg font-italic mb-0 text-danger h"
+                >
+                  {msgErrorNome}
+                </p>
               </div>
               <div className="modal-footer">
                 <button
                   type="button"
                   className="btn btn-dark shadow"
-                  data-dismiss="modal"
                   onClick={addEtapa}
                 >
                   Criar
@@ -161,6 +176,9 @@ const Etapa = (props) => {
                         className="oi oi-pencil p-0 pt-2 d-flex justify-content-end edit"
                         data-toggle="modal"
                         data-target={`#modalRenomearEtapa${id}`}
+                        onClick={() => {
+                          setMsgErrorNome("");
+                        }}
                       />
                       <div
                         className="oi oi-x  p-0 pt-1 ml-2 d-flex justify-content-end"
@@ -212,12 +230,17 @@ const Etapa = (props) => {
                     value={novoNomeEtapa}
                     onChange={(e) => setNovoNomeEtapa(e.target.value)}
                   />
+                  <p
+                    style={{ height: "8px" }}
+                    className="error-msg font-italic mb-0 text-danger h"
+                  >
+                    {msgErrorNome}
+                  </p>
                 </div>
                 <div className="modal-footer">
                   <button
                     type="button"
                     className="btn btn-dark shadow"
-                    data-dismiss="modal"
                     onClick={() => {
                       var etapaId = id;
                       putEtapa(etapaId);

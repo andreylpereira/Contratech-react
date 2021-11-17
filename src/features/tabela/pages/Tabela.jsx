@@ -18,25 +18,25 @@ const Tabela = () => {
   useEffect(() => {
     carregarRelatorio();
   }, []);
-  
 
   const carregarRelatorio = async () => {
     try {
       const obra = await services.relatorioObra(token, id, idObra);
       setRelatorioObra(obra);
-      console.log(relatorioObra);
     } catch (error) {
       console.log(error);
     }
   };
 
-
   return (
-    <div className="h-100" style={{ backgroundColor: 'rgba(255, 218, 106, 1)'}}>
+    <div
+      className="h-100"
+      style={{ backgroundColor: "rgba(255, 218, 106, 1)" }}
+    >
       <div>
         <Breadcrumb item="Minhas Obras" active="Etapas" router="#" />
         <br />
-        <Etapa idObra={idObra}/>
+        <Etapa idObra={idObra} />
       </div>
     </div>
   );

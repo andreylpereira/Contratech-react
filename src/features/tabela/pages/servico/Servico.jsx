@@ -2,6 +2,7 @@
 /* eslint-disable no-mixed-operators */
 import React, { useEffect, useState } from "react";
 import services from "../../../../services/services";
+import $ from "jquery";
 
 const Servico = (props) => {
   const idObra = props.idObra;
@@ -10,10 +11,15 @@ const Servico = (props) => {
   const token = localStorage.getItem("token").replace(/['"]+/g, "");
   const id = JSON.parse(localStorage.getItem("id"));
   const [servicos, setServicos] = useState([]);
+  //validações
+  const [validError, setValidError] = useState("");
+  const [validNome, setValidNome] = useState("");
+  const [validPreco, setValidPreco] = useState("");
+  const [validPorcentagem, setValidPorcentagem] = useState("");
+  const [validQuantidade, setValidQuantidade] = useState("");
 
   useEffect(() => {
     getServicos();
-    console.log(servicos);
   }, []);
 
   const getServicos = async () => {
@@ -78,21 +84,28 @@ const Servico = (props) => {
       ) {
         await services.atualizarServicos(token, data, id, idObra, idEtapa);
         getServicos();
+        const url = `#modalEditarEtapa${idEtapa}`;
+        $(url).hide().click();
       } else {
+        setValidError("ATENÇÃO!!!");
         if (validacaoNome.length !== data.length) {
-          alert("* O nome do serviço deve ter entre 5 e 35 caracteres!");
+          setValidNome(
+            " * O nome do serviço deve ter entre 5 e 35 caracteres!"
+          );
         }
 
         if (validacaoPreco.length !== data.length) {
-          alert("* O preço do serviço deve ser maior que ZERO!");
+          setValidPreco(" * O preço do serviço deve ser maior que ZERO!");
         }
 
         if (validacaoPorcentagem.length !== data.length) {
-          alert("* A porcentagem deve ser um numero inteiro entre 0 e 100!");
+          setValidPorcentagem(
+            " * A porcentagem deve ser um numero inteiro entre 0 e 100!"
+          );
         }
 
         if (validacaoQuantidade.length !== data.length) {
-          alert("* A quantidade deve ser entre 0 e 99!");
+          setValidQuantidade(" * A quantidade deve ser entre 0 e 99!");
         }
       }
     } catch (error) {
@@ -254,6 +267,13 @@ const Servico = (props) => {
           style={{ borderColor: "white" }}
           data-toggle="modal"
           data-target={`#modalEditarEtapa${idEtapa}`}
+          onClick={() => {
+            setValidError("");
+            setValidNome("");
+            setValidPreco("");
+            setValidPorcentagem("");
+            setValidQuantidade("");
+          }}
         >
           Editar Etapa
         </button>
@@ -289,13 +309,50 @@ const Servico = (props) => {
               </button>
             </div>
             <div className="modal-body">
-              <p>Têm certeza que deseja editar a Etapa: nomeEtapa?</p>
+              <p>Têm certeza que deseja editar a Etapa: {nomeEtapa}?</p>
+              <p
+                style={{ height: "10px" }}
+                className="error-msg font-italic font-bold mb-0 text-danger h mb-2"
+              >
+                {validError}
+              </p>
+              {validNome !== "" && (
+                <p
+                  style={{ height: "8px" }}
+                  className="error-msg font-italic mb-0 text-danger h mb-1"
+                >
+                  {validNome}
+                </p>
+              )}
+              {validPreco !== "" && (
+                <p
+                  style={{ height: "8px" }}
+                  className="error-msg font-italic mb-0 text-danger h mb-1"
+                >
+                  {validPreco}
+                </p>
+              )}
+              {validPorcentagem !== "" && (
+                <p
+                  style={{ height: "8px" }}
+                  className="error-msg font-italic mb-0 text-danger h mb-1"
+                >
+                  {validPorcentagem}
+                </p>
+              )}
+              {validQuantidade !== "" && (
+                <p
+                  style={{ height: "8px" }}
+                  className="error-msg font-italic mb-0 text-danger h mb-1"
+                >
+                  {validQuantidade}
+                </p>
+              )}
             </div>
             <div className="modal-footer">
               <button
                 type="button"
                 className="btn btn-dark shadow"
-                data-dismiss="modal"
                 onClick={putServicos}
               >
                 Confirmar
