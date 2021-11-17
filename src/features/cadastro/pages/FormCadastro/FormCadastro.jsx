@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import "./FormCadastro.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import validator from "validator";
 import services from "../../../../services/services";
 
@@ -18,14 +18,41 @@ const FormCadastro = () => {
   const [msgEmail, setMsgEmail] = useState("");
   const [msgSenha, setMsgSenha] = useState("");
   const [msgSenhaConfirmacao, setMsgSenhaConfirmacao] = useState("");
+  const [validLogin, setValidLogin ] = useState("");
+
+  useEffect(() => {
+    validation();
+  }, []);
+
+  const validation = async () => {
+  try {
+    const data = {
+      login: login
+    }
+    const validation = await services.verificarLogin(data);
+    if (validation !== "") {
+      setValidLogin("* Este login já está sendo utilizado por outro usuário!")
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+}
 
   const cadastrar = () => {
-    
+  
     if (cadastrar) {
+
+      if (login !== "") {
+        validation();
+      }
+
       if (login === "") {
         setMsgLogin("* Campo login em branco!");
+        setValidLogin("");
       } else if (login.length > 20 || login.length < 6) {
         setMsgLogin("* Campo login deve estar entre 6 a 20 caracteres!");
+        setValidLogin("");
       }
 
       if (nome === "") {
@@ -77,6 +104,18 @@ const FormCadastro = () => {
       } catch (error) {
         console.log(error);   
       }
+    
+      setTimeout(function () {
+
+        setMsgLogin("");
+        setValidLogin("");
+        setMsgNome("");
+        setMsgSobrenome("");
+        setMsgEmail("");
+        setMsgSenha("");
+        setMsgSenhaConfirmacao("");
+      }, 5000);
+    
     }
   };
 
@@ -109,6 +148,7 @@ const FormCadastro = () => {
             className="error-msg font-italic mb-0 text-danger h"
           >
             {msgLogin}
+            {validLogin}
           </p>
         </div>
         <div className="form-group mb-2">
