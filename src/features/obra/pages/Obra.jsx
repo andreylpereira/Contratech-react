@@ -6,6 +6,7 @@ import "./Obra.css";
 import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
 import { Link } from "react-router-dom";
 import services from "../../../services/services";
+import $ from "jquery";
 
 const Obra = () => {
   const [obras, setObras] = useState([]);
@@ -13,6 +14,8 @@ const Obra = () => {
   const id = JSON.parse(localStorage.getItem("id"));
   const [renomearObra, setRenomearObra] = useState("");
   const [novaObra, setNovaObra] = useState("");
+  const [validNova, setValidNova] = useState("");
+  const [validRenomear, setValidRenomear] = useState("");
 
   useEffect(() => {
     carregarObras();
@@ -21,7 +24,7 @@ const Obra = () => {
   const carregarObras = async () => {
     try {
       const obras = await services.buscarObras(token, id);
-      setObras(obras.sort((a,b) => a.nomeObra > b.nomeObra && 1 || -1));
+      setObras(obras.sort((a, b) => (a.nomeObra > b.nomeObra && 1) || -1));
     } catch (error) {
       console.log(error);
     }
@@ -30,12 +33,14 @@ const Obra = () => {
   const addObra = async () => {
     try {
       const data = { nomeObra: novaObra };
-      if ((data.nomeObra.length <= 35) && (data.nomeObra.length >= 5)) {
+      if (data.nomeObra.length <= 35 && data.nomeObra.length >= 5) {
         await services.adicionarObra(token, data, id);
         setNovaObra("");
         carregarObras();
+        const url = "#modalCriarObra .close";
+        $(url).click();
       } else {
-        alert("* O nome da obra deve ter entre 5 e 35 caracteres!");
+        setValidNova("* O nome da obra deve ter entre 5 e 35 caracteres!");
       }
     } catch (error) {
       console.log(error);
@@ -56,13 +61,15 @@ const Obra = () => {
     const idObra = obraId;
     const data = { nomeObra: renomearObra };
     try {
-      if ((data.nomeObra.length <= 35) && (data.nomeObra.length >= 5)) {
-      await services.renomearObra(token, data, id, idObra);
-      setRenomearObra("");
-      carregarObras();
-    } else {
-      alert("* O nome da obra deve ter entre 5 e 35 caracteres!");
-    }
+      if (data.nomeObra.length <= 35 && data.nomeObra.length >= 5) {
+        await services.renomearObra(token, data, id, idObra);
+        setRenomearObra("");
+        carregarObras();
+        const url = `#modalRenomearObra${idObra}`;
+        $(url).hide().click();
+      } else {
+        setValidRenomear("* O nome da obra deve ter entre 5 e 35 caracteres!");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -78,6 +85,9 @@ const Obra = () => {
               className="pt-2 cursor"
               data-toggle="modal"
               data-target={`#modalRenomearObra${o.id}`}
+              onClick={() => {
+                setValidRenomear("");
+              }}
             >
               {o.nomeObra}
             </div>
@@ -85,6 +95,9 @@ const Obra = () => {
               className="oi oi-pencil edit ml-1 pt-2"
               data-toggle="modal"
               data-target={`#modalRenomearObra${o.id}`}
+              onClick={() => {
+                setValidRenomear("");
+              }}
             ></div>
           </div>
         </th>
@@ -146,12 +159,17 @@ const Obra = () => {
                     onChange={(e) => setRenomearObra(e.target.value)}
                   />
                 </p>
+                <p
+                  style={{ height: "8px" }}
+                  className="text-left error-msg font-italic mb-0 text-danger h"
+                >
+                  {validRenomear}
+                </p>
               </div>
               <div className="modal-footer">
                 <button
                   type="button"
                   className="btn btn-dark shadow"
-                  data-dismiss="modal"
                   onClick={() => {
                     var id = o.id;
                     putObra(id);
@@ -222,7 +240,10 @@ const Obra = () => {
     ));
 
   return (
-    <div className="h-100" style={{ backgroundColor: 'rgba(255, 218, 106, 1)'}}>
+    <div
+      className="h-100"
+      style={{ backgroundColor: "rgba(255, 218, 106, 1)" }}
+    >
       <div className="pb-5">
         <Breadcrumb unique="Minhas obras" />
         <br />
@@ -232,6 +253,9 @@ const Obra = () => {
             className="btn btn-dark mb-2 shadow"
             data-toggle="modal"
             data-target="#modalCriarObra"
+            onClick={() => {
+              setValidNova("");
+            }}
           >
             Nova Obra
           </button>
@@ -281,12 +305,17 @@ const Obra = () => {
                   type="text"
                 />
               </p>
+              <p
+                style={{ height: "8px" }}
+                className="error-msg font-italic mb-0 text-danger h"
+              >
+                {validNova}
+              </p>
             </div>
             <div className="modal-footer">
               <button
                 type="button"
                 className="btn btn-dark shadow"
-                data-dismiss="modal"
                 onClick={addObra}
               >
                 Criar

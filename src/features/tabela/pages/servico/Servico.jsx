@@ -2,6 +2,7 @@
 /* eslint-disable no-mixed-operators */
 import React, { useEffect, useState } from "react";
 import services from "../../../../services/services";
+import $ from "jquery";
 
 const Servico = (props) => {
   const idObra = props.idObra;
@@ -10,10 +11,15 @@ const Servico = (props) => {
   const token = localStorage.getItem("token").replace(/['"]+/g, "");
   const id = JSON.parse(localStorage.getItem("id"));
   const [servicos, setServicos] = useState([]);
+  //validações
+  const [validError, setValidError] = useState("");
+  const [validNome, setValidNome] = useState("");
+  const [validPreco, setValidPreco] = useState("");
+  const [validPorcentagem, setValidPorcentagem] = useState("");
+  const [validQuantidade, setValidQuantidade] = useState("");
 
   useEffect(() => {
     getServicos();
-    console.log(servicos);
   }, []);
 
   const getServicos = async () => {
@@ -24,9 +30,9 @@ const Servico = (props) => {
         idObra,
         idEtapa
       );
-      setServicos(listaServicos.sort(
-        (a, b) => a.nomeServico > b.nomeServico && 1 || -1
-      ));
+      setServicos(
+        listaServicos.sort((a, b) => (a.nomeServico > b.nomeServico && 1) || -1)
+      );
     } catch (error) {
       console.log(error);
     }
@@ -55,21 +61,53 @@ const Servico = (props) => {
   const putServicos = async () => {
     const data = servicos;
 
-    // const validacao = data.filter(function (v) {
-    //   return (
-    //     v.nomeServico.length >= 5 &&
-    //     v.nomeServico.length <= 35 &&
-    //     v.preco.value <= 0 &&
-    //     v.quantidade.value >= 0 &&
-    //     v.quantidade.value <= 99 &&
-    //     v.porcentagem.value >= 0 &&
-    //     v.quantidade.value <= 100
-    //   );
-    // });
+    const validacaoNome = data.filter(
+      (x) => x.nomeServico.length >= 5 && x.nomeServico.length <= 35
+    );
+
+    const validacaoPreco = data.filter((x) => x.preco >= 0);
+
+    const validacaoPorcentagem = data.filter(
+      (x) => typeof x.porcentagem !== "string"
+    );
+
+    const validacaoQuantidade = data.filter(
+      (x) => x.quantidade >= 0 && x.quantidade <= 99
+    );
 
     try {
-      await services.atualizarServicos(token, data, id, idObra, idEtapa);
-      getServicos();
+      if (
+        validacaoNome.length === data.length &&
+        validacaoPreco.length === data.length &&
+        validacaoPorcentagem.length === data.length &&
+        validacaoQuantidade.length === data.length
+      ) {
+        await services.atualizarServicos(token, data, id, idObra, idEtapa);
+        getServicos();
+        const url = `#modalEditarEtapa${idEtapa}`;
+        $(url).hide().click();
+      } else {
+        setValidError("ATENÇÃO!!!");
+        if (validacaoNome.length !== data.length) {
+          setValidNome(
+            " * O nome do serviço deve ter entre 5 e 35 caracteres!"
+          );
+        }
+
+        if (validacaoPreco.length !== data.length) {
+          setValidPreco(" * O preço do serviço deve ser maior que ZERO!");
+        }
+
+        if (validacaoPorcentagem.length !== data.length) {
+          setValidPorcentagem(
+            " * A porcentagem deve ser um numero inteiro entre 0 e 100!"
+          );
+        }
+
+        if (validacaoQuantidade.length !== data.length) {
+          setValidQuantidade(" * A quantidade deve ser entre 0 e 99!");
+        }
+      }
     } catch (error) {
       console.log(error);
     }
@@ -229,6 +267,13 @@ const Servico = (props) => {
           style={{ borderColor: "white" }}
           data-toggle="modal"
           data-target={`#modalEditarEtapa${idEtapa}`}
+          onClick={() => {
+            setValidError("");
+            setValidNome("");
+            setValidPreco("");
+            setValidPorcentagem("");
+            setValidQuantidade("");
+          }}
         >
           Editar Etapa
         </button>
@@ -264,13 +309,50 @@ const Servico = (props) => {
               </button>
             </div>
             <div className="modal-body">
-              <p>Têm certeza que deseja editar a Etapa: nomeEtapa?</p>
+              <p>Têm certeza que deseja editar a Etapa: {nomeEtapa}?</p>
+              <p
+                style={{ height: "10px" }}
+                className="error-msg font-italic font-bold mb-0 text-danger h mb-2"
+              >
+                {validError}
+              </p>
+              {validNome !== "" && (
+                <p
+                  style={{ height: "8px" }}
+                  className="error-msg font-italic mb-0 text-danger h mb-1"
+                >
+                  {validNome}
+                </p>
+              )}
+              {validPreco !== "" && (
+                <p
+                  style={{ height: "8px" }}
+                  className="error-msg font-italic mb-0 text-danger h mb-1"
+                >
+                  {validPreco}
+                </p>
+              )}
+              {validPorcentagem !== "" && (
+                <p
+                  style={{ height: "8px" }}
+                  className="error-msg font-italic mb-0 text-danger h mb-1"
+                >
+                  {validPorcentagem}
+                </p>
+              )}
+              {validQuantidade !== "" && (
+                <p
+                  style={{ height: "8px" }}
+                  className="error-msg font-italic mb-0 text-danger h mb-1"
+                >
+                  {validQuantidade}
+                </p>
+              )}
             </div>
             <div className="modal-footer">
               <button
                 type="button"
                 className="btn btn-dark shadow"
-                data-dismiss="modal"
                 onClick={putServicos}
               >
                 Confirmar
