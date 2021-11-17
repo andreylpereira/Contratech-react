@@ -45,9 +45,9 @@ const FormLogin = (props) => {
       if (!authenticated) {
         setLogin("");
         setSenha("");
+        setMsgLogin("* Campo login e/ou senha inválido(s)!");
       }
     } catch (error) {
-      setMsgLogin("* Campo login e/ou senha inválido(s)!");
       console.log(error);
     }
   }
