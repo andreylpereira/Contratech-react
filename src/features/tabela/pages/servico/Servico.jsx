@@ -68,7 +68,7 @@ const Servico = (props) => {
     const validacaoPreco = data.filter((x) => x.preco >= 0);
 
     const validacaoPorcentagem = data.filter(
-      (x) => typeof x.porcentagem !== "string"
+      (x) => x.porcentagem >= 0 && x.porcentagem <= 100 && (x.porcentagem % 1 === 0)
     );
 
     const validacaoQuantidade = data.filter(

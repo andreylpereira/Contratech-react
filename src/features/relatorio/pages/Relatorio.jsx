@@ -67,6 +67,7 @@ const Relatorio = () => {
             <td className="p-0"></td>
             <td className="p-0"></td>
           </tr>
+          {!lista && <p className="font-italic font-weight-light text-muted">Não há nenhuma etapa ainda nesta obra.</p>}
           {lista}
         </tbody>
       </table>
@@ -84,7 +85,7 @@ const Relatorio = () => {
         </div>
       </div>
       <hr style={{ width: 250 }} />
-      <p className="text-center font-weight-bold mb-5">Assinatura</p>
+      <p className="text-center font-weight-bold mb-5 pb-2">Assinatura</p>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import services from "../../../../services/services";
 import Servico from "../servico/Servico";
 import $ from "jquery";
+import Card from '../../../../components/card/Card'
 
 const Etapa = (props) => {
   const [etapas, setEtapas] = useState([]);
@@ -143,6 +144,8 @@ const Etapa = (props) => {
           </div>
         </div>
       </div>
+      {etapas.length === 0 && <div className="w-75 container-fluid p-0">
+        <Card ><p className=" pt-0 text-center font-italic font-weight-light text-muted">Nenhuma etapa cadastrada.</p></Card></div>}
       {etapas.map(({ id, nomeEtapa }) => (
         <div>
           <div

@@ -3,6 +3,7 @@ import "./FormCadastro.css";
 import React, { useState, useEffect } from "react";
 import validator from "validator";
 import services from "../../../../services/services";
+import { useNavigate } from "react-router-dom";
 
 const FormCadastro = () => {
   const [login, setLogin] = useState("");
@@ -18,33 +19,40 @@ const FormCadastro = () => {
   const [msgEmail, setMsgEmail] = useState("");
   const [msgSenha, setMsgSenha] = useState("");
   const [msgSenhaConfirmacao, setMsgSenhaConfirmacao] = useState("");
-  const [validLogin, setValidLogin ] = useState("");
+  const [validLogin, setValidLogin] = useState("");
 
   useEffect(() => {
     validation();
   }, []);
 
-  const validation = async () => {
-  try {
-    const data = {
-      login: login
-    }
-    const validation = await services.verificarLogin(data);
-    if (validation !== "") {
-      setValidLogin("* Este login já está sendo utilizado por outro usuário!")
-    }
+  const navigate = useNavigate();
+  const goToLogin = () => {
+    navigate("/login");
+  };
 
-  } catch (error) {
-    console.log(error);
-  }
-}
+  const validation = async () => {
+    try {
+      const data = {
+        login: login,
+      };
+      const validation = await services.verificarLogin(data);
+      setValidLogin(validation)
+      
+      if (validation !== "") {
+        setValidLogin(
+          "* Este login já está sendo utilizado por outro usuário!"
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const cadastrar = () => {
-  
     if (cadastrar) {
-
       if (login !== "") {
         validation();
+        
       }
 
       if (login === "") {
@@ -68,9 +76,9 @@ const FormCadastro = () => {
       }
 
       if (email.length > 0) {
-          if (!validator.isEmail(email)) {
-            setMsgEmail("* Digite um e-mail válido!");
-          }
+        if (!validator.isEmail(email)) {
+          setMsgEmail("* Digite um e-mail válido!");
+        }
       } else {
         setMsgEmail("* Campo email em branco!");
       }
@@ -84,29 +92,19 @@ const FormCadastro = () => {
       if (senhaConfirmacao === "") {
         setMsgSenhaConfirmacao("* Campo senha em branco!");
       } else if (senhaConfirmacao.length > 10 || senhaConfirmacao.length < 6) {
-        setMsgSenhaConfirmacao("* Campo senha deve estar entre 6 a 10 caracteres!");
+        setMsgSenhaConfirmacao(
+          "* Campo senha deve estar entre 6 a 10 caracteres!"
+        );
       }
 
       if (senha !== senhaConfirmacao) {
         setMsgSenha("* Campo senha e confirme sua senha não são iguais!");
-        setMsgSenhaConfirmacao("* Campo senha e confirme sua senha não são iguais!");
+        setMsgSenhaConfirmacao(
+          "* Campo senha e confirme sua senha não são iguais!"
+        );
       }
 
-      try {
-        const data = {
-          login: login,
-          nome: nome,
-          sobrenome: sobrenome,
-          email: email,
-          senha: senha,
-        };
-        services.cadastrar(data); 
-      } catch (error) {
-        console.log(error);   
-      }
-    
       setTimeout(function () {
-
         setMsgLogin("");
         setValidLogin("");
         setMsgNome("");
@@ -115,8 +113,26 @@ const FormCadastro = () => {
         setMsgSenha("");
         setMsgSenhaConfirmacao("");
       }, 5000);
-    
     }
+
+    if((login !== "") && (login.length <= 20 || login.length >= 6) && (validator.isEmail(email)) && (senha.length <= 10 || senha.length >= 6) && (senhaConfirmacao.length <= 10 || senhaConfirmacao.length >= 6) && (senha === senhaConfirmacao)) {
+      console.log("entrou");
+      const data = {
+        login: login,
+        nome: nome,
+        sobrenome: sobrenome,
+        email: email,
+        senha: senha,
+      };
+      try {
+          services.cadastrar(data); 
+          goToLogin();
+       
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  
   };
 
   return (
