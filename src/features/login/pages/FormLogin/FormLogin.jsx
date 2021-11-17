@@ -43,12 +43,12 @@ const FormLogin = (props) => {
     try {
       handleLogin(login, senha);
       if (!authenticated) {
-        setMsgLogin("* Campo login e/ou senha inválido(s)!");
         setLogin("");
         setSenha("");
       }
     } catch (error) {
-      console.log(error)
+      setMsgLogin("* Campo login e/ou senha inválido(s)!");
+      console.log(error);
     }
   }
 

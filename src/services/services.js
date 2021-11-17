@@ -5,13 +5,13 @@ class Services {
         api.post('/cadastro', data)
     }
 
-    // verificarLogin(data) {
-    //     return api.get('/cadastro/verificacao', data)
-    //     .then(response => response.data)
-    //     .catch(erro => {
-    //         throw erro;
-    //     })
-    // }
+    verificarLogin(data) {
+        return api.post('/cadastro/verificacao', data)
+        .then(response => response.data)
+        .catch(erro => {
+            throw erro;
+        })
+    }
 
     buscarObras(token, id) {
 
