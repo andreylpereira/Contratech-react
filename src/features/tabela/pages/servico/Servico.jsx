@@ -17,6 +17,7 @@ const Servico = (props) => {
   const [validPreco, setValidPreco] = useState("");
   const [validPorcentagem, setValidPorcentagem] = useState("");
   const [validQuantidade, setValidQuantidade] = useState("");
+  const [msgSucess, setMsgSucess] = useState("");
 
   useEffect(() => {
     getServicos();
@@ -37,6 +38,7 @@ const Servico = (props) => {
       console.log(error);
     }
   };
+
 
   const addServico = async () => {
     try {
@@ -68,7 +70,8 @@ const Servico = (props) => {
     const validacaoPreco = data.filter((x) => x.preco >= 0);
 
     const validacaoPorcentagem = data.filter(
-      (x) => x.porcentagem >= 0 && x.porcentagem <= 100 && (x.porcentagem % 1 === 0)
+      (x) =>
+        x.porcentagem >= 0 && x.porcentagem <= 100 && x.porcentagem % 1 === 0
     );
 
     const validacaoQuantidade = data.filter(
@@ -85,6 +88,7 @@ const Servico = (props) => {
         await services.atualizarServicos(token, data, id, idObra, idEtapa);
         getServicos();
         const url = `#modalEditarEtapa${idEtapa}`;
+        successMsg();
         $(url).hide().click();
       } else {
         setValidError("ATENÇÃO!!!");
@@ -113,6 +117,13 @@ const Servico = (props) => {
     }
   };
 
+  function successMsg() {
+    setMsgSucess("Seus serviços foram atualizados com sucesso!!!")
+    setTimeout(() => {
+      setMsgSucess("");
+    }, 3000);
+  }
+  
   const handleChangeInput = (id, event) => {
     const values = [...servicos];
     values[id][event.target.name] = event.target.value;
@@ -261,6 +272,12 @@ const Servico = (props) => {
         </tbody>
       </table>
       <div className="container-fluid mb-2">
+        <p
+          style={{ height: "8px" }}
+          className="error-msg font-italic mb-0 text-center h mb-1 text-success"
+        >
+          {msgSucess}
+        </p>
         <button
           type="submit"
           className="btn btn-dark m-2 ml-1 shadow"
