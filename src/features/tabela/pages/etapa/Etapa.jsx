@@ -40,6 +40,7 @@ const Etapa = (props) => {
         await services.renomearEtapa(token, data, id, obraId, idEtapa);
         setNovoNomeEtapa("");
         getEtapas();
+        reload(); //verificar
       } else {
         setMsgErrorNome("* O nome da etapa deve ter entre 5 e 35 caracteres!");
       }
@@ -58,7 +59,7 @@ const Etapa = (props) => {
         setNomeEtapa("");
         const url = "#modalCriarEtapa .close";
         $(url).click();
-        reload();
+        reload(); //verificar
       } else {
         setMsgErrorNome("* O nome da etapa deve ter entre 5 e 35 caracteres!");
       }
@@ -77,11 +78,9 @@ const Etapa = (props) => {
       setEtapas(
         listaEtapas.sort((a, b) => (a.nomeEtapa > b.nomeEtapa && 1) || -1)
       );
-      
     } catch (error) {
       console.log(error);
     }
-    
   };
 
   return (
