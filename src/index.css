@@ -41,3 +41,7 @@ select:focus {
   outline-color: rgb(190, 190, 190) !important;
   border-color: #e2e2e2;
 }
+
+.error-msg {
+  font-size:  0.75rem;
+}

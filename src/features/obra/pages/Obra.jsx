@@ -276,7 +276,11 @@ const Obra = () => {
                 <th></th>
               </tr>
             </thead>
-            {obras.length === 0 && <p className="pt-4 text-center font-italic font-weight-light text-muted">Nenhuma obra cadastrada.</p>}
+            {obras.length === 0 && (
+              <p className="pt-4 text-center font-italic font-weight-light text-muted">
+                Nenhuma obra cadastrada.
+              </p>
+            )}
             {obras && <tbody>{lista}</tbody>}
           </table>
         </div>

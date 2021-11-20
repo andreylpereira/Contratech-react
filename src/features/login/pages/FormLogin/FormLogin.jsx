@@ -11,6 +11,18 @@ const FormLogin = (props) => {
   const [msgLogin, setMsgLogin] = useState("");
 
   async function entrar() {
+    if (login === "" && senha === "") {
+      setMsgLogin("* Campos login e senha estão vazios!");
+    }
+
+    if (login === "") {
+      setMsgLogin("* Campo login está vazio!");
+    }
+
+    if (senha === "") {
+      setMsgLogin("* Campos senha está vazio!");
+    }
+
     if (login.length < 6 || login.length > 20) {
       setMsgLogin("* Campo login deve ter entre 6 a 20 caracteres.");
       setLogin("");
@@ -40,15 +52,29 @@ const FormLogin = (props) => {
         setMsgLogin("");
       }, 3000);
     }
-    try {
-      handleLogin(login, senha);
-      if (!authenticated) {
-        setLogin("");
-        setSenha("");
+
+    if (
+      login.length >= 6 &&
+      login.length <= 20 &&
+      senha.length >= 6 &&
+      senha.length <= 10
+    ) {
+      try {
+        handleLogin(login, senha);
+        if (!authenticated) {
+          setLogin("");
+          setSenha("");
+          setTimeout(() => {
+            setMsgLogin("* Campo login e/ou senha inválido(s)!");
+          }, 1000);
+
+          setTimeout(() => {
+            setMsgLogin("");
+          }, 4000);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      setMsgLogin("* Campo login e/ou senha inválido(s)!");
-      console.log(error);
     }
   }
 
