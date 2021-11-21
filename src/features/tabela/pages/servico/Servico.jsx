@@ -39,7 +39,6 @@ const Servico = (props) => {
     }
   };
 
-
   const addServico = async () => {
     try {
       await services.adicionarServico(token, id, idObra, idEtapa);
@@ -56,6 +55,16 @@ const Servico = (props) => {
       getServicos();
     } catch (error) {
       setServicos([]);
+      console.log(error);
+    }
+  };
+
+  const delServicos = async () => {
+    try {
+      await services.excluirServicos(token, id, idObra, idEtapa);
+      getServicos();
+      reload();
+    } catch (error) {
       console.log(error);
     }
   };
@@ -118,12 +127,16 @@ const Servico = (props) => {
   };
 
   function successMsg() {
-    setMsgSucess("Seus serviços foram atualizados com sucesso!!!")
+    setMsgSucess("Seus serviços foram atualizados com sucesso!!!");
     setTimeout(() => {
       setMsgSucess("");
     }, 3000);
   }
-  
+
+  const reload = () => {
+    document.location.reload(true);
+  };
+
   const handleChangeInput = (id, event) => {
     const values = [...servicos];
     values[id][event.target.name] = event.target.value;
@@ -267,7 +280,13 @@ const Servico = (props) => {
             <td className="p-0"></td>
             <td className="p-0"></td>
             <td className="p-0"></td>
-            <td className="p-0"></td>
+            <td
+              className="text-center addServico pl-0 pr-0"
+              data-toggle="modal"
+              data-target={`#modalDeletarServicos${idEtapa}`}
+            >
+              Excluir Todos
+            </td>
           </tr>
         </tbody>
       </table>
@@ -292,20 +311,66 @@ const Servico = (props) => {
             setValidQuantidade("");
           }}
         >
-          Editar Etapa
+          Salvar
         </button>
-        {/* <button
+        <button
           type="button"
           className="btn btn-danger shadow ml-1"
           style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
           data-toggle="modal"
-          data-target={`#modalExcluirEtapa${1}`}
+          data-target={`#modalDeletarServicos${idEtapa}`}
         >
-          Excluir Etapa
-        </button> */}
+          Excluir
+        </button>
+      </div>
+      {/* modal para deletar serviço */}
+      <div
+        className="modal"
+        id={`modalDeletarServicos${idEtapa}`}
+        tabindex="-1"
+        role="dialog"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Deletar serviços:</h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>Você deseja deletar todos os serviços da {nomeEtapa}?</p>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-danger shadow"
+                data-dismiss="modal"
+                onClick={() => {
+                  const id = idEtapa;
+                  delServicos(id);
+                }}
+              >
+                Deletar
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-danger shadow"
+                data-dismiss="modal"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* modal para editar etapa */}
+      {/* modal para salvar serviços */}
       <div
         className="modal"
         id={`modalEditarEtapa${idEtapa}`}
@@ -326,7 +391,9 @@ const Servico = (props) => {
               </button>
             </div>
             <div className="modal-body">
-              <p>Têm certeza que deseja editar a Etapa: {nomeEtapa}?</p>
+              <p>
+                Têm certeza que deseja salvar os serviços da Etapa: {nomeEtapa}?
+              </p>
               <p
                 style={{ height: "10px" }}
                 className="error-msg font-italic font-bold mb-0 text-danger h mb-2"
