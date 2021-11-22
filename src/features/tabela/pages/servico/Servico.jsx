@@ -280,13 +280,16 @@ const Servico = (props) => {
             <td className="p-0"></td>
             <td className="p-0"></td>
             <td className="p-0"></td>
+            {!(servicos.length !== 0) &&
+            <td className="p-0"></td>}
+            {(servicos.length !== 0) &&
             <td
               className="text-center addServico pl-0 pr-0"
               data-toggle="modal"
               data-target={`#modalDeletarServicos${idEtapa}`}
             >
               Excluir Todos
-            </td>
+            </td>}
           </tr>
         </tbody>
       </table>
@@ -313,7 +316,7 @@ const Servico = (props) => {
         >
           Salvar
         </button>
-        <button
+        {/* <button
           type="button"
           className="btn btn-danger shadow ml-1"
           style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
@@ -321,7 +324,7 @@ const Servico = (props) => {
           data-target={`#modalDeletarServicos${idEtapa}`}
         >
           Excluir
-        </button>
+        </button> */}
       </div>
       {/* modal para deletar serviço */}
       <div
