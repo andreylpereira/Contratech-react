@@ -17,7 +17,7 @@ const Servico = (props) => {
   const [validPreco, setValidPreco] = useState("");
   const [validPorcentagem, setValidPorcentagem] = useState("");
   const [validQuantidade, setValidQuantidade] = useState("");
-  const [msgSucess, setMsgSucess] = useState("");
+  const [msgSuccess, setMsgSuccess] = useState("");
 
   useEffect(() => {
     getServicos();
@@ -127,9 +127,9 @@ const Servico = (props) => {
   };
 
   function successMsg() {
-    setMsgSucess("Seus serviços foram atualizados com sucesso!!!");
+    setMsgSuccess("Seus serviços foram atualizados com sucesso!!!");
     setTimeout(() => {
-      setMsgSucess("");
+      setMsgSuccess("");
     }, 3000);
   }
 
@@ -298,7 +298,7 @@ const Servico = (props) => {
           style={{ height: "8px" }}
           className="error-msg font-italic mb-0 text-center h mb-1 text-success"
         >
-          {msgSucess}
+          {msgSuccess}
         </p>
         <button
           type="submit"

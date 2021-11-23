@@ -20,6 +20,7 @@ const FormCadastro = () => {
   const [msgSenha, setMsgSenha] = useState("");
   const [msgSenhaConfirmacao, setMsgSenhaConfirmacao] = useState("");
   const [validLogin, setValidLogin] = useState("");
+  const [msgSuccess, setMsgSuccess] = useState("");
 
   useEffect(() => {
     validation();
@@ -125,8 +126,12 @@ const FormCadastro = () => {
         senha: senha,
       };
       try {
-          services.cadastrar(data); 
-          goToLogin();
+          services.cadastrar(data);
+          setMsgSuccess("Usuário Cadastrado com sucesso!")
+          setTimeout(() => {
+            setMsgSuccess("");
+            goToLogin();
+          }, 2500);
        
       } catch (error) {
         console.log(error);
@@ -324,6 +329,12 @@ const FormCadastro = () => {
         </div>
 
         <br />
+        <p
+          style={{ height: "8px" }}
+          className="error-msg font-italic mb-0 text-center h mb-1 text-success"
+        >
+          {msgSuccess}
+        </p>
         <button
           type="submit"
           className="btn btn-dark mb-2 shadow"
