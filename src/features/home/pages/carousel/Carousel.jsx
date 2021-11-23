@@ -34,7 +34,6 @@ export default () => {
                 className="d-flex mx-auto cover"
               />
             </div>
-            {/* <!-- width: 375px e height="264px--> */}
             <div className="carousel-caption d-none d-md-block d-xl-block d-lg-block d">
               <h5 className="text-dark font-weight-bold">Cadastre-se !</h5>
               <p className="subtitle p-1">
@@ -66,7 +65,6 @@ export default () => {
               alt="Third slide"
               className="d-block mx-auto cover"
             />
-            {/* <!-- className="d-block mx-auto" --> */}
             <div className="carousel-caption d-none d-md-block">
               <h5 className="text-dark font-weight-bold">
                 Imprima o relatório de sua obra !

@@ -143,6 +143,18 @@ class Services {
             })
     }
 
+    excluirServicos(token, id, idObra, idEtapa) {
+        return api.delete(`/usuarios/${id}/obras/${idObra}/etapas/${idEtapa}/servicos/`, {
+            headers: {
+                Authorization: `Bearer ${token.replace(/['"]+/g, "")}`
+            }
+        })
+            .then(response => response.data)
+            .catch(erro => {
+                throw erro;
+            })
+    }
+
     atualizarServicos(token, data, id, idObra, idEtapa) {
         return api.put(`/usuarios/${id}/obras/${idObra}/etapas/${idEtapa}/servicos/atualizar`, data, {
             headers: {

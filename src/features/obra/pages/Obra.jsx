@@ -118,8 +118,7 @@ const Obra = () => {
             >
               Excluir
             </button>
-
-            <Link
+              <Link
               target="_blank"
               style={{ borderColor: "rgba(0, 0, 0, 0.200)" }}
               className="btn btn-light m-1 shadow"
@@ -127,6 +126,7 @@ const Obra = () => {
             >
               Relatório
             </Link>
+            
           </div>
         </td>
         {/* modal para renomear obra */}
