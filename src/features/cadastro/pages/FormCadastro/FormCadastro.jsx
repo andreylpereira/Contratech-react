@@ -116,7 +116,7 @@ const FormCadastro = () => {
       }, 5000);
     }
 
-    if((login !== "") && (login.length <= 20 || login.length >= 6) && (validator.isEmail(email)) && (senha.length <= 10 || senha.length >= 6) && (senhaConfirmacao.length <= 10 || senhaConfirmacao.length >= 6) && (senha === senhaConfirmacao)) {
+    if((login !== "") && (login.length <= 20 || login.length >= 6) && (validator.isEmail(email)) && (senha.length <= 10 || senha.length >= 6) && (senhaConfirmacao.length <= 10 && senhaConfirmacao.length >= 6) && (senha === senhaConfirmacao)) {
       console.log("entrou");
       const data = {
         login: login,

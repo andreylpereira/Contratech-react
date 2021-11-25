@@ -13,7 +13,7 @@ const Header = (props) => {
   return (
     <>
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow" id="nav-bar">
           <div className="navbar-brand">
             <img id="efeito" src={Logo} width="30" height="30" alt="" />
           </div>

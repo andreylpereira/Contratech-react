@@ -14,6 +14,7 @@ const Relatorio = () => {
   console.log(params);
 
   useEffect(() => {
+   document.getElementById('nav-bar').style.display = "none";
     carregarRelatorio();
     return () => console.log("Fim");
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,7 +86,8 @@ const Relatorio = () => {
         </div>
       </div>
       <hr style={{ width: 250 }} />
-      <p className="text-center font-weight-bold mb-5 pb-2">Assinatura</p>
+      <p className="text-center font-weight-bold mb-5 pb-4">Assinatura</p>
+      <p className="pb-3"></p>
     </div>
   );
 };
