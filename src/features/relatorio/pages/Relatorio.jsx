@@ -87,7 +87,7 @@ const Relatorio = () => {
       </div>
       <hr style={{ width: 250 }} />
       <p className="text-center font-weight-bold mb-5 pb-4">Assinatura</p>
-      <p className="pb-3"></p>
+      <p className="pb-4"></p>
     </div>
   );
 };
