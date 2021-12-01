@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import services from "../../../../services/services";
 import $ from "jquery";
+import { mensagemSucesso, mensagemErro } from "../../../../components/toastr/toastr";
 
 const Servico = (props) => {
   const idObra = props.idObra;
@@ -17,7 +18,6 @@ const Servico = (props) => {
   const [validPreco, setValidPreco] = useState("");
   const [validPorcentagem, setValidPorcentagem] = useState("");
   const [validQuantidade, setValidQuantidade] = useState("");
-  const [msgSuccess, setMsgSuccess] = useState("");
 
   useEffect(() => {
     getServicos();
@@ -43,7 +43,9 @@ const Servico = (props) => {
     try {
       await services.adicionarServico(token, id, idObra, idEtapa);
       getServicos();
+      mensagemSucesso("Serviço adicionado com sucesso!!!");
     } catch (error) {
+      mensagemErro("Não foi possível adicionar um novo serviço!");
       console.log(error);
     }
   };
@@ -53,7 +55,9 @@ const Servico = (props) => {
     try {
       await services.excluirServico(token, id, idObra, idEtapa, idServico);
       getServicos();
+      mensagemSucesso("Serviço excluído com sucesso!!!");
     } catch (error) {
+      mensagemErro("Não foi possível deletar o serviço!");
       setServicos([]);
       console.log(error);
     }
@@ -63,8 +67,12 @@ const Servico = (props) => {
     try {
       await services.excluirServicos(token, id, idObra, idEtapa);
       getServicos();
-      reload();
+      mensagemSucesso("Serviços excluídos com sucesso!!!");
+      setInterval(() => {
+        reload();
+      }, 3000);
     } catch (error) {
+      mensagemErro("Não foi possível excluir todos os serviços!!!");
       console.log(error);
     }
   };
@@ -97,9 +105,10 @@ const Servico = (props) => {
         await services.atualizarServicos(token, data, id, idObra, idEtapa);
         getServicos();
         const url = `#modalEditarEtapa${idEtapa}`;
-        successMsg();
+        mensagemSucesso("Serviços salvos com sucesso!!!");
         $(url).hide().click();
       } else {
+        mensagemErro("Não foi possível salvar os Serviços!!!");
         setValidError("ATENÇÃO!!!");
         if (validacaoNome.length !== data.length) {
           setValidNome(
@@ -125,13 +134,6 @@ const Servico = (props) => {
       console.log(error);
     }
   };
-
-  function successMsg() {
-    setMsgSuccess("Seus serviços foram atualizados com sucesso!!!");
-    setTimeout(() => {
-      setMsgSuccess("");
-    }, 3000);
-  }
 
   const reload = () => {
     document.location.reload(true);
@@ -280,26 +282,20 @@ const Servico = (props) => {
             <td className="p-0"></td>
             <td className="p-0"></td>
             <td className="p-0"></td>
-            {!(servicos.length !== 0) &&
-            <td className="p-0"></td>}
-            {(servicos.length !== 0) &&
-            <td
-              className="text-center addServico pl-0 pr-0"
-              data-toggle="modal"
-              data-target={`#modalDeletarServicos${idEtapa}`}
-            >
-              Excluir Todos
-            </td>}
+            {!(servicos.length !== 0) && <td className="p-0"></td>}
+            {servicos.length !== 0 && (
+              <td
+                className="text-center addServico pl-0 pr-0"
+                data-toggle="modal"
+                data-target={`#modalDeletarServicos${idEtapa}`}
+              >
+                Excluir Todos
+              </td>
+            )}
           </tr>
         </tbody>
       </table>
       <div className="container-fluid mb-2">
-        <p
-          style={{ height: "8px" }}
-          className="error-msg font-italic mb-0 text-center h mb-1 text-success"
-        >
-          {msgSuccess}
-        </p>
         <button
           type="submit"
           className="btn btn-dark m-2 ml-1 shadow"

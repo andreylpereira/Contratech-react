@@ -4,6 +4,10 @@ import React, { useState, useEffect } from "react";
 import validator from "validator";
 import services from "../../../../services/services";
 import { useNavigate } from "react-router-dom";
+import {
+  mensagemSucesso,
+  mensagemErro,
+} from "../../../../components/toastr/toastr";
 
 const FormCadastro = () => {
   const [login, setLogin] = useState("");
@@ -20,7 +24,6 @@ const FormCadastro = () => {
   const [msgSenha, setMsgSenha] = useState("");
   const [msgSenhaConfirmacao, setMsgSenhaConfirmacao] = useState("");
   const [validLogin, setValidLogin] = useState("");
-  const [msgSuccess, setMsgSuccess] = useState("");
 
   useEffect(() => {
     validation();
@@ -37,12 +40,13 @@ const FormCadastro = () => {
         login: login,
       };
       const validation = await services.verificarLogin(data);
-      setValidLogin(validation)
-      
+      setValidLogin(validation);
+
       if (validation !== "") {
         setValidLogin(
           "* Este login já está sendo utilizado por outro usuário!"
         );
+        mensagemErro("Não é possível efetuar o cadastro!!!");
       }
     } catch (error) {
       console.log(error);
@@ -53,49 +57,60 @@ const FormCadastro = () => {
     if (cadastrar) {
       if (login !== "") {
         validation();
-        
       }
 
       if (login === "") {
         setMsgLogin("* Campo login em branco!");
         setValidLogin("");
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       } else if (login.length > 20 || login.length < 6) {
         setMsgLogin("* Campo login deve estar entre 6 a 20 caracteres!");
         setValidLogin("");
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       }
 
       if (nome === "") {
         setMsgNome("* Campo nome em branco!");
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       } else if (nome.length > 30) {
         setMsgNome("* Campo nome deve ter no maximo 30 caracteres!");
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       }
 
       if (sobrenome === "") {
         setMsgSobrenome("* Campo sobrenome em branco!");
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       } else if (sobrenome.length > 30) {
         setMsgSobrenome("* Campo sobrenome deve ter no maximo 30 caracteres!");
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       }
 
       if (email.length > 0) {
         if (!validator.isEmail(email)) {
           setMsgEmail("* Digite um e-mail válido!");
+          mensagemErro("Não foi possível efetuar o cadastro!!!");
         }
       } else {
         setMsgEmail("* Campo email em branco!");
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       }
 
       if (senha === "") {
         setMsgSenha("* Campo senha em branco!");
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       } else if (senha.length > 10 || senha.length < 6) {
         setMsgSenha("* Campo senha deve estar entre 6 a 10 caracteres!");
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       }
 
       if (senhaConfirmacao === "") {
         setMsgSenhaConfirmacao("* Campo senha em branco!");
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       } else if (senhaConfirmacao.length > 10 || senhaConfirmacao.length < 6) {
         setMsgSenhaConfirmacao(
           "* Campo senha deve estar entre 6 a 10 caracteres!"
         );
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       }
 
       if (senha !== senhaConfirmacao) {
@@ -103,8 +118,9 @@ const FormCadastro = () => {
         setMsgSenhaConfirmacao(
           "* Campo senha e confirme sua senha não são iguais!"
         );
+        mensagemErro("Não foi possível efetuar o cadastro!!!");
       }
-
+      
       setTimeout(function () {
         setMsgLogin("");
         setValidLogin("");
@@ -114,10 +130,17 @@ const FormCadastro = () => {
         setMsgSenha("");
         setMsgSenhaConfirmacao("");
       }, 5000);
-    }
+    } 
 
-    if((login !== "") && (login.length <= 20 || login.length >= 6) && (validator.isEmail(email)) && (senha.length <= 10 || senha.length >= 6) && (senhaConfirmacao.length <= 10 && senhaConfirmacao.length >= 6) && (senha === senhaConfirmacao)) {
-      console.log("entrou");
+    if (
+      login !== "" &&
+      (login.length <= 20 || login.length >= 6) &&
+      validator.isEmail(email) &&
+      (senha.length <= 10 || senha.length >= 6) &&
+      (senhaConfirmacao.length <= 10 &&
+      senhaConfirmacao.length >= 6) &&
+      senha === senhaConfirmacao
+    ) {
       const data = {
         login: login,
         nome: nome,
@@ -126,18 +149,16 @@ const FormCadastro = () => {
         senha: senha,
       };
       try {
-          services.cadastrar(data);
-          setMsgSuccess("Usuário Cadastrado com sucesso!")
-          setTimeout(() => {
-            setMsgSuccess("");
-            goToLogin();
-          }, 2500);
-       
+        services.cadastrar(data);
+        mensagemSucesso("Cadastro efetuado com sucesso!!!");
+        setTimeout(() => {
+          goToLogin();
+        }, 2500);
       } catch (error) {
         console.log(error);
       }
+      
     }
-  
   };
 
   return (
@@ -329,12 +350,6 @@ const FormCadastro = () => {
         </div>
 
         <br />
-        <p
-          style={{ height: "8px" }}
-          className="error-msg font-italic mb-0 text-center h mb-1 text-success"
-        >
-          {msgSuccess}
-        </p>
         <button
           type="submit"
           className="btn btn-dark mb-2 shadow"
