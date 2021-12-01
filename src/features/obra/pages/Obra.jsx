@@ -7,6 +7,7 @@ import Breadcrumb from "../../../components/breadcrumb/Breadcrumb";
 import { Link } from "react-router-dom";
 import services from "../../../services/services";
 import $ from "jquery";
+import { mensagemSucesso, mensagemErro } from "../../../components/toastr/toastr";
 
 const Obra = () => {
   const [obras, setObras] = useState([]);
@@ -37,10 +38,12 @@ const Obra = () => {
         await services.adicionarObra(token, data, id);
         setNovaObra("");
         carregarObras();
+        mensagemSucesso("Obra criada com sucesso!!!");
         const url = "#modalCriarObra .close";
         $(url).click();
       } else {
         setValidNova("* O nome da obra deve ter entre 5 e 35 caracteres!");
+        mensagemErro("Não foi possível criar uma nova Obra!!!");
       }
     } catch (error) {
       console.log(error);
@@ -52,8 +55,10 @@ const Obra = () => {
     try {
       await services.excluirObra(token, id, idObra);
       carregarObras();
+      mensagemSucesso("Obra deletada com sucesso!!!");
     } catch (error) {
       console.log(error);
+      mensagemErro("Não foi possível deletar a Obra!!!");
     }
   };
 
@@ -65,10 +70,12 @@ const Obra = () => {
         await services.renomearObra(token, data, id, idObra);
         setRenomearObra("");
         carregarObras();
+        mensagemSucesso("Obra renomeada com sucesso!!!");
         const url = `#modalRenomearObra${idObra}`;
         $(url).hide().click();
       } else {
         setValidRenomear("* O nome da obra deve ter entre 5 e 35 caracteres!");
+        mensagemErro("Não foi possível renomear a Obra!!!");
       }
     } catch (error) {
       console.log(error);

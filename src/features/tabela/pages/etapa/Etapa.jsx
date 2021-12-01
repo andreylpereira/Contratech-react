@@ -5,6 +5,7 @@ import services from "../../../../services/services";
 import Servico from "../servico/Servico";
 import $ from "jquery";
 import Card from "../../../../components/card/Card";
+import { mensagemSucesso, mensagemErro } from "../../../../components/toastr/toastr";
 
 const Etapa = (props) => {
   const [etapas, setEtapas] = useState([]);
@@ -24,7 +25,9 @@ const Etapa = (props) => {
     try {
       await services.excluirEtapa(token, id, obraId, idEtapa);
       getEtapas();
+      mensagemSucesso("Etapa deletada com sucesso!!!");
     } catch (error) {
+      mensagemErro("Não foi possível deletar a Etapa!!!");
       console.log(error);
     }
   };
@@ -40,9 +43,14 @@ const Etapa = (props) => {
         await services.renomearEtapa(token, data, id, obraId, idEtapa);
         setNovoNomeEtapa("");
         getEtapas();
-        reload(); //verificar
+        mensagemSucesso("Etapa renomeada com sucesso!!!");
+        setInterval(() => {
+          reload();
+        }, 3000);
+        //verificar
       } else {
         setMsgErrorNome("* O nome da etapa deve ter entre 5 e 35 caracteres!");
+        mensagemErro("Não foi possível renomear a Etapa!!!");
       }
     } catch (error) {
       console.log(error);
@@ -59,9 +67,14 @@ const Etapa = (props) => {
         setNomeEtapa("");
         const url = "#modalCriarEtapa .close";
         $(url).click();
-        reload(); //verificar
+        mensagemSucesso("Etapa criada com sucesso!!!");
+        setInterval(() => {
+          reload();
+        }, 3000);
+         //verificar
       } else {
         setMsgErrorNome("* O nome da etapa deve ter entre 5 e 35 caracteres!");
+        mensagemErro("Não foi possível criar a Etapa!!!");
       }
     } catch (error) {
       console.log(error);
