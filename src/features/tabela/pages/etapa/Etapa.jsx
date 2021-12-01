@@ -46,7 +46,7 @@ const Etapa = (props) => {
         mensagemSucesso("Etapa renomeada com sucesso!!!");
         setInterval(() => {
           reload();
-        }, 3000);
+        }, 1000);
         //verificar
       } else {
         setMsgErrorNome("* O nome da etapa deve ter entre 5 e 35 caracteres!");
@@ -70,7 +70,7 @@ const Etapa = (props) => {
         mensagemSucesso("Etapa criada com sucesso!!!");
         setInterval(() => {
           reload();
-        }, 3000);
+        }, 1000);
          //verificar
       } else {
         setMsgErrorNome("* O nome da etapa deve ter entre 5 e 35 caracteres!");

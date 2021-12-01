@@ -2,7 +2,7 @@ import "./FormLogin.css";
 import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Context } from "../../../../context/AuthContext";
-import { mensagemErro } from "../../../../components/toastr/toastr";
+import { mensagemSucesso, mensagemErro } from "../../../../components/toastr/toastr";
 
 const FormLogin = (props) => {
   const { authenticated, handleLogin } = useContext(Context);
@@ -75,12 +75,12 @@ const FormLogin = (props) => {
               setSenha("");
               setTimeout(() => {
                 setMsgLogin("* Campo login e/ou senha inválido(s)!");
+                
           }, 1000);
-
           setTimeout(() => {
             setMsgLogin("");
           }, 4000);
-        }
+        } 
       } catch (error) {
         console.log(error);
       }

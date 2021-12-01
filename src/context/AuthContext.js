@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import api from '../services/api'
 import { useNavigate } from "react-router-dom";
+import { mensagemSucesso, mensagemErro } from '../components/toastr/toastr';
 const Context = createContext();
 
 
@@ -36,17 +37,21 @@ function AuthProvider({ children }) {
 
     async function handleLogin(login, senha) {
 
-        const { data: { token }, data: { id } } = await api.post('/seguranca/login', { login, senha });
+        try {
+            const { data: { token }, data: { id } } = await api.post('/seguranca/login', { login, senha });
+            localStorage.setItem('token', JSON.stringify(token));
+            localStorage.setItem('id', JSON.stringify(id));
+            localStorage.setItem('login', JSON.stringify(login))
+            setAuthenticated(true);
+            let usuario = localStorage.getItem("login").replace(/['"]+/g, "");
+            setUser(usuario); 
+            mensagemSucesso("Login efetuado com sucesso!!!");
+            goToHome();
+        } catch (error) {
+            mensagemErro("Não foi possível efetuar o login!!!");        
+        }
 
-        localStorage.setItem('token', JSON.stringify(token));
-        localStorage.setItem('id', JSON.stringify(id));
-        localStorage.setItem('login', JSON.stringify(login))
-        setAuthenticated(true);
-        let usuario = localStorage.getItem("login").replace(/['"]+/g, "");
-        setUser(usuario); 
-        goToHome();
-        
-    }
+    } 
 
     function handleLogOut() {
         setAuthenticated(false);
