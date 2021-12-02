@@ -16,7 +16,7 @@ const FormCadastro = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [senhaConfirmacao, setSenhaConfirmacao] = useState("");
-  const [liberacao, setLiberacao] = useState(true);
+  const [liberacao, setLiberacao] = useState(false);
   //msgs error
   const [msgLogin, setMsgLogin] = useState("");
   const [msgNome, setMsgNome] = useState("");
@@ -30,7 +30,6 @@ const FormCadastro = () => {
   const goToLogin = () => {
     navigate("/login");
   };
-
 
   const validation = async () => {
     try {
@@ -46,7 +45,6 @@ const FormCadastro = () => {
           "* Este login já está sendo utilizado por outro usuário!"
         );
         mensagemErro("Não é possível efetuar o cadastro!!!");
-        setLiberacao(false);
       }
     } catch (error) {
       setLiberacao(true);
@@ -159,7 +157,6 @@ const FormCadastro = () => {
         setMsgEmail("");
         setMsgSenha("");
         setMsgSenhaConfirmacao("");
-        setLiberacao(false);
       }, 3000);
     }
   };
