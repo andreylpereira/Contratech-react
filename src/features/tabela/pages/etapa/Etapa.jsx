@@ -47,7 +47,6 @@ const Etapa = (props) => {
         setInterval(() => {
           reload();
         }, 1000);
-        //verificar
       } else {
         setMsgErrorNome("* O nome da etapa deve ter entre 5 e 35 caracteres!");
         mensagemErro("Não foi possível renomear a Etapa!!!");
