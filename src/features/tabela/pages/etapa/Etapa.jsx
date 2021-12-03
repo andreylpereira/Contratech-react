@@ -26,6 +26,9 @@ const Etapa = (props) => {
       await services.excluirEtapa(token, id, obraId, idEtapa);
       getEtapas();
       mensagemSucesso("Etapa deletada com sucesso!!!");
+      setInterval(() => {
+        reload();
+      }, 1000);
     } catch (error) {
       mensagemErro("Não foi possível deletar a Etapa!!!");
       console.log(error);
@@ -68,9 +71,9 @@ const Etapa = (props) => {
         const url = "#modalCriarEtapa .close";
         $(url).click();
         mensagemSucesso("Etapa criada com sucesso!!!");
-        // setInterval(() => {
-        //   reload();
-        // }, 1000);
+        setInterval(() => {
+          reload();
+        }, 1000);
          //verificar
       } else {
         setMsgErrorNome("* O nome da etapa deve ter entre 5 e 35 caracteres!");

@@ -32,7 +32,7 @@ const Servico = (props) => {
         idEtapa
       );
       setServicos(
-        listaServicos.sort((a, b) => (a.nomeServico > b.nomeServico && 1) || -1)
+        listaServicos//.sort((a, b) => (a.nomeServico > b.nomeServico && 1) || -1)
       );
     } catch (error) {
       console.log(error);

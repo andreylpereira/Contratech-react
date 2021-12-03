@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import "./FormCadastro.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import validator from "validator";
 import services from "../../../../services/services";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ const FormCadastro = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [senhaConfirmacao, setSenhaConfirmacao] = useState("");
+  const [liberacao, setLiberacao] = useState(false);
   //msgs error
   const [msgLogin, setMsgLogin] = useState("");
   const [msgNome, setMsgNome] = useState("");
@@ -24,10 +25,6 @@ const FormCadastro = () => {
   const [msgSenha, setMsgSenha] = useState("");
   const [msgSenhaConfirmacao, setMsgSenhaConfirmacao] = useState("");
   const [validLogin, setValidLogin] = useState("");
-
-  useEffect(() => {
-    validation();
-  }, []);
 
   const navigate = useNavigate();
   const goToLogin = () => {
@@ -40,8 +37,9 @@ const FormCadastro = () => {
         login: login,
       };
       const validation = await services.verificarLogin(data);
-      setValidLogin(validation);
 
+      setValidLogin(validation);
+      console.log(validation);
       if (validation !== "") {
         setValidLogin(
           "* Este login já está sendo utilizado por outro usuário!"
@@ -49,6 +47,7 @@ const FormCadastro = () => {
         mensagemErro("Não é possível efetuar o cadastro!!!");
       }
     } catch (error) {
+      setLiberacao(true);
       console.log(error);
     }
   };
@@ -120,7 +119,36 @@ const FormCadastro = () => {
         );
         mensagemErro("Não foi possível efetuar o cadastro!!!");
       }
-      
+
+      if (
+        login !== "" &&
+        (login.length <= 20 || login.length >= 6) &&
+        validator.isEmail(email) &&
+        (senha.length <= 10 || senha.length >= 6) &&
+        senhaConfirmacao.length <= 10 &&
+        senhaConfirmacao.length >= 6 &&
+        senha === senhaConfirmacao
+      ) {
+        if (liberacao === true) {
+          const data = {
+            login: login,
+            nome: nome,
+            sobrenome: sobrenome,
+            email: email,
+            senha: senha,
+          };
+          try {
+            services.cadastrar(data);
+            mensagemSucesso("Cadastro efetuado com sucesso!!!");
+            setTimeout(() => {
+              goToLogin();
+            }, 2500);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      }
+
       setTimeout(function () {
         setMsgLogin("");
         setValidLogin("");
@@ -129,35 +157,7 @@ const FormCadastro = () => {
         setMsgEmail("");
         setMsgSenha("");
         setMsgSenhaConfirmacao("");
-      }, 5000);
-    } 
-
-    if (
-      login !== "" &&
-      (login.length <= 20 || login.length >= 6) &&
-      validator.isEmail(email) &&
-      (senha.length <= 10 || senha.length >= 6) &&
-      (senhaConfirmacao.length <= 10 &&
-      senhaConfirmacao.length >= 6) &&
-      senha === senhaConfirmacao
-    ) {
-      const data = {
-        login: login,
-        nome: nome,
-        sobrenome: sobrenome,
-        email: email,
-        senha: senha,
-      };
-      try {
-        services.cadastrar(data);
-        mensagemSucesso("Cadastro efetuado com sucesso!!!");
-        setTimeout(() => {
-          goToLogin();
-        }, 2500);
-      } catch (error) {
-        console.log(error);
-      }
-      
+      }, 3000);
     }
   };
 
